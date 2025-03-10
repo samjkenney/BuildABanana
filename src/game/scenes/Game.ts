@@ -15,10 +15,7 @@ export class Game extends Scene
     create ()
     {
         this.camera = this.cameras.main;
-        this.camera.setBackgroundColor(0x00ff00);
-
-        this.background = this.add.image(512, 384, 'background');
-        this.background.setAlpha(0.5);
+        this.add.image(512, 384, 'gameBackground').setDisplaySize(1024, 768);
 
         // this.gameText = this.add.text(512, 384, 'Make something fun!\nand share it with us:\nsupport@phaser.io', {
         //     fontFamily: 'Arial Black', fontSize: 38, color: '#ffffff',

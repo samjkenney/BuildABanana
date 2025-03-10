@@ -52,10 +52,7 @@ function App()
 
             if (scene)
             {
-                // Add more stars
-                const x = Phaser.Math.Between(64, scene.scale.width - 64);
-                const y = Phaser.Math.Between(64, scene.scale.height - 64);
-    
+
                 //  `add.sprite` is a Phaser GameObjectFactory method and it returns a Sprite Game Object instance
                 const banana = scene.add.sprite(scene.scale.width / 2, scene.scale.height / 2, 'banana');
                 banana.setDisplaySize(500, 750);

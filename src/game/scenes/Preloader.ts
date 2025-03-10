@@ -32,9 +32,15 @@ export class Preloader extends Scene
         //  Load the assets for the game - Replace with your own assets
         this.load.setPath('assets');
 
+        this.load.image('mainBackground', 'Basic Background.png'); 
+        this.load.image('gameBackground', 'Basic Background 2.png'); 
+        this.load.image('customButton1', 'Basic Button 1.png');
+        this.load.image('customButton2', 'Basic Button 2.png');
+        this.load.image('customButton4', 'Basic Button 4.png');
         this.load.image('logo', 'logo.png');
         this.load.image('banana', 'bananabase.png');
         this.load.image('faceCool', 'faceCool.png');
+        this.load.image('faceClown', 'face clown.png');
     }
 
     create ()
