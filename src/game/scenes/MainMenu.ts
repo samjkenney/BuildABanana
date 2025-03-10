@@ -17,7 +17,7 @@ export class MainMenu extends Scene
         super('MainMenu');
     }
 
-    create ()
+    create () //Too much Repetition
     {
         
         this.add.image(512, 384, 'mainBackground').setDisplaySize(1024, 768);
