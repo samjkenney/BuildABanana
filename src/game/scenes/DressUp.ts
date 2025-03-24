@@ -76,19 +76,7 @@ export class DressUp extends Scene {
         bodyClown.setVisible(false);
     });
 
-    // Button 2 shows hat
-    buttonTwo.on('pointerdown', () => {
-        faceChill.setVisible(false);
-        hatClown.setVisible(true);  
-        bodyClown.setVisible(false);
-    });
-
-    // Button 3 shows body
-    buttonThree.on('pointerdown', () => {
-        faceChill.setVisible(false);
-        hatClown.setVisible(false);
-        bodyClown.setVisible(true);  
-    });
+    
 
      
 
