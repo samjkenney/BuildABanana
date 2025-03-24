@@ -1,6 +1,8 @@
 
 import { MainMenu } from './scenes/MainMenu';
 import { DressUp } from './scenes/DressUp';
+import { Peel } from './scenes/Peel';
+import { Split } from './scenes/Split';
 import { AUTO, Game } from 'phaser';
 import { Preloader } from './scenes/Preloader';
 
@@ -15,8 +17,12 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         Preloader,
         MainMenu,
-        DressUp
-    ]
+        DressUp,
+        Split,
+        Peel
+    ] 
+
+
 };
 
 const StartGame = (parent: string) => {
