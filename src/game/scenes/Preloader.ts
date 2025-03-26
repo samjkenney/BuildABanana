@@ -28,6 +28,7 @@ export class Preloader extends Scene {
          this.load.image('faceChill', 'assets/FaceChill.png'); 
         this.load.image('hatClown', 'assets/HatClown.png');  
         this.load.image('bodyClown', 'assets/BodyClown.png'); 
+        this.load.image('nextButton', 'assets/nextButton.png');
     }
 
     create() {

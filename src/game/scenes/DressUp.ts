@@ -19,6 +19,7 @@ export class DressUp extends Scene {
         this.load.image('faceChill', 'assets/FaceChill.png'); 
         this.load.image('hatClown', 'assets/HatClown.png');  
         this.load.image('bodyClown', 'assets/BodyClown.png'); 
+        this.load.image('nextButton', 'assets/nextButton.png');
         
     }
 
@@ -33,7 +34,7 @@ export class DressUp extends Scene {
         const buttonTwo = this.add.image(750, 270, 'buttonTwo').setVisible(false);
         const buttonThree = this.add.image(750, 270, 'buttonThree').setVisible(true);
    
-        const face = this.add.image(645, 334, 'face'); 
+        const face = this.add.image(6, 334, 'face'); 
         face.setInteractive();
         const glasses =this.add.image(625, 434, 'glasses'); 
         glasses.setInteractive();
@@ -45,10 +46,9 @@ export class DressUp extends Scene {
         const hatClown = this.add.image(210, 384, 'hatClown').setVisible(false).setInteractive();
         const bodyClown = this.add.image(210, 384, 'bodyClown').setVisible(false).setInteractive();
 
+        
 
 
-
-  
          face.on('pointerdown', () => {
             buttonOne.setVisible(false);  
             buttonTwo.setVisible(false); 
@@ -77,6 +77,15 @@ export class DressUp extends Scene {
     });
 
     
+
+
+    const nextButton = this.add.sprite(800, 654, 'nextButton').setInteractive(); //centered???
+    nextButton.setScale(0.1);
+
+       
+    nextButton.on('pointerdown', () => {
+        this.scene.start('Peel'); 
+    });
 
      
 
