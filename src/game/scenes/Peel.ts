@@ -8,7 +8,7 @@ export class Peel extends Scene {
     preload() {
         this.load.image('banana', 'assets/Banana.png'); 
         this.load.image('background', 'assets/Basic Background 2.png');
-        this.load.image('startButton', 'assets/startButton.png'); 
+        this.load.image('nextButton', 'assets/nextButton.png'); 
         //load peeled banana    
     }
 
@@ -18,13 +18,14 @@ export class Peel extends Scene {
         banana.setScale(0.5);  
         banana.setInteractive();
 
+        //when banana is clicked
         banana.on('pointerdown', () => {
             //peel the banana
             //add a next button
-            const startButton = this.add.sprite(512, 384, 'startButton').setInteractive(); //centered???
-
+            const nextButton = this.add.sprite(800, 654, 'nextButton').setInteractive(); //centered???
+            nextButton.setScale(0.1);
        
-            startButton.on('pointerdown', () => {
+            nextButton.on('pointerdown', () => {
                 this.scene.start('Split'); 
             });
         })

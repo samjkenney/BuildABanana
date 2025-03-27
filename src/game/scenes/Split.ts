@@ -18,6 +18,7 @@ export class Split extends Scene {
         banana.setScale(0.5);  
         banana.setInteractive();
 
+        //when the banana is clicked
         banana.on('pointerdown', () => {
             //slice the banana
             //add a next button
