@@ -3,6 +3,7 @@ import { GameObjects, Scene } from 'phaser';
 export class DressUp extends Scene {
 
     private selectedFace: Phaser.GameObjects.Image | null = null; 
+    private currentFace: Phaser.GameObjects.Image | null = null; 
 
     constructor() {
         super('DressUp');
@@ -92,6 +93,12 @@ export class DressUp extends Scene {
                 prettyFace.setTint(0xff69b4); 
                 minionFace.clearTint(); 
                 console.log('pretty face selected');
+                const face1 = this.add.image(210, 384, 'Face1');
+                face1.setScale(0.4);
+                if (this.currentFace != null){
+                    this.currentFace.destroy();
+                }
+                this.currentFace = face1;
             });
         
             minionFace.on('pointerover', () => {
@@ -111,6 +118,12 @@ export class DressUp extends Scene {
                 minionFace.setTint(0xff69b4); 
                 prettyFace.clearTint(); 
                 console.log('minion face selected');
+                const face2 = this.add.image(210, 384, 'Face2');
+                face2.setScale(0.4);
+                if (this.currentFace != null){
+                    this.currentFace.destroy();
+                }
+                this.currentFace = face2;
             });
         });
 
