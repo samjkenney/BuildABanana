@@ -18,7 +18,7 @@ export class MainMenu extends Scene {
 
        
         startButton.on('pointerdown', () => {
-            this.scene.start('DressUp'); 
+            this.scene.start('Name'); 
         });
     }
 }

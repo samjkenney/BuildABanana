@@ -1,6 +1,10 @@
-import { GameObjects, Scene } from 'phaser';
+import { Scene } from 'phaser';
+import { GameObjects } from 'phaser'; // Separate import for GameObjects
+import { NextButton }from './toolbox/NextButton'; 
+import { Banana } from './toolbox/Banana'; // Import the Banana class
 
 export class Peel extends Scene {
+    private banana: Banana | null = null; // Declare banana as a property of the class
     constructor() {
         super('Peel');
     }
@@ -22,13 +26,12 @@ export class Peel extends Scene {
         banana.on('pointerdown', () => {
             //peel the banana
             //add a next button
-            const nextButton = this.add.sprite(800, 654, 'nextButton').setInteractive(); //centered???
-            nextButton.setScale(0.1);
-       
-            nextButton.on('pointerdown', () => {
-                this.scene.start('Split'); 
-            });
+            new NextButton(this, 800, 654, 'Split'); 
         })
         
+    }
+
+    setBanana(banana: Banana){
+        this.banana = banana;
     }
 }

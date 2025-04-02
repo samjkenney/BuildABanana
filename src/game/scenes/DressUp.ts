@@ -1,8 +1,10 @@
 import { GameObjects, Scene } from 'phaser';
+import { NextButton } from './toolbox/NextButton'; 
+import { Banana } from './toolbox/Banana';
 
 export class DressUp extends Scene {
 
-    private selectedFace: Phaser.GameObjects.Image | null = null; 
+    private selectedIcon: Phaser.GameObjects.Image | null = null; 
     private currentFace: Phaser.GameObjects.Image | null = null; 
 
     constructor() {
@@ -40,8 +42,9 @@ export class DressUp extends Scene {
         this.add.image(512, 384,'dressUpBackground'); 
         const menu = this.add.image(800, 404, 'menu');  
         menu.setScale(1.7);
-        const banana = this.add.image(210, 384, 'banana'); 
-        banana.setScale(0.4);  
+        const myBanana = new Banana(this, 210, 384, 'banana');
+        //const banana = this.add.image(210, 384, 'banana'); 
+        //banana.setScale(0.4);  
         
         // Dress Up Options
         const prettyFace = this.add.image(710, 300, 'prettyFace').setInteractive().setVisible(false);
@@ -77,19 +80,19 @@ export class DressUp extends Scene {
 
 
             prettyFace.on('pointerover', () => {
-                if (this.selectedFace !== prettyFace) { 
+                if (this.selectedIcon !== prettyFace) { 
                     prettyFace.setTint(0xffb6c1); 
                 }
             });
         
             prettyFace.on('pointerout', () => {
-                if (this.selectedFace !== prettyFace) { 
+                if (this.selectedIcon !== prettyFace) { 
                     prettyFace.clearTint();
                 }
             });
         
             prettyFace.on('pointerdown', () => {
-                this.selectedFace = prettyFace;
+                this.selectedIcon = prettyFace;
                 prettyFace.setTint(0xff69b4); 
                 minionFace.clearTint(); 
                 console.log('pretty face selected');
@@ -99,22 +102,23 @@ export class DressUp extends Scene {
                     this.currentFace.destroy();
                 }
                 this.currentFace = face1;
+                //myBanana.setBananaFace('face trixie');
             });
         
             minionFace.on('pointerover', () => {
-                if (this.selectedFace !== minionFace) { 
+                if (this.selectedIcon !== minionFace) { 
                     minionFace.setTint(0xffb6c1); 
                 }
             });
         
             minionFace.on('pointerout', () => {
-                if (this.selectedFace !== minionFace) { 
+                if (this.selectedIcon !== minionFace) { 
                     minionFace.clearTint();
                 }
             });
         
             minionFace.on('pointerdown', () => {
-                this.selectedFace = minionFace; 
+                this.selectedIcon = minionFace; 
                 minionFace.setTint(0xff69b4); 
                 prettyFace.clearTint(); 
                 console.log('minion face selected');
@@ -152,6 +156,7 @@ export class DressUp extends Scene {
         shirt.setScale(0.15);
         shirt.setInteractive();
 
+        
         shirt.on('pointerout', () => {
             shirt.clearTint();
         });
@@ -165,34 +170,21 @@ export class DressUp extends Scene {
         });
 
        
-  
-    
-
-
         //Next Button 
-        const nextButton = this.add.sprite(800, 654, 'nextButton').setInteractive();
-        nextButton.setScale(0.1); 
+        new NextButton(this, 800, 654, 'Peel'); // Properly instantiate NextButton
+        // const nextButton = this.add.sprite(800, 654, 'nextButton').setInteractive();
+        // nextButton.setScale(0.1); 
        
 
-        // Mouse hovers 
-        nextButton.on('pointerover', () => {
-            nextButton.setTint(0xffb6c1); 
-            nextButton.setScale(0.12); 
-        });
-
-        // Mouse leaves 
-        nextButton.on('pointerout', () => {
-            nextButton.clearTint();
-            nextButton.setScale(0.1); 
-        });
-
-        // When clicked
-        nextButton.on('pointerdown', () => {
-            this.scene.start('Peel'); 
-        });
+        // // Mouse hovers 
+        // nextButton.on('pointerover', () => {
+        //     nextButton.setTint(0xffb6c1); 
+        //   
 
 
 
         
     }
+
+    
 }
