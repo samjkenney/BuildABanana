@@ -11,6 +11,11 @@ export class DressUp extends Scene {
     private layers: { [key: string]: Phaser.GameObjects.Image } = {};
     private selectedLayer: string | null = null;
 
+    private imageMap: { [key: string]: Phaser.GameObjects.Image } = {}; 
+    private selectedFace: string | null = null;
+    private selectedGlasses: string | null = null;
+    private selectedShirt: string | null = null;
+
     constructor() {
         super('DressUp');
     }
@@ -19,7 +24,7 @@ export class DressUp extends Scene {
         this.load.image('dressUpBackground', 'assets/DU_BKG.png');
         this.load.image('menu', 'assets/DU_MenuBase.png');
         this.load.image('banana', 'assets/Banana.png');
-        
+
         //Cats
         this.load.image('face', 'assets/Face.png');
         this.load.image('glasses', 'assets/Glasses.png');
@@ -30,6 +35,12 @@ export class DressUp extends Scene {
             this.load.image(`Face${i}`, `assets/Face${i}.png`);
             this.load.image(`Glasses${i}`, `assets/Glasses${i}.png`);
             this.load.image(`Shirt${i}`, `assets/Shirt${i}.png`);
+
+
+             // Map buttons to DU images
+             this.load.image(`DU_Face${i}`, `assets/DU_Face${i}.png`);
+             this.load.image(`DU_Glasses${i}`, `assets/DU_Glasses${i}.png`);
+             this.load.image(`DU_Shirt${i}`, `assets/DU_Shirt${i}.png`);
         }
 
         this.load.image('nextButton', 'assets/nextButton.png');
@@ -86,15 +97,29 @@ export class DressUp extends Scene {
         // make Button
         const createCategoryButtons = (category: string, positions: { x: number, y: number }[]) => {
             const buttons: Phaser.GameObjects.Image[] = [];
+            let currentButton: Phaser.GameObjects.Image | null = null;
+
             for (let i = 1; i <= 4; i++) {
                 const button = this.add.image(positions[i - 1].x, positions[i - 1].y, `${category}${i}`);
-                button.setInteractive().setVisible(false).setDisplaySize(400, 250);
+                button.setInteractive({ pixelPerfect: true }).setVisible(false).setScale(0.7);
+                button.on('pointerdown', () => {
+                    console.log(`Clicked ${category}${i}`);
+                    this.toggleImage(`${category}${i}`);
+
+                    if (currentButton) {
+                        currentButton.clearTint();
+                    }
+
+                    button.setTint(0xe1a8a0);
+                    currentButton = button;
+                    
+                });
                 buttons.push(button);
             }
             return buttons;
         };
 
-        // Buttons for cat
+        // Buttons for cat call function above
         this.faceButtons = createCategoryButtons('Face', buttonPositions.face);
         this.glassesButtons = createCategoryButtons('Glasses', buttonPositions.glasses);
         this.shirtButtons = createCategoryButtons('Shirt', buttonPositions.shirt);
@@ -103,6 +128,25 @@ export class DressUp extends Scene {
         const face = this.add.image(596.5, 344, 'face').setScale(0.16).setInteractive();
         const glasses = this.add.image(597, 414, 'glasses').setScale(0.16).setInteractive();
         const shirt = this.add.image(596.5, 488, 'shirt').setScale(0.16).setInteractive();
+
+        //Maps for Image
+
+        this.imageMap = {
+            'Face1': this.add.image(274, 469, 'DU_Face1').setVisible(false).setScale(0.4),
+            'Face2': this.add.image(274, 469, 'DU_Face2').setVisible(false).setScale(0.4),
+            'Face3': this.add.image(274, 469, 'DU_Face3').setVisible(false).setScale(0.4),
+            'Face4': this.add.image(274, 469, 'DU_Face4').setVisible(false).setScale(0.4),
+
+            'Glasses1': this.add.image(274, 469, 'DU_Glasses1').setVisible(false).setScale(0.4),
+            'Glasses2': this.add.image(274, 469, 'DU_Glasses2').setVisible(false).setScale(0.4),
+            'Glasses3': this.add.image(274, 469, 'DU_Glasses3').setVisible(false).setScale(0.4),
+            'Glasses4': this.add.image(274, 469, 'DU_Glasses4').setVisible(false).setScale(0.4),
+
+            'Shirt1': this.add.image(274, 469, 'DU_Shirt1').setVisible(false).setScale(0.4),
+            'Shirt2': this.add.image(274, 469, 'DU_Shirt2').setVisible(false).setScale(0.4),
+            'Shirt3': this.add.image(274, 469, 'DU_Shirt3').setVisible(false).setScale(0.4),
+            'Shirt4': this.add.image(274, 469, 'DU_Shirt4').setVisible(false).setScale(0.4)
+        };
 
         // Cat logic
         const setCategory = (category: string) => {
@@ -120,25 +164,43 @@ export class DressUp extends Scene {
         };
 
         // Mouse Interactions
-        
+        setCategory('face');
+        face.setTint(0xcc7577); 
         face.on('pointerdown', () => {
             setCategory('face');
-            face.setTint(0xff69b4); 
+            face.setTint(0xcc7577); 
+             
         });
 
         // TODO:(Change to Hat)
         glasses.on('pointerdown', () => {
             setCategory('glasses');
-            glasses.setTint(0xff69b4); 
+            glasses.setTint(0xcc7577); 
+            
         });
 
       
         shirt.on('pointerdown', () => {
             setCategory('shirt');
-            shirt.setTint(0xff69b4); 
+            shirt.setTint(0xcc7577); 
+            
         });
 
     
         new NextButton(this, 800, 654, 'Peel');
     }
+
+   
+
+    private toggleImage(imageKey: string) {
+        for (const key in this.imageMap) {
+            this.imageMap[key].setVisible(false);
+        }
+        if (this.imageMap[imageKey]) {
+            this.imageMap[imageKey].setVisible(true);
+        }
+    }
+
+
+
 }
