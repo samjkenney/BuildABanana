@@ -9,14 +9,14 @@ export class NextButton{
 
     constructor(currentScene : Scene, x: number, y: number, nextScene: string){
         //adds the button to the screen
-        currentScene.load.image('nextButton', 'assets/nextButton.png');
+        // currentScene.load.image('nextButton', 'assets/nextButton.png');
         const nextButton = currentScene.add.sprite(x, y, 'nextButton').setInteractive();
-        nextButton.setScale(0.7);
+        nextButton.setScale(0.1);
 
         //mouse over
         nextButton.on('pointerover', () => {
             nextButton.setTint(0xffb6c1); 
-            nextButton.setScale(0.12); 
+            nextButton.setScale(0.13); 
         });
 
         // Mouse leaves 
