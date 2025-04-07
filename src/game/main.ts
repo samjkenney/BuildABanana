@@ -10,20 +10,24 @@ import { AUTO, Game } from 'phaser';
 //  Find out more information about the Game Config at:
 //  https://newdocs.phaser.io/docs/3.70.0/Phaser.Types.Core.GameConfig
 const config: Phaser.Types.Core.GameConfig = {
-    type: AUTO,
+    type: AUTO, //decides if using WebGL or Canvas
     width: 1024,
     height: 768,
+    backgroundColor: '#ffffff',
+
     dom: {
         createContainer: true
     },
     parent: 'game-container',
-    backgroundColor: '#028af8',
+
+    title: "Build-A-Banana",
+    //url: ,
     scene: [
         MainMenu,
+        Name,
         DressUp,
-        Split,
         Peel,
-        Name
+        Split
     ] 
 
 
