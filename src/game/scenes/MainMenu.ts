@@ -16,7 +16,6 @@ export class MainMenu extends Scene {
      
         const startButton = this.add.sprite(512, 384, 'startButton').setInteractive(); //centered???
 
-       
         startButton.on('pointerdown', () => {
             this.scene.start('Name'); 
         });
