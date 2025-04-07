@@ -16,7 +16,4 @@ export class ImageButton extends Button{
 
         this.add(image);
     }
-     
-
-    //click???
 }

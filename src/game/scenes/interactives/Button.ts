@@ -37,7 +37,7 @@ export abstract class Button extends Phaser.GameObjects.Container{ //make not ab
 
         //mouse enters (hover start)
         this.on('pointerover', () => {
-            this.backgroundGraphics.fillStyle(Button.TINT, 1);
+            this.backgroundGraphics.fillStyle(Button.TINT, 1); //make transparent?
             this.backgroundGraphics.fillRoundedRect(0, 0, width, height, Button.CORNERRADIUS);
             //this.setScale(1.2); 
         });
