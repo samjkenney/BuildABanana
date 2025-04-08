@@ -8,7 +8,7 @@ export class ImageButton extends Button{
     // image: GameObjects.Image;
 
     constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, imageKey: string, action: Function){
-        super(scene, x, y, width, height, color, action);
+        super(scene, x, y, width, height, color, false, action);
         //.load.image("image", imagePath); //moved loading to scene, pass in key instead of path
 
         var image = new GameObjects.Image(scene, width / 2, height / 2, imageKey);
