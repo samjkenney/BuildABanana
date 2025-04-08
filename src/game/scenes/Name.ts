@@ -26,7 +26,8 @@ export class Name extends Scene {
         this.message = this.add.text(640, 250, "Hello, --", {
             color: "#FFFFFF",
             fontSize: 60,
-            fontStyle: "bold"
+            fontStyle: "bold",
+            fontFamily: "Kitto"
         }).setOrigin(0.5);
 
 
