@@ -3,6 +3,7 @@ import { NextButton } from './toolbox/NextButton';
 import { Banana } from './toolbox/Banana';
 
 export class DressUp extends Scene {
+    //TODO: Data Manager -> transfer choices to next scene
 
     private faceButtons: Phaser.GameObjects.Image[] = [];
     private glassesButtons: Phaser.GameObjects.Image[] = [];
@@ -21,7 +22,7 @@ export class DressUp extends Scene {
     }
 
     preload() {
-        this.load.image('dressUpBackground', 'assets/DU_BKG.png');
+        this.load.image('dressUpBackground', 'assets/DU_BKG(1).png');
         this.load.image('menu', 'assets/DU_MenuBase.png');
         this.load.image('banana', 'assets/Banana.png');
 
@@ -55,7 +56,9 @@ export class DressUp extends Scene {
         this.add.image(512, 384, 'dressUpBackground');
         const menu = this.add.image(550, 376, 'menu');
         menu.setScale(0.55);
-        const myBanana = new Banana(this, 274, 469, 'banana');
+        const myBanana = new Banana(this, 274, 500, 'banana');
+
+       
 
         // Layers
         const layers = {
@@ -101,6 +104,7 @@ export class DressUp extends Scene {
                     }
                     button.setTint(0xe1a8a0);
                     currentButton = button;
+
                 });
                 buttons.push(button);
             }
@@ -120,20 +124,20 @@ export class DressUp extends Scene {
         //Maps for Image
 
         this.imageMap = {
-            'Face1': this.add.image(274, 469, 'DU_Face1').setVisible(false).setScale(0.4),
-            'Face2': this.add.image(274, 469, 'DU_Face2').setVisible(false).setScale(0.4),
-            'Face3': this.add.image(274, 469, 'DU_Face3').setVisible(false).setScale(0.4),
-            'Face4': this.add.image(274, 469, 'DU_Face4').setVisible(false).setScale(0.4),
+            'Face1': this.add.image(274, 500, 'DU_Face1').setVisible(false).setScale(0.4),
+            'Face2': this.add.image(274, 500, 'DU_Face2').setVisible(false).setScale(0.4),
+            'Face3': this.add.image(274, 500, 'DU_Face3').setVisible(false).setScale(0.4),
+            'Face4': this.add.image(274, 500, 'DU_Face4').setVisible(false).setScale(0.4),
 
-            'Glasses1': this.add.image(274, 469, 'DU_Glasses1').setVisible(false).setScale(0.4),
-            'Glasses2': this.add.image(274, 469, 'DU_Glasses2').setVisible(false).setScale(0.4),
-            'Glasses3': this.add.image(274, 469, 'DU_Glasses3').setVisible(false).setScale(0.4),
-            'Glasses4': this.add.image(274, 469, 'DU_Glasses4').setVisible(false).setScale(0.4),
+            'Glasses1': this.add.image(274, 500, 'DU_Glasses1').setVisible(false).setScale(0.4),
+            'Glasses2': this.add.image(274, 500, 'DU_Glasses2').setVisible(false).setScale(0.4),
+            'Glasses3': this.add.image(274, 500, 'DU_Glasses3').setVisible(false).setScale(0.4),
+            'Glasses4': this.add.image(274, 500, 'DU_Glasses4').setVisible(false).setScale(0.4),
 
-            'Shirt1': this.add.image(274, 469, 'DU_Shirt1').setVisible(false).setScale(0.4),
-            'Shirt2': this.add.image(274, 469, 'DU_Shirt2').setVisible(false).setScale(0.4),
-            'Shirt3': this.add.image(274, 469, 'DU_Shirt3').setVisible(false).setScale(0.4),
-            'Shirt4': this.add.image(274, 469, 'DU_Shirt4').setVisible(false).setScale(0.4)
+            'Shirt1': this.add.image(274, 500, 'DU_Shirt1').setVisible(false).setScale(0.4),
+            'Shirt2': this.add.image(274, 500, 'DU_Shirt2').setVisible(false).setScale(0.4),
+            'Shirt3': this.add.image(274, 500, 'DU_Shirt3').setVisible(false).setScale(0.4),
+            'Shirt4': this.add.image(274, 500, 'DU_Shirt4').setVisible(false).setScale(0.4)
         };
 
         // Cat logic
