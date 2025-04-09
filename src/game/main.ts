@@ -26,7 +26,7 @@ const config: Phaser.Types.Core.GameConfig = {
     },
 
     title: "Build-A-Banana",
-    //url: ,
+    //url: ???,
     scene: [
         MainMenu,
         Name,
@@ -34,8 +34,6 @@ const config: Phaser.Types.Core.GameConfig = {
         Peel,
         Split
     ] 
-
-
 };
 
 const StartGame = (parent: string) => {
