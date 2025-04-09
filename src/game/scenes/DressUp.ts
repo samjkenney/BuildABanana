@@ -64,6 +64,7 @@ export class DressUp extends Scene {
             shirt: this.add.image(550, 376, 'Clothes_Layer').setInteractive().setVisible(false).setScale(0.55),
         };
 
+        
         this.layers = layers;
         
         const hideAllLayers = () => {
@@ -72,29 +73,18 @@ export class DressUp extends Scene {
             }
         };
 
-        //Positning
+        //Positioning, TODO: Make it an Array instead???
         const buttonPositions = {
-            face: [
+            sharedPositions: [
                 { x: 750.5, y: 344 },
                 { x: 900.5, y: 344 },
                 { x: 750.5, y: 480 },
                 { x: 900.5, y: 480 }
             ],
-            glasses: [
-                { x: 750.5, y: 344 },
-                { x: 900.5, y: 344 },
-                { x: 750.5, y: 480 },
-                { x: 900.5, y: 480 }
-            ],
-            shirt: [
-                { x: 750.5, y: 344 },
-                { x: 900.5, y: 344 },
-                { x: 750.5, y: 480 },
-                { x: 900.5, y: 480 }
-            ]
+            
         };
 
-        // make Button
+        // Make Button
         const createCategoryButtons = (category: string, positions: { x: number, y: number }[]) => {
             const buttons: Phaser.GameObjects.Image[] = [];
             let currentButton: Phaser.GameObjects.Image | null = null;
@@ -109,10 +99,8 @@ export class DressUp extends Scene {
                     if (currentButton) {
                         currentButton.clearTint();
                     }
-
                     button.setTint(0xe1a8a0);
                     currentButton = button;
-                    
                 });
                 buttons.push(button);
             }
@@ -120,9 +108,9 @@ export class DressUp extends Scene {
         };
 
         // Buttons for cat call function above
-        this.faceButtons = createCategoryButtons('Face', buttonPositions.face);
-        this.glassesButtons = createCategoryButtons('Glasses', buttonPositions.glasses);
-        this.shirtButtons = createCategoryButtons('Shirt', buttonPositions.shirt);
+        this.faceButtons = createCategoryButtons('Face', buttonPositions.sharedPositions);
+        this.glassesButtons = createCategoryButtons('Glasses', buttonPositions.sharedPositions);
+        this.shirtButtons = createCategoryButtons('Shirt', buttonPositions.sharedPositions);
 
         // Icons for cat
         const face = this.add.image(596.5, 344, 'face').setScale(0.16).setInteractive();
@@ -193,12 +181,19 @@ export class DressUp extends Scene {
    
 
     private toggleImage(imageKey: string) {
+        const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; // need to get "Face" 
+        if (!category) return; 
+
         for (const key in this.imageMap) {
-            this.imageMap[key].setVisible(false);
+            if (key.startsWith(category)) {
+                this.imageMap[key].setVisible(false);
+            }
         }
+
         if (this.imageMap[imageKey]) {
             this.imageMap[imageKey].setVisible(true);
         }
+       
     }
 
 
