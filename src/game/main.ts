@@ -1,5 +1,7 @@
 import { MainMenu } from './scenes/MainMenu'; // Import scenes
-import { Name} from './scenes/Name';
+import { Name } from './scenes/Name';
+import { Personality } from './scenes/Personality';
+import { Aspirations } from './scenes/Aspirations';
 import { DressUp } from './scenes/DressUp';
 import { Peel } from './scenes/Peel';
 import { Split } from './scenes/Split';
@@ -30,6 +32,8 @@ const config: Phaser.Types.Core.GameConfig = {
     scene: [
         MainMenu,
         Name,
+        Personality,
+        Aspirations,
         DressUp,
         Peel,
         Split
