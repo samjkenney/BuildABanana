@@ -8,7 +8,12 @@ export class IconButton extends ImageButton{
     //private static height: number; //make constant?
 
     constructor(scene: Scene, x: number, y: number, imageKey: string){
-        super(scene, x, y, 200, 200, 0x000000, imageKey, () => console.log("Icon clicked"));
+        var action = () => {
+            console.log("Icon button clicked");
+            //change clothes
+        };
+
+        super(scene, x, y, 200, 200, 0x000000, imageKey, action);
 
     }
 }
