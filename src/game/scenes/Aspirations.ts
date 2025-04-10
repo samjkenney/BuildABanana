@@ -44,5 +44,6 @@ export class Aspirations extends CustomizationTemplate{
         // }
 
         super.addNextButton(this, "DressUp");
+        super.addBackButton(this, "Personality");
     }
 }

@@ -47,5 +47,6 @@ export class Personality extends CustomizationTemplate{
         // }
 
         super.addNextButton(this, "Aspirations");
+        super.addBackButton(this, "Name");
     }
 }
