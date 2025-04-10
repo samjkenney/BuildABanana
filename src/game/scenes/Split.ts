@@ -1,4 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
+import { NextButton } from './toolbox/NextButton';
 
 export class Split extends Scene {
     constructor() {
@@ -22,6 +23,7 @@ export class Split extends Scene {
         banana.on('pointerdown', () => {
             //slice the banana
             //add a next button
+            new NextButton(this, 800, 654, 'IceCream');
         })
         
     }
