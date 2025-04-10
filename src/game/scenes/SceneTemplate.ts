@@ -1,6 +1,7 @@
 import { GameObjects, Scene } from 'phaser';
 import { TextStyles } from './toolbox/TextStyles';
 import { NextButton } from './interactives/NextButton';
+import { BackButton } from './interactives/BackButton';
 
 export abstract class SceneTemplate extends Scene {
     // protected SCENEWIDTH: number;
@@ -11,7 +12,7 @@ export abstract class SceneTemplate extends Scene {
     // protected titleX: number;
     // protected titleY: number;
     protected nextButton: NextButton;
-    //protected backButton: BackButton;
+    protected backButton: BackButton;
 
     // constructor(sceneFileName: string, titleText: string, titleX: number, titleY: number, backButton: boolean, backgroundImagePath?: string) {
         constructor(sceneFileName: string, titleText: string, backgroundImagePath?: string) {
@@ -64,14 +65,14 @@ export abstract class SceneTemplate extends Scene {
     }
 
     protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
-        this.nextButton = new NextButton(this, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), nextScene, displayText);
+        this.nextButton = new NextButton(this, nextScene, displayText);
         scene.add.existing(this.nextButton);
     }
 
-    // protected addBackButton(previousScene: string){
-    //     this.backButton = new BackButton();
-    //     this.add.existing(this.backButton);
-    // }
+    protected addBackButton(scene: Scene, previousScene: string){
+        this.backButton = new BackButton(scene, previousScene);
+        this.add.existing(this.backButton);
+    }
 
     // protected getSceneWidth(){
     //     return this.SCENEWIDTH;
