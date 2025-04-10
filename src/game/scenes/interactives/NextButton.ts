@@ -35,8 +35,8 @@ import { TextStyles } from '../toolbox/TextStyles';
 
 export class NextButton extends SceneButton{
     //private static color: string; //make constant?
-    //private static width: number; //make constant?
-    //private static height: number; //make constant?
+    private static WIDTH = 170; //make constant?
+    private static HEIGHT = 80; //make constant?
 
     constructor(scene: Scene, x: number, y: number, nextScene: string, displayText?: string){
         var text;
@@ -47,7 +47,15 @@ export class NextButton extends SceneButton{
             text = "Next";
         }
 
-        super(scene, x, y, 200, 80, 0xF9B1B4, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
+        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, 0xF9B1B4, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
 
+    }
+
+    static getWidth(){
+        return NextButton.WIDTH;
+    }
+
+    static getHeight(){
+        return NextButton.HEIGHT;
     }
 }
