@@ -18,13 +18,8 @@ export class MainMenu extends Scene {
         background.setOrigin(0);
         
         var startButton = new TextButton(this, background.width / 2 - 125, background.height / 2 - 50, 250, 100, 0xF9B1B4, "Start", TextStyles.getTitleStyle(this), false, true, () => {this.scene.start('Name')});
-        //var startButton2 = new NextButton(this, background.width / 2 - 100, background.height / 2 - 40 + 240, "Name");
-
         this.add.existing(startButton).setInteractive();
-        //this.add.existing(startButton2).setInteractive();
-
-
-
+        
         //const startButton = this.add.sprite(this.scale.displaySize.width, this.scale.displaySize.height, 'startButton').setInteractive(); //centered???
         // this.startButton.on('pointerdown', () => {
         //     this.scene.start('Name'); 
