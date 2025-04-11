@@ -7,6 +7,8 @@ import { Peel } from './scenes/Peel';
 import { Split } from './scenes/Split';
 
 import { AUTO, Game } from 'phaser';
+import { Wash } from './scenes/Wash';
+import { IceCream } from './scenes/IceCream';
 
 
 //  Find out more information about the Game Config at:
@@ -36,7 +38,9 @@ const config: Phaser.Types.Core.GameConfig = {
         Aspirations,
         DressUp,
         Peel,
-        Split
+        Split,
+        Wash,
+        IceCream
     ] 
 };
 

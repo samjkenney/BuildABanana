@@ -26,7 +26,7 @@ export class DressUp extends Scene {
         this.load.image('menu', 'assets/DU_MenuBase.png');
         this.load.image('banana', 'assets/Banana.png');
 
-        //Cats
+        //Categories
         this.load.image('face', 'assets/Face.png');
         this.load.image('glasses', 'assets/Glasses.png');
         this.load.image('shirt', 'assets/Shirt.png');
@@ -179,7 +179,7 @@ export class DressUp extends Scene {
         });
 
     
-        new NextButton(this, 800, 654, 'Peel');
+        new NextButton(this, 800, 654, 'Wash');
     }
 
    

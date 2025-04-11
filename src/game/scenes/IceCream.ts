@@ -1,5 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './interactives/NextButton';
+import { NextButton } from './toolbox/NextButton';
 
 export class IceCream extends Scene {
     constructor() {
