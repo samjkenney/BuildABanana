@@ -10,7 +10,7 @@ export class SceneButton extends TextButton{
 
     constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string,){
         var action = () => {
-            scene?.scene.start(nextScene);
+            scene?.scene.start(nextScene); // Use optional chaining to safely access scene
         };
 
         super(scene, x, y, width, height, color, displayText, textStyle, scaleToButtonSize, scaleOnHover, action);
