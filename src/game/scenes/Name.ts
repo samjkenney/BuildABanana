@@ -15,10 +15,10 @@ export class Name extends Scene {
     }
 
     preload() {  
-        this.load.image('NameBackground', 'assets/NS_BKG.png');  
+        this.load.image('NameBackground', 'assets/name/NS_BKG.png');  
         this.load.image('nextButton', 'assets/nextButton.png');
         this.load.image('banana', 'assets/Banana.png'); 
-        this.load.spritesheet('blinking_sheet','assets/Blinking.png', {
+        this.load.spritesheet('blinking_sheet','assets/name/Blinking.png', {
             frameWidth: 666,  
             frameHeight: 372,
         });

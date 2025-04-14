@@ -22,34 +22,34 @@ export class DressUp extends Scene {
     }
 
     preload() {
-        this.load.image('dressUpBackground', 'assets/DS_BKG.png');
-        this.load.image('menu', 'assets/DU_MenuBase.png');
+        this.load.image('dressUpBackground', 'assets/dressup/DS_BKG.png');
+        this.load.image('menu', 'assets/dressup/DU_MenuBase.png');
         this.load.image('banana', 'assets/Banana.png');
 
         //Cats
-        this.load.image('face', 'assets/Face.png');
-        this.load.image('glasses', 'assets/Glasses.png');
-        this.load.image('shirt', 'assets/Shirt.png');
+        this.load.image('face', 'assets/dressup/Face.png');
+        this.load.image('glasses', 'assets/dressup/Glasses.png');
+        this.load.image('shirt', 'assets/dressup/Shirt.png');
 
         // Button images
         for (let i = 1; i <= 4; i++) {
-            this.load.image(`Face${i}`, `assets/Face${i}.png`);
-            this.load.image(`Glasses${i}`, `assets/Glasses${i}.png`);
-            this.load.image(`Shirt${i}`, `assets/Shirt${i}.png`);
+            this.load.image(`Face${i}`, `assets/dressup/Face${i}.png`);
+            this.load.image(`Glasses${i}`, `assets/dressup/Glasses${i}.png`);
+            this.load.image(`Shirt${i}`, `assets/dressup/Shirt${i}.png`);
 
 
              // Map buttons to DU images
-             this.load.image(`DU_Face${i}`, `assets/DU_Face${i}.png`);
-             this.load.image(`DU_Glasses${i}`, `assets/DU_Glasses${i}.png`);
-             this.load.image(`DU_Shirt${i}`, `assets/DU_Shirt${i}.png`);
+             this.load.image(`DU_Face${i}`, `assets/dressup/DU_Face${i}.png`);
+             this.load.image(`DU_Glasses${i}`, `assets/dressup/DU_Glasses${i}.png`);
+             this.load.image(`DU_Shirt${i}`, `assets/dressup/DU_Shirt${i}.png`);
         }
 
         this.load.image('nextButton', 'assets/nextButton.png');
 
         // UI Layers
-        this.load.image('Face_Layer', 'assets/DU_F_Layer.png');
-        this.load.image('Clothes_Layer', 'assets/DU_C_Layer.png');
-        this.load.image('Hat_Layer', 'assets/DU_H_Layer.png');
+        this.load.image('Face_Layer', 'assets/dressup/DU_F_Layer.png');
+        this.load.image('Clothes_Layer', 'assets/dressup/DU_C_Layer.png');
+        this.load.image('Hat_Layer', 'assets/dressup/DU_H_Layer.png');
     }
 
     create() {

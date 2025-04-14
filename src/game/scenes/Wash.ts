@@ -46,7 +46,7 @@ export class Wash extends Scene {
                     x: 1000,           
                     y: 900,     
                     alpha: 0,      
-                    duration: 4000,    
+                    duration: 4000,   
                     ease: 'Power2',     
                     onComplete: () => {
                         console.log("Delayed action executed");
