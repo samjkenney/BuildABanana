@@ -43,7 +43,7 @@ export class Name extends Scene {
         this.expression.play('blink',true);
         this.expression.setDepth(1);
         this.expression.setScale(1.6); 
-        const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the DressUp scene
+        const nextButton = new NextButton(this, 1160, 854, 'DressUp'); // Add a next button to go to the DressUp scene
         nextButton.setVisible(false); 
         const myBanana = new Banana(this, 400, 714, 'banana'); // Create a new Banana object
         
