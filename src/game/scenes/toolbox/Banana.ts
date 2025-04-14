@@ -14,7 +14,7 @@ export class Banana{
         this.y = y;
         currentScene.load.image('banana', 'assets/Banana.png'); //replace asset with peeled banana
         const banana = currentScene.add.image(x, y, 'banana'); 
-        banana.setScale(0.4);  
+        banana.setScale(0.65);  
         banana.setInteractive();
     }
 

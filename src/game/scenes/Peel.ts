@@ -11,7 +11,7 @@ export class Peel extends Scene {
 
     preload() {
         this.load.image('banana', 'assets/bananaPeel0.png'); 
-        this.load.image('background', 'assets/Basic Background 2.png');
+        this.load.image('background', 'assets/Basic_BKG.jpeg');
         this.load.image('nextButton', 'assets/nextButton.png'); 
         //load peeled banana    
         this.load.image('peeledBanana', 'assets/bananaPeel4.png');
@@ -22,7 +22,7 @@ export class Peel extends Scene {
     }
 
     create() {
-        this.add.image(512, 384,'background'); 
+        this.add.image(849, 567.5,'background'); 
         const peeledBanana = this.add.image(256, 384, 'peeledBanana');
         peeledBanana.setScale(0.5);
 
@@ -70,7 +70,5 @@ export class Peel extends Scene {
         
     }
 
-    setBanana(banana: Banana){
-        this.banana = banana;
-    }
+   
 }

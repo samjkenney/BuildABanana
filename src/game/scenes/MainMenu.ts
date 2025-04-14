@@ -10,7 +10,7 @@ export class MainMenu extends Scene {
 
     preload() {
         this.load.image('startButton', 'assets/startButton.png');  
-        this.load.image('backgroundImage', 'assets/Basic Background.png');
+        this.load.image('backgroundImage', 'assets/Basic_BKG.jpeg');
     }
 
     create() {

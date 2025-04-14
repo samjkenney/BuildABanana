@@ -13,18 +13,18 @@ export class NextButton extends GameObjects.Sprite {
 
         
         this.setInteractive();
-        this.setScale(0.1);
+        this.setScale(0.15);
 
       
         this.on('pointerover', () => {
             this.setTint(0xffb6c1); 
-            this.setScale(0.13);
+            this.setScale(0.18);
         });
 
         
         this.on('pointerout', () => {
             this.clearTint();
-            this.setScale(0.1);
+            this.setScale(0.15);
         });
 
        

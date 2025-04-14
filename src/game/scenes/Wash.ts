@@ -18,13 +18,15 @@ export class Wash extends Scene {
     }
 
     create() {
-        this.add.image(512, 384,'background'); 
+        this.add.image(849, 567.5,'background'); 
 
-        const banana = this.add.image(256, 384, 'banana'); 
-        banana.setScale(0.5);  
+        const banana = this.add.image(849, 767.5, 'banana');  
+        banana.setScale(0.55)
         banana.setInteractive();
 
-        const washButton = this.add.image(512, 500, 'washButton');
+
+        const washButton = this.add.image(792, 500, 'washButton');
+        washButton.setScale(0.8)
         washButton.setInteractive();
 
         
@@ -33,14 +35,29 @@ export class Wash extends Scene {
         //when the banana is clicked
         washButton.on('pointerdown', () => {
             washButton.destroy();
-            const hose = this.add.image(512, 384, 'hose');
+            const hose = this.add.image(849, 600, 'hose');
+            hose.setAlpha(1);  
+            
             setTimeout(() => {
-                // Code to execute after 2 seconds
-                hose.destroy();
-                console.log("Delayed action executed");
-            }, 3000);
-            //wash the banana
-            new NextButton(this, 800, 654, 'Peel');
+                
+                // Move off screen 
+                this.tweens.add({
+                    targets: hose,
+                    x: 1000,           
+                    y: 900,     
+                    alpha: 0,      
+                    duration: 4000,    
+                    ease: 'Power2',     
+                    onComplete: () => {
+                        console.log("Delayed action executed");
+                        hose.destroy();  
+                        new NextButton(this, 1550, 100, 'Peel');
+                        
+                    }
+                });
+
+            }, 2000);
+           
         })
         
     }

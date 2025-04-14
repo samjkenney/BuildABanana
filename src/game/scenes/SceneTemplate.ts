@@ -52,7 +52,7 @@ export abstract class SceneTemplate extends Scene {
             scene.load.image('backgroundImage', this.backgroundImagePath);
         }
         else{
-            scene.load.image('backgroundImage', 'assets/Basic Background.png'); //default background
+            scene.load.image('backgroundImage', 'assets/Basic_BKG.jpeg'); //default background
         }
 
         scene.add.image(scene.scale.baseSize.width / 2, scene.scale.baseSize.height / 2, "backgroundImage");

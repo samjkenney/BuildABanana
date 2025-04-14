@@ -27,7 +27,7 @@ export class Name extends Scene {
     }
 
     create() {
-        this.add.image(512, 384, 'NameBackground'); 
+        this.add.image(849, 567.5, 'NameBackground'); 
 
 
         this.anims.create({
@@ -38,27 +38,29 @@ export class Name extends Scene {
 
 
         });
-        this.expression = this.add.sprite(480,384, 'blinking_sheet');
+        this.expression = this.add.sprite(530,714, 'blinking_sheet');
         this.expression.setFrame(0);
         this.expression.play('blink',true);
         this.expression.setDepth(1);
-        const nextButton = new NextButton(this, 800, 654, 'Personality'); // Add a next button to go to the DressUp scene
+        this.expression.setScale(1.6); 
+        const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the DressUp scene
         nextButton.setVisible(false); 
-        const myBanana = new Banana(this, 400, 384, 'banana'); // Create a new Banana object
+        const myBanana = new Banana(this, 400, 714, 'banana'); // Create a new Banana object
         
-        const element = this.add.dom(400, 450).createFromCache('nameform'); 
+        const element = this.add.dom(800, 450).createFromCache('nameform'); 
 
    
         const inputBox = element.getChildByName('nameField') as HTMLInputElement;
 
         
-        element.setPosition(800, 254); 
+        element.setPosition(1150, 434); 
 
         // custom
-        inputBox.style.backgroundColor = '#f9cccc'; 
-        inputBox.style.border = '2px solid #FFB6C1'; 
-        inputBox.style.width = '300px';
-        inputBox.style.height = '40px'; 
+        inputBox.style.backgroundColor = '#ffccd2'; 
+        // inputBox.style.border = '1px solid ##ffccd2'; 
+        inputBox.style.border = 'none';
+        inputBox.style.width = '700px';
+        inputBox.style.height = '100px'; 
 
         
         inputBox.addEventListener('input', () => {

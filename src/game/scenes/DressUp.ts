@@ -22,11 +22,11 @@ export class DressUp extends Scene {
     }
 
     preload() {
-        this.load.image('dressUpBackground', 'assets/DU_BKG(1).png');
+        this.load.image('dressUpBackground', 'assets/DS_BKG.png');
         this.load.image('menu', 'assets/DU_MenuBase.png');
         this.load.image('banana', 'assets/Banana.png');
 
-        //Categories
+        //Cats
         this.load.image('face', 'assets/Face.png');
         this.load.image('glasses', 'assets/Glasses.png');
         this.load.image('shirt', 'assets/Shirt.png');
@@ -53,18 +53,18 @@ export class DressUp extends Scene {
     }
 
     create() {
-        this.add.image(512, 384, 'dressUpBackground');
-        const menu = this.add.image(550, 376, 'menu');
-        menu.setScale(0.55);
-        const myBanana = new Banana(this, 274, 500, 'banana');
+        this.add.image(849, 567.5, 'dressUpBackground');
+        const menu = this.add.image(950, 576, 'menu');
+        menu.setScale(0.85);
+        const myBanana = new Banana(this, 450, 714, 'banana');
 
        
 
         // Layers
         const layers = {
-            face: this.add.image(550, 376, 'Hat_Layer').setInteractive().setVisible(false).setScale(0.55),
-            glasses: this.add.image(550, 376, 'Face_Layer').setInteractive().setVisible(false).setScale(0.55),
-            shirt: this.add.image(550, 376, 'Clothes_Layer').setInteractive().setVisible(false).setScale(0.55),
+            face: this.add.image(950, 576, 'Hat_Layer').setInteractive().setVisible(false).setScale(0.85),
+            glasses: this.add.image(950, 576, 'Face_Layer').setInteractive().setVisible(false).setScale(0.85),
+            shirt: this.add.image(950, 576, 'Clothes_Layer').setInteractive().setVisible(false).setScale(0.85),
         };
 
         
@@ -79,10 +79,10 @@ export class DressUp extends Scene {
         //Positioning, TODO: Make it an Array instead???
         const buttonPositions = {
             sharedPositions: [
-                { x: 750.5, y: 344 },
-                { x: 900.5, y: 344 },
-                { x: 750.5, y: 480 },
-                { x: 900.5, y: 480 }
+                { x: 1250.5, y: 750 },
+                { x: 1480.5, y: 520 },
+                { x: 1250.5, y: 520 },
+                { x: 1480.5, y: 750 }
             ],
             
         };
@@ -94,7 +94,7 @@ export class DressUp extends Scene {
 
             for (let i = 1; i <= 4; i++) {
                 const button = this.add.image(positions[i - 1].x, positions[i - 1].y, `${category}${i}`);
-                button.setInteractive({ pixelPerfect: true }).setVisible(false).setScale(0.7);
+                button.setInteractive({ pixelPerfect: true }).setVisible(false).setScale(1.24);
                 button.on('pointerdown', () => {
                     console.log(`Clicked ${category}${i}`);
                     this.toggleImage(`${category}${i}`);
@@ -117,27 +117,27 @@ export class DressUp extends Scene {
         this.shirtButtons = createCategoryButtons('Shirt', buttonPositions.sharedPositions);
 
         // Icons for cat
-        const face = this.add.image(596.5, 344, 'face').setScale(0.16).setInteractive();
-        const glasses = this.add.image(597, 414, 'glasses').setScale(0.16).setInteractive();
-        const shirt = this.add.image(596.5, 488, 'shirt').setScale(0.16).setInteractive();
+        const face = this.add.image(1020, 536, 'face').setScale(0.23).setInteractive();
+        const glasses = this.add.image(1020, 636, 'glasses').setScale(0.23).setInteractive();
+        const shirt = this.add.image(1020, 736, 'shirt').setScale(0.23).setInteractive();
 
         //Maps for Image
 
         this.imageMap = {
-            'Face1': this.add.image(274, 500, 'DU_Face1').setVisible(false).setScale(0.4),
-            'Face2': this.add.image(274, 500, 'DU_Face2').setVisible(false).setScale(0.4),
-            'Face3': this.add.image(274, 500, 'DU_Face3').setVisible(false).setScale(0.4),
-            'Face4': this.add.image(274, 500, 'DU_Face4').setVisible(false).setScale(0.4),
+            'Face1': this.add.image(450, 714, 'DU_Face1').setVisible(false).setScale(0.65),
+            'Face2': this.add.image(450, 714, 'DU_Face2').setVisible(false).setScale(0.65),
+            'Face3': this.add.image(450, 714, 'DU_Face3').setVisible(false).setScale(0.65),
+            'Face4': this.add.image(450, 714, 'DU_Face4').setVisible(false).setScale(0.65),
 
-            'Glasses1': this.add.image(274, 500, 'DU_Glasses1').setVisible(false).setScale(0.4),
-            'Glasses2': this.add.image(274, 500, 'DU_Glasses2').setVisible(false).setScale(0.4),
-            'Glasses3': this.add.image(274, 500, 'DU_Glasses3').setVisible(false).setScale(0.4),
-            'Glasses4': this.add.image(274, 500, 'DU_Glasses4').setVisible(false).setScale(0.4),
+            'Glasses1': this.add.image(450, 714, 'DU_Glasses1').setVisible(false).setScale(0.65),
+            'Glasses2': this.add.image(450, 714, 'DU_Glasses2').setVisible(false).setScale(0.65),
+            'Glasses3': this.add.image(450, 714, 'DU_Glasses3').setVisible(false).setScale(0.65),
+            'Glasses4': this.add.image(450, 714, 'DU_Glasses4').setVisible(false).setScale(0.65),
 
-            'Shirt1': this.add.image(274, 500, 'DU_Shirt1').setVisible(false).setScale(0.4),
-            'Shirt2': this.add.image(274, 500, 'DU_Shirt2').setVisible(false).setScale(0.4),
-            'Shirt3': this.add.image(274, 500, 'DU_Shirt3').setVisible(false).setScale(0.4),
-            'Shirt4': this.add.image(274, 500, 'DU_Shirt4').setVisible(false).setScale(0.4)
+            'Shirt1': this.add.image(450, 714, 'DU_Shirt1').setVisible(false).setScale(0.65),
+            'Shirt2': this.add.image(450, 714, 'DU_Shirt2').setVisible(false).setScale(0.65),
+            'Shirt3': this.add.image(450, 714, 'DU_Shirt3').setVisible(false).setScale(0.65),
+            'Shirt4': this.add.image(450, 714, 'DU_Shirt4').setVisible(false).setScale(0.65)
         };
 
         // Cat logic
@@ -179,7 +179,7 @@ export class DressUp extends Scene {
         });
 
     
-        new NextButton(this, 800, 654, 'Wash');
+        new NextButton(this, 1300, 990, 'Wash');
     }
 
    
