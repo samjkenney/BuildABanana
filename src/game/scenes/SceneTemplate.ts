@@ -71,7 +71,7 @@ export abstract class SceneTemplate extends Scene {
 
     protected addBackButton(scene: Scene, previousScene: string){
         this.backButton = new BackButton(scene, previousScene);
-        this.add.existing(this.backButton);
+        scene.add.existing(this.backButton);
     }
 
     // protected getSceneWidth(){

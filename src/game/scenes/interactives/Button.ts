@@ -7,8 +7,8 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     //y: number;
     width: number;
     height: number;
-    color: number; //necessary?
-    backgroundGraphics;
+    protected color: number; //necessary?
+    protected backgroundGraphics;
 
     private static CORNERRADIUS: number = 10; //make constant, make protected, not static to later access, set (button styles, customization category tabs, etc.)?
     //protected static BORDER = 10; //make constant?

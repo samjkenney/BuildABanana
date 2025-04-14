@@ -37,6 +37,7 @@ export class NextButton extends SceneButton{
     //private static color: string; //make constant?
     private static WIDTH = 170; //make constant?
     private static HEIGHT = 80; //make constant?
+    private static COLOR = 0xF9B1B4; //make constant?
 
     constructor(scene: Scene, nextScene: string, displayText?: string){
         var text;
@@ -47,7 +48,7 @@ export class NextButton extends SceneButton{
             text = "Next";
         }
 
-        super(scene, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), NextButton.WIDTH, NextButton.HEIGHT, 0xF9B1B4, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
+        super(scene, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
 
     }
 
