@@ -14,8 +14,8 @@ export class Peel extends Scene {
         
      
         this.load.spritesheet('peel', 'assets/peel/peel.png', { 
-            frameWidth: 666, 
-            frameHeight: 375  
+            frameWidth: 1698, 
+            frameHeight: 1135 
         });
     }
 
@@ -30,9 +30,12 @@ export class Peel extends Scene {
         });
 
         
-        const peelSprite = this.add.sprite(866, 500, 'peel'); //TODO: Fix Positioning
+        const peelSprite = this.add.sprite(823, 535, 'peel'); //TODO: Fix Positioning
+        peelSprite.setScale(0.9);
         peelSprite.play('peelAnim'); 
-        peelSprite.setScale(4);  
+         
+
+       
 
 
    
