@@ -9,6 +9,7 @@ export class Wash extends Scene {
     preload() {
         this.load.image('banana', 'assets/Banana.png'); 
         this.load.image('background', 'assets/wash/Shower.png'); //replace w custom background
+        this.load.image('hoseOff', 'assets/wash/Hose_off.png');
 
         //load wash assets
         this.load.image('hose', 'assets/wash/Hose.png');
@@ -35,30 +36,43 @@ export class Wash extends Scene {
         //when the banana is clicked
         washButton.on('pointerdown', () => {
             washButton.destroy();
-            const hose = this.add.image(849, 600, 'hose');
-            hose.setAlpha(1);  
-            
-            setTimeout(() => {
-                
-                // Move off screen 
-                this.tweens.add({
-                    targets: hose,
-                    x: 1000,           
-                    y: 900,     
-                    alpha: 0,      
-                    duration: 4000,   
-                    ease: 'Power2',     
-                    onComplete: () => {
-                        console.log("Delayed action executed");
-                        hose.destroy();  
-                        new NextButton(this, 1550, 100, 'Peel');
-                        
-                    }
+
+        const hose = this.add.image(1000, 900, 'hoseOff').setAlpha(1);
+
+        //Hose onscreen
+        this.tweens.add({
+            targets: hose,
+            x: 849,
+            y: 600,
+            duration: 1000,
+            ease: 'Power2',
+            onComplete: () => {
+                // Switch 
+                this.time.delayedCall(1200, () => {
+                    hose.setTexture('hose');
                 });
 
-            }, 2000);
-           
-        })
-        
-    }
+                 // Switch back 
+                 this.time.delayedCall(3000, () => {
+                    hose.setTexture('hoseOff');
+
+                    this.time.delayedCall(1000, () => {
+                        //Hose offscreen
+                        this.tweens.add({
+                            targets: hose,
+                            x: 1000,
+                            y: 900,
+                            duration: 4000,
+                            ease: 'Power2',
+                            onComplete: () => {
+                                hose.destroy();
+                                new NextButton(this, 1550, 100, 'Peel');
+                            }
+                        });
+                    });
+                });
+            }
+        });
+    }); 
+} 
 }
