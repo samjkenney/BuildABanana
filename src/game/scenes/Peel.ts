@@ -1,16 +1,18 @@
-import { Scene } from 'phaser';
+import { Input, Scene } from 'phaser';
 import { GameObjects } from 'phaser'; // Separate import for GameObjects
 import { NextButton }from './toolbox/NextButton'; 
 
 export class Peel extends Scene {
     constructor() {
         super('Peel');
+       
     }
 
  
     preload() {
         this.load.image('backgroundP', 'assets/peel/Peel_BKG.png');
         this.load.image('nextButton', 'assets/nextButton.png'); 
+        this.load.image('openHandCursor', 'assets/peel/open_hand.png');
         
      
         this.load.spritesheet('peel', 'assets/peel/peel.png', { 
@@ -21,6 +23,19 @@ export class Peel extends Scene {
 
     create() {
         this.add.image(849, 567.5, 'backgroundP'); 
+
+        
+         this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
+
+
+        this.input.on('pointerdown', () => {
+            this.input.setDefaultCursor('url(assets/peel/closed_hand.png), auto');
+        });
+
+        this.input.on('pointerup', () => {
+            this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
+        });
+
     
         this.anims.create({
             key: 'peelAnim',
@@ -33,13 +48,9 @@ export class Peel extends Scene {
         const peelSprite = this.add.sprite(823, 535, 'peel'); //TODO: Fix Positioning
         peelSprite.setScale(0.9);
         peelSprite.play('peelAnim'); 
-         
-
-       
-
-
-   
 
         
     }
+
+    
 }
