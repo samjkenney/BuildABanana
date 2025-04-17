@@ -3,6 +3,7 @@ import { GameObjects } from 'phaser';
 
 export class Banana{
     scene: Scene;
+    bananaImage: GameObjects.Image;
     activeFace: GameObjects.Image | null = null; 
     x: number;
     y: number;
@@ -12,10 +13,9 @@ export class Banana{
         this.scene = currentScene; 
         this.x = x;
         this.y = y;
-        currentScene.load.image('banana', 'assets/Banana.png'); //replace asset with peeled banana
-        const banana = currentScene.add.image(x, y, 'banana'); 
-        banana.setScale(0.65);  
-        banana.setInteractive();
+        this.bananaImage = currentScene.add.image(x, y, 'banana'); 
+        this.bananaImage.setScale(0.65);  
+        this.bananaImage.setInteractive();
     }
 
     updateBanana(){
@@ -31,5 +31,10 @@ export class Banana{
         }
         this.activeFace = this.scene.add.image(this.x, this.y, 'bananaFace');
         this.activeFace.setScale(0.4);
+    }
+
+
+    destroy() {
+        this.bananaImage.destroy();
     }
 }
