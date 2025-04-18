@@ -38,6 +38,8 @@ const config: Phaser.Types.Core.GameConfig = {
         Personality,
         Aspirations,
         DressUp,
+        Peel,
+        Split,
         Wash,
         Peel,
         Split,
