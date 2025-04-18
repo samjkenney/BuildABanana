@@ -47,7 +47,9 @@ export class Wash extends Scene {
 
     create() {
         this.add.image(849, 567.5, 'background');
-        this.add.image(100, 100, this.registry.get("imageKey"));
+        this.add.image(100, 100, this.registry.get("FaceCosmetic"));
+        this.add.image(200, 200, this.registry.get("GlassesCosmetic"));
+        this.add.image(300, 300, this.registry.get("ShirtCosmetic"));
         // const selectedFace = this.registry.get("face");
 
             

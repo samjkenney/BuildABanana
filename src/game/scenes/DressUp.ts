@@ -191,6 +191,7 @@ export class DressUp extends Scene {
     //put cosmetic on banana
     private toggleImage(imageKey: string) { //passes in category and number ("Face1")
         const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; //get category ("Face")
+        var cosmetic = category + "Cosmetic";
         if (!category) return;
 
         for (const key in this.imageMap) { //loop through all items in imageMap
@@ -204,7 +205,7 @@ export class DressUp extends Scene {
             this.imageMap[imageKey].setVisible(true); //find selected image in imageMap, set visible
         }
 
-        this.registry.set(category.toLowerCase(), imageKey);
+        this.registry.set(cosmetic, imageKey);
         // console.log(this.registry.get(category.toLowerCase()));
        
     }
