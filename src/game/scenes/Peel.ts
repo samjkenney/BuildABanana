@@ -42,6 +42,8 @@ export class Peel extends Scene {
             this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
         });
 
+        new NextButton(this, 1550, 100, 'Split'); // Add a next button to go to the Split scene
+
         this.anims.create({
             key: 'peelAnim',
             frames: this.anims.generateFrameNumbers('peel', { start: 0, end: 4 }), 
