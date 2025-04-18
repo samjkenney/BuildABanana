@@ -205,7 +205,7 @@ export class DressUp extends Scene {
             this.imageMap[imageKey].setVisible(true); //find selected image in imageMap, set visible
         }
 
-        this.registry.set(cosmetic, imageKey);
+        this.registry.set(cosmetic, "DU_" + imageKey);
         // console.log(this.registry.get(category.toLowerCase()));
        
     }

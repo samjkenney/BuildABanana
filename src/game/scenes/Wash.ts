@@ -17,7 +17,6 @@ export class Wash extends Scene {
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
 
-        //this.load.image(this.registry.get("imageMap")[this.registry.get("imageKey")]);
         for (let i = 1; i <= 4; i++) {
             this.load.image(`Face${i}`, `assets/dressup/Face${i}.png`);
             this.load.image(`Glasses${i}`, `assets/dressup/Glasses${i}.png`);
@@ -47,10 +46,9 @@ export class Wash extends Scene {
 
     create() {
         this.add.image(849, 567.5, 'background');
-        this.add.image(100, 100, this.registry.get("FaceCosmetic"));
-        this.add.image(200, 200, this.registry.get("GlassesCosmetic"));
-        this.add.image(300, 300, this.registry.get("ShirtCosmetic"));
-        // const selectedFace = this.registry.get("face");
+        this.add.image(600, 600, this.registry.get("FaceCosmetic"));
+        this.add.image(600, 600, this.registry.get("GlassesCosmetic"));
+        this.add.image(600, 600, this.registry.get("ShirtCosmetic"));
 
             
         const puddle = this.add.image(849, 1000, 'puddle')
