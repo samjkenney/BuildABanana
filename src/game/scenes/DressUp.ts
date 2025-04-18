@@ -87,7 +87,7 @@ export class DressUp extends Scene {
             
         };
 
-        // Make Button
+        // Make Category Buttons
         const createCategoryButtons = (category: string, positions: { x: number, y: number }[]) => {
             const buttons: Phaser.GameObjects.Image[] = [];
             let currentButton: Phaser.GameObjects.Image | null = null;
@@ -140,6 +140,9 @@ export class DressUp extends Scene {
             'Shirt4': this.add.image(450, 714, 'DU_Shirt4').setVisible(false).setScale(0.65)
         };
 
+        //this.registry.set("imageMap", this.imageMap);
+        //console.log(this.registry.get("imageMap"));
+
         // Cat logic
         const setCategory = (category: string) => {
             hideAllLayers();
@@ -183,20 +186,23 @@ export class DressUp extends Scene {
     }
 
    
-
+    //put cosmetic on banana
     private toggleImage(imageKey: string) {
         const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; // need to get "Face" 
         if (!category) return; 
 
         for (const key in this.imageMap) {
             if (key.startsWith(category)) {
-                this.imageMap[key].setVisible(false);
+                this.imageMap[key].setVisible(false); //hide other cosmetics in category
             }
         }
 
+        //show selected cosmetic
         if (this.imageMap[imageKey]) {
             this.imageMap[imageKey].setVisible(true);
         }
+
+        this.registry.set("cosmeticImage", this.imageMap[imageKey])
        
     }
 
