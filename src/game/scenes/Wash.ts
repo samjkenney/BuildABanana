@@ -16,6 +16,19 @@ export class Wash extends Scene {
 
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
+
+        //this.load.image(this.registry.get("imageMap")[this.registry.get("imageKey")]);
+        for (let i = 1; i <= 4; i++) {
+            this.load.image(`Face${i}`, `assets/dressup/Face${i}.png`);
+            this.load.image(`Glasses${i}`, `assets/dressup/Glasses${i}.png`);
+            this.load.image(`Shirt${i}`, `assets/dressup/Shirt${i}.png`);
+
+
+             // Map buttons to DU images
+             this.load.image(`DU_Face${i}`, `assets/dressup/DU_Face${i}.png`);
+             this.load.image(`DU_Glasses${i}`, `assets/dressup/DU_Glasses${i}.png`);
+             this.load.image(`DU_Shirt${i}`, `assets/dressup/DU_Shirt${i}.png`);
+        }
     }
 
     private makeDropFall(drop: GameObjects.Image) {
@@ -33,7 +46,10 @@ export class Wash extends Scene {
     }
 
     create() {
-        this.add.image(849, 567.5, 'background'); 
+        this.add.image(849, 567.5, 'background');
+        this.add.image(100, 100, this.registry.get("imageKey"));
+        // const selectedFace = this.registry.get("face");
+
             
         const puddle = this.add.image(849, 1000, 'puddle')
             .setScale(0.95)

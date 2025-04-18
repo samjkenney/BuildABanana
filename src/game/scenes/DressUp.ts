@@ -102,8 +102,10 @@ export class DressUp extends Scene {
                     if (currentButton) {
                         currentButton.clearTint();
                     }
+                    
                     button.setTint(0xe1a8a0);
                     currentButton = button;
+                    //this.registry.set("currentButton", currentButton)
 
                 });
                 buttons.push(button);
@@ -140,7 +142,7 @@ export class DressUp extends Scene {
             'Shirt4': this.add.image(450, 714, 'DU_Shirt4').setVisible(false).setScale(0.65)
         };
 
-        //this.registry.set("imageMap", this.imageMap);
+        this.registry.set("imageMap", this.imageMap);
         //console.log(this.registry.get("imageMap"));
 
         // Cat logic
@@ -187,22 +189,23 @@ export class DressUp extends Scene {
 
    
     //put cosmetic on banana
-    private toggleImage(imageKey: string) {
-        const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; // need to get "Face" 
-        if (!category) return; 
+    private toggleImage(imageKey: string) { //passes in category and number ("Face1")
+        const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; //get category ("Face")
+        if (!category) return;
 
-        for (const key in this.imageMap) {
+        for (const key in this.imageMap) { //loop through all items in imageMap
             if (key.startsWith(category)) {
-                this.imageMap[key].setVisible(false); //hide other cosmetics in category
+                this.imageMap[key].setVisible(false); //hide all cosmetics in category
             }
         }
 
         //show selected cosmetic
-        if (this.imageMap[imageKey]) {
-            this.imageMap[imageKey].setVisible(true);
+        if (this.imageMap[imageKey]) { //check if null
+            this.imageMap[imageKey].setVisible(true); //find selected image in imageMap, set visible
         }
 
-        this.registry.set("cosmeticImage", this.imageMap[imageKey])
+        this.registry.set(category.toLowerCase(), imageKey);
+        // console.log(this.registry.get(category.toLowerCase()));
        
     }
 
