@@ -36,7 +36,7 @@ export class Banana{
     addBanana(scene: Scene){
         //add banana image
         if(!this.peeled){ //check if peeled    
-            this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.4);
+            this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.8);
         }
         else{
             this.bananaImage = scene.add.image(0, 0, 'bananaPeeled').setScale(0.4);
