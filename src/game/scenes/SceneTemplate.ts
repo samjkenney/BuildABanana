@@ -1,4 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
+import { Banana } from './toolbox/Banana';
 import { TextStyles } from './toolbox/TextStyles';
 import { NextButton } from './interactives/NextButton';
 import { BackButton } from './interactives/BackButton';
@@ -15,7 +16,7 @@ export abstract class SceneTemplate extends Scene {
     protected backButton: BackButton;
 
     // constructor(sceneFileName: string, titleText: string, titleX: number, titleY: number, backButton: boolean, backgroundImagePath?: string) {
-        constructor(sceneFileName: string, titleText: string, backgroundImagePath?: string) {
+    constructor(sceneFileName: string, titleText: string, backgroundImagePath?: string) {
         super(sceneFileName);
         this.titleText = titleText;
         // this.titleX = titleX;
@@ -36,10 +37,11 @@ export abstract class SceneTemplate extends Scene {
     create(){
     };
 
-    protected loader(scene: Scene){
+    protected sceneLoader(scene: Scene){
         //this.calculateSizes(scene);
         this.addBackground(scene);
         this.addTitle(scene, this.titleText)
+        this.addBanana(scene);
     }
 
     // private calculateSizes(scene: Scene){
@@ -64,6 +66,13 @@ export abstract class SceneTemplate extends Scene {
         //position updated in child classes
     }
 
+    private addBanana(scene: Scene){
+        var banana = scene.registry.get("banana");
+        banana.addBanana(scene);
+    }
+
+
+
     protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
         this.nextButton = new NextButton(this, nextScene, displayText);
         scene.add.existing(this.nextButton);
@@ -82,6 +91,8 @@ export abstract class SceneTemplate extends Scene {
     //     return this.SCENEHEIGHT;
     // }
 
+
+    //getter methods
     protected getTitle(){
         return this.title;
     }

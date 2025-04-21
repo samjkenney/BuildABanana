@@ -18,14 +18,14 @@ export class Aspirations extends CustomizationTemplate{
     ]
 
     constructor(){
-        super("Aspirations", "Pick an aspiration!");
+        super("Aspirations", "Pick an\naspiration!");
     }
 
     preload(){
     }
 
     create(){
-        super.loader1(this);
+        super.customizationLoader(this);
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
