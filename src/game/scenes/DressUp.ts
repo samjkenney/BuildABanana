@@ -56,7 +56,7 @@ export class DressUp extends Scene {
         this.add.image(849, 567.5, 'dressUpBackground');
         const menu = this.add.image(950, 576, 'menu');
         menu.setScale(0.85);
-        const myBanana = new Banana(this, 450, 714, 'banana');
+        //const myBanana = new Banana(this, 450, 714, 'banana');
 
        
 

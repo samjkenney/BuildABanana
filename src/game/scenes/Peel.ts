@@ -30,7 +30,7 @@ export class Peel extends Scene {
 
         this.add.image(849, 567.5, 'backgroundP'); 
 
-        const banana = new Banana(this, 823, 535, 'banana');
+        //const banana = new Banana(this, 823, 535, 'banana');
 
         this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
 

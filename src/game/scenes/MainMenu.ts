@@ -10,12 +10,15 @@ export class MainMenu extends Scene {
     }
 
     preload() {
-        this.load.image('startButton', 'assets/startButton.png');  
-        this.load.image('backgroundImage', 'assets/Basic_BKG.jpeg');
+        //this.load.image('startButton', 'assets/startButton.png');
+        this.load.image('defaultBackground', 'assets/Basic_BKG.jpeg');
+        this.load.image('labBackground', 'assets/lab_BKG.png');
+        this.load.image('banana', 'assets/Banana.png');
+        this.load.image("bananaPeeled", "assets/peel.png");
     }
 
     create() {
-        var background = this.add.image(0, 0, 'backgroundImage');
+        var background = this.add.image(0, 0, 'defaultBackground');
         background.setOrigin(0);
 
         var banana = new Banana(this); //create new banana

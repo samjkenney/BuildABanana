@@ -20,7 +20,7 @@ export class Personality extends CustomizationTemplate{
     ]
 
     constructor(){
-        super("Personality", "Pick a\npersonality!");
+        super("Personality", "Pick a\npersonality!", "labBackground");
     }
 
     preload(){

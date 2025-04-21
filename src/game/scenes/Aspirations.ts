@@ -18,7 +18,7 @@ export class Aspirations extends CustomizationTemplate{
     ]
 
     constructor(){
-        super("Aspirations", "Pick an\naspiration!");
+        super("Aspirations", "Pick an\naspiration!", "labBackground");
     }
 
     preload(){

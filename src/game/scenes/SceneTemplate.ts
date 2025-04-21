@@ -7,7 +7,7 @@ import { BackButton } from './interactives/BackButton';
 export abstract class SceneTemplate extends Scene {
     // protected SCENEWIDTH: number;
     // protected SCENEHEIGHT: number;
-    protected backgroundImagePath?: string
+    protected backgroundImage = "defaultBackground"; //default background
     protected title: GameObjects.Text;
     protected titleText: string;
     // protected titleX: number;
@@ -16,13 +16,15 @@ export abstract class SceneTemplate extends Scene {
     protected backButton: BackButton;
 
     // constructor(sceneFileName: string, titleText: string, titleX: number, titleY: number, backButton: boolean, backgroundImagePath?: string) {
-    constructor(sceneFileName: string, titleText: string, backgroundImagePath?: string) {
+    constructor(sceneFileName: string, titleText: string, backgroundImage?: string) {
         super(sceneFileName);
         this.titleText = titleText;
         // this.titleX = titleX;
         // this.titleY = titleY;
         // this.backButton = backButton;
-        this.backgroundImagePath = backgroundImagePath
+        if(backgroundImage){
+            this.backgroundImage = backgroundImage //replace background if given new one
+        }
     };
 
     preload(){
@@ -50,14 +52,7 @@ export abstract class SceneTemplate extends Scene {
     // }
 
     private addBackground(scene: Scene){
-        if((this.backgroundImagePath === undefined) == false){
-            scene.load.image('backgroundImage', this.backgroundImagePath);
-        }
-        else{
-            scene.load.image('backgroundImage', 'assets/Basic_BKG.jpeg'); //default background
-        }
-
-        scene.add.image(scene.scale.baseSize.width / 2, scene.scale.baseSize.height / 2, "backgroundImage");
+        scene.add.image(0, 0, this.backgroundImage).setOrigin(0);
     }
 
     private addTitle(scene: Scene, text: string){
@@ -74,7 +69,7 @@ export abstract class SceneTemplate extends Scene {
 
 
     protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
-        this.nextButton = new NextButton(this, nextScene, displayText);
+        this.nextButton = new NextButton(this, nextScene, 0, 0, displayText);
         scene.add.existing(this.nextButton);
     }
 
@@ -95,5 +90,9 @@ export abstract class SceneTemplate extends Scene {
     //getter methods
     protected getTitle(){
         return this.title;
+    }
+
+    protected getNextButton(){
+        return this.nextButton;
     }
 };
