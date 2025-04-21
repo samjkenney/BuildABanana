@@ -41,8 +41,6 @@ const config: Phaser.Types.Core.GameConfig = {
         Peel,
         Split,
         Wash,
-        Peel,
-        Split,
         IceCream
     ] 
 };

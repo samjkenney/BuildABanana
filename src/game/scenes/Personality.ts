@@ -20,14 +20,14 @@ export class Personality extends CustomizationTemplate{
     ]
 
     constructor(){
-        super("Personality", "Pick a personality!");
+        super("Personality", "Pick a\npersonality!");
     }
 
     preload(){
     }
 
     create(){
-        super.loader1(this);
+        super.customizationLoader(this);
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().width * 0.05;

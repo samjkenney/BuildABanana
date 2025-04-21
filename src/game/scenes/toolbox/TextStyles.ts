@@ -4,7 +4,9 @@ export class TextStyles{
     static title = {
             fontFamily: "Kitto",
             color: "#ffffff",
-            fontSize: 80
+            fontSize: 100,
+            align: "center",
+            //increase line spacing
         };
         
     static button = {
