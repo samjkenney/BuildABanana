@@ -33,12 +33,12 @@ const config: Phaser.Types.Core.GameConfig = {
     title: "Build-A-Banana",
     //url: ???,
     scene: [
+        Peel,
         MainMenu,
         Name,
         Personality,
         Aspirations,
         DressUp,
-        Peel,
         Split,
         Wash,
         IceCream
