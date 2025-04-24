@@ -11,7 +11,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     protected backgroundGraphics;
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
 
-    protected static CORNERRADIUS: number = 10; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
+    protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
     //protected static BORDER = 10; //make constant?
     private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     private static HOVERSCALE = 1.2;

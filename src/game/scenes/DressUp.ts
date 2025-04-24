@@ -82,7 +82,7 @@ export class DressUp extends CustomizationTemplate {
         this.iconContainer = new GameObjects.Container(this, this.categoryContainer.width, 0);
         this.iconContainer.setSize(this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height);
         this.cosmeticContainer.add(this.iconContainer);
-        this.iconContainer.add(this.add.graphics().fillStyle(0xffffff, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 10)); //change to get button corner radius?
+        this.iconContainer.add(this.add.graphics().fillStyle(0xffffff, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
 
         //make arrays of cosmetic image keys
         this.faceArray = [];
@@ -112,8 +112,9 @@ export class DressUp extends CustomizationTemplate {
 
         for(var i = 0; i < categories.length; i++){
             var y = (0.25 / 2 + i * 0.25) * this.categoryContainer.height; //change to calculate from category list size?
-            this.categoryContainer.add(new CategoryButton(this, 0, y, categories[i], this.categoryContainer, this.iconContainer, categoriesMap[categories[i]], this.bananaContainer)); //change to getBananaContainer()?
+            this.categoryContainer.add(new CategoryButton(this, 0, y, categories[i], this.categoryContainer, this.iconContainer, categoriesMap[categories[i]], this.bananaContainer)); //save buttons to variables
         }
+        //set face button to selected
 
         //check 1 category button selected at time (list of buttons, set others in list to not selected?)
 

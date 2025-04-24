@@ -35,7 +35,7 @@ import { TextStyles } from '../toolbox/TextStyles';
 
 export class NextButton extends SceneButton{
     //private static color: string; //make constant?
-    private static WIDTH = 200; //make constant?
+    private static WIDTH = 240; //make constant?
     private static HEIGHT = 100; //make constant?
     private static COLOR = 0xF9B1B4; //make constant?
     //add rounding
