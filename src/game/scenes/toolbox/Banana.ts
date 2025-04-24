@@ -18,6 +18,13 @@ export class Banana{
         this.bananaImage.setInteractive();
     }
 
+
+    setTexture(textureKey: string) {
+        this.bananaImage.setTexture(textureKey);
+        this.bananaImage.setScale(0.85);
+    }
+
+
     updateBanana(){
         //update banana customizations
     }
