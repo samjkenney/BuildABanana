@@ -31,7 +31,7 @@ export class CategoryButton extends ImageButton{
             //update?
         };
 
-        super(scene, x, y, container.width + Button.CORNERRADIUS, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action);
+        super(scene, x, y, container.width + 10, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
         this.scene = scene;
         this.imageKey = imageKey;
         this.iconContainer = iconContainer;
@@ -44,7 +44,7 @@ export class CategoryButton extends ImageButton{
     }
 
     private calculateSizes(container: GameObjects.Container){ //move to just in the constructor (not a function)?
-        this.WIDTH = container.width + Button.CORNERRADIUS;
+        this.WIDTH = container.width + this.cornerRadius;
         this.HEIGHT = container.height * 0.25; //change to calculate based on number of categories?
         this.SIDEBORDER = this.iconContainer.width * 0.1;
         this.TOPBORDER = this.iconContainer.height * 0.1;

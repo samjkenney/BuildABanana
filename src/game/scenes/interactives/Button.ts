@@ -11,7 +11,8 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     protected backgroundGraphics;
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
 
-    protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
+    //protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
+    protected cornerRadius: number;
     //protected static BORDER = 10; //make constant?
     private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     private static HOVERSCALE = 1.2;
@@ -22,7 +23,8 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.width = width;
         this.height = height;
         this.color = color; //necessary?
-        this.content  = content;
+        this.content = content;
+        this.cornerRadius = this.height * 0.2;
 
         this.setSize(this.width, this.height);
         this.setPosition(x, y);
@@ -73,7 +75,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
     protected addRectangle(color: number){
         this.backgroundGraphics.fillStyle(color, 1); //move to method?
-        this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, Button.CORNERRADIUS);
+        this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
 
     //scale content to button size
