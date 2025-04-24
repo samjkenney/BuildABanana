@@ -9,7 +9,7 @@ export class BackButton extends SceneButton{
     private static HEIGHT = 80; //make constant?
 
     constructor(scene: Scene, previousScene: string){
-        super(scene, scene.scale.baseSize.width * 0.05, scene.scale.baseSize.height * 0.05, BackButton.WIDTH, BackButton.HEIGHT, 0xF9B1B4, "<", new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, previousScene);
+        super(scene, scene.scale.baseSize.width * 0.04, scene.scale.baseSize.height * 0.08, BackButton.WIDTH, BackButton.HEIGHT, 0xF9B1B4, "<", new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, previousScene);
 
     }
 

@@ -5,15 +5,25 @@ import { Button } from './Button';
 export class ImageButton extends Button{
     // width: number;
     // height: number;
-    // image: GameObjects.Image;
+    //image: GameObjects.Image;
 
-    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, imageKey: string, action: Function){
-        super(scene, x, y, width, height, color, false, action);
+    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, imageKey: string, scaleOnHover: boolean, action: Function){
+        var content = new GameObjects.Image(scene, 0, 0, imageKey);
+        super(scene, x, y, width, height, color, content, true, scaleOnHover, action);
         //.load.image("image", imagePath); //moved loading to scene, pass in key instead of path
 
-        var image = new GameObjects.Image(scene, width / 2, height / 2, imageKey);
-        this.scaleToButton(image);
+        this.content.setPosition(width / 2, height / 2);
 
-        this.add(image);
+        this.add(this.content);
     }
+
+    //replaces Button updateSize
+    // protected updateSize(width: number, height: number): void{ //make replace Container setSize method?
+    //     this.width = width;
+    //     this.height = height;
+    //     this.setSize(this.width, this.height);
+
+    //     this.backgroundGraphics.clear();
+    //     this.addRectangle(this.color);   
+    // }
 }
