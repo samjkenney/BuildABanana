@@ -1,5 +1,6 @@
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
+import { Banana } from './toolbox/Banana';
 import { NextButton } from './toolbox/NextButton';
 
 export class Wash extends CookTemplate {
@@ -83,10 +84,10 @@ export class Wash extends CookTemplate {
                     this.time.delayedCall(3000, () => {
                         hoseAnimation.remove();
 
-                        var banana = this.registry.get("banana");
-                        banana.setFace(this, "default", this.bananaContainer);
-                        banana.setGlasses(this, "none", this.bananaContainer);
-                        banana.setShirt(this, "none", this.bananaContainer);
+                        var banana: Banana = this.registry.get("banana");
+                        banana.setFace(this, banana.defaultFaceCosmetic, this.bananaContainer);
+                        banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
+                        banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);
 
                         hose.setTexture('hoseOff');
                         puddle.setVisible(true);

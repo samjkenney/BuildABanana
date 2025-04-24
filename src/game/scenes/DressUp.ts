@@ -3,6 +3,7 @@ import { NextButton } from './interactives/NextButton'; //changed to interactive
 import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
+import { Cosmetic } from './toolbox/Cosmetic';
 
 export class DressUp extends CustomizationTemplate {
     //TODO: Data Manager -> transfer choices to next scene
@@ -10,9 +11,12 @@ export class DressUp extends CustomizationTemplate {
     private categoryContainer: GameObjects.Container;
     private iconContainer: GameObjects.Container;
 
-    private faceArray: string[];
-    private glassesArray: string[];
-    private shirtArray: string[];
+    // private faceArray: string[];
+    // private glassesArray: string[];
+    // private shirtArray: string[];
+    private faceArray: Cosmetic[];
+    private glassesArray: Cosmetic[];
+    private shirtArray: Cosmetic[];
 
     private faceButtons: Phaser.GameObjects.Image[] = [];
     private glassesButtons: Phaser.GameObjects.Image[] = [];
@@ -63,6 +67,7 @@ export class DressUp extends CustomizationTemplate {
     create() {
         this.customizationLoader(this);
 
+        //create containers
         this.cosmeticContainer = new GameObjects.Container(this, 0, 300); //change to calculate y
         this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height * 0.8); //make calculateSize method?
         this.getMenuContainer().add(this.cosmeticContainer);
@@ -85,24 +90,39 @@ export class DressUp extends CustomizationTemplate {
         this.iconContainer.add(this.add.graphics().fillStyle(0xffffff, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
 
         //make arrays of cosmetic image keys
-        this.faceArray = [];
-        for (let i = 1; i <= 4; i++) {
-             this.faceArray.push(`DU_Face${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
-        }
+        this.faceArray = [
+            new Cosmetic(this, "DU_Face1", 10, 0, 0.78),
+            new Cosmetic(this, "DU_Face2", 20, 0, 0.8),
+            new Cosmetic(this, "DU_Face3", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Face4", 0, 0, 0.8),
+        ];
+        // for (let i = 1; i <= 4; i++) {
+        //      this.faceArray.push(`DU_Face${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
+        // }
 
-        this.glassesArray = [];
-        for (let i = 1; i <= 4; i++) {
-             this.glassesArray.push(`DU_Glasses${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
-        }
+        this.glassesArray = [
+            new Cosmetic(this, "DU_Glasses1", 10, 0, 0.8),
+            new Cosmetic(this, "DU_Glasses2", 5, 0, 0.78),
+            new Cosmetic(this, "DU_Glasses3", 10, -190, 0.81),
+            new Cosmetic(this, "DU_Glasses4", 0, 0, 0.8),
+        ];
+        // for (let i = 1; i <= 4; i++) {
+        //      this.glassesArray.push(`DU_Glasses${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
+        // }
 
-        this.shirtArray = [];
-        for (let i = 1; i <= 4; i++) {
-             this.shirtArray.push(`DU_Shirt${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
-        }
+        this.shirtArray = [
+            new Cosmetic(this, "DU_Shirt1", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Shirt2", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Shirt3", 20, 0, 0.8),
+            new Cosmetic(this, "DU_Shirt4", 0, 0, 0.8),
+        ];
+        // for (let i = 1; i <= 4; i++) {
+        //      this.shirtArray.push(`DU_Shirt${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
+        // }
 
         //create category buttons
         var categories = ["face", "glasses", "shirt"]; //move to variables?
-        var categoriesMap: {[key: string]: string[]} = {"face": this.faceArray, "glasses": this.glassesArray, "shirt": this.shirtArray}; 
+        var categoriesMap: {[key: string]: Cosmetic[]} = {"face": this.faceArray, "glasses": this.glassesArray, "shirt": this.shirtArray}; //change to array of dictionaries
         
         // var categories1: {[key: string]: any}[] = [
         //     {"name": "face", "array": this.faceArray},

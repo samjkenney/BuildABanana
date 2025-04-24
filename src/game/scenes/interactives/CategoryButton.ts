@@ -3,6 +3,7 @@ import { GameObjects } from "phaser";
 import { Button } from './Button';
 import { ImageButton } from './ImageButton';
 import { IconButton } from './IconButton';
+import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
     private static COLOR = 0x000000; //make constant?
@@ -19,10 +20,10 @@ export class CategoryButton extends ImageButton{
     scene: Scene;
     imageKey: string;
     iconContainer: GameObjects.Container;
-    cosmeticArray: string[];
+    cosmeticArray: Cosmetic[];
     bananaContainer: GameObjects.Container;
 
-    constructor(scene: Scene, x: number, y: number, imageKey: string, container: GameObjects.Container, iconContainer: GameObjects.Container, cosmeticArray: string[], bananaContainer: GameObjects.Container){
+    constructor(scene: Scene, x: number, y: number, imageKey: string, container: GameObjects.Container, iconContainer: GameObjects.Container, cosmeticArray: Cosmetic[], bananaContainer: GameObjects.Container){
         var action = () => {
             console.log("Category button clicked");
 
@@ -31,7 +32,7 @@ export class CategoryButton extends ImageButton{
             //update?
         };
 
-        super(scene, x, y, container.width + 10, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
+        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
         this.scene = scene;
         this.imageKey = imageKey;
         this.iconContainer = iconContainer;

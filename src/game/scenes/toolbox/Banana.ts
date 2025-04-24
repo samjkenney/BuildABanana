@@ -1,5 +1,6 @@
 import { Scene } from 'phaser';
 import { GameObjects } from 'phaser';
+import { Cosmetic } from "./Cosmetic";
 
 export class Banana{
     scene: Scene;
@@ -11,9 +12,17 @@ export class Banana{
     personality: string;
     aspiration: string;
 
-    activeFace = "default";
+    activeFace = "default"; //combine with faceCosmetic somehow?
     activeGlasses = "none";
     activeShirt = "none";
+
+    faceCosmetic: Cosmetic;
+    glassesCosmetic: Cosmetic;
+    shirtCosmetic: Cosmetic;
+
+    defaultFaceCosmetic: Cosmetic;
+    noGlassesCosmetic: Cosmetic;
+    noShirtCosmetic: Cosmetic;
 
     bananaImage: GameObjects.Image;
     //activeFace: GameObjects.Image | null = null;
@@ -31,6 +40,12 @@ export class Banana{
         //this.bananaImage = currentScene.add.image(x, y, 'banana'); 
         //this.bananaImage.setScale(0.65);  
         //this.bananaImage.setInteractive();
+        this.defaultFaceCosmetic = new Cosmetic(currentScene, "defaultFace", 100, 100, 1.4);
+        this.noGlassesCosmetic = new Cosmetic(currentScene, "defaultFace", 0, 0, 1); //add defaults
+        this.noShirtCosmetic = new Cosmetic(currentScene, "defaultFace", 0, 0, 1);
+        this.faceCosmetic = this.defaultFaceCosmetic;
+        this.glassesCosmetic = this.noGlassesCosmetic;
+        this.shirtCosmetic = this.noShirtCosmetic;
     }
 
         setTexture(textureKey: string) {
@@ -50,7 +65,7 @@ export class Banana{
         //add face
         if(this.activeFace !== "default" && !this.washed){ //check logic
             //scene.load.image("face1", "assets/" + this.activeFace + ".png"); //change from loading to setting to faceImage
-            this.faceImage = scene.add.image(0, 0, this.activeFace);
+            this.faceImage = scene.add.image(0, 0, this.faceCosmetic.getImageKey()).setScale(this.faceCosmetic.getScale());
         }
         else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
@@ -61,7 +76,7 @@ export class Banana{
         //add glasses
         if(this.activeGlasses !== "none" && !this.washed){
             //scene.load.image("glasses", "assets/" + this.activeGlasses + ".png"); //change from loading
-            this.glassesImage = scene.add.image(0, 0, this.activeGlasses);
+            this.glassesImage = scene.add.image(0, 0, this.glassesCosmetic.getImageKey()).setScale(this.glassesCosmetic.getScale());
         }
         else{
             this.activeGlasses = "none"; //set to none if null or something weird, or if washed?????
@@ -72,7 +87,7 @@ export class Banana{
         //add shirt
         if(this.activeShirt !== "none" && !this.washed){
             //scene.load.image("shirt", "assets/" + this.activeShirt + ".png"); //change from loading
-            this.shirtImage = scene.add.image(0, 0, this.activeShirt);
+            this.shirtImage = scene.add.image(0, 0, this.shirtCosmetic.getImageKey()).setScale(this.shirtCosmetic.getScale());
         }
         else{
             this.activeShirt = "none"; //set to none if null or something weird, or if washed?????
@@ -100,8 +115,6 @@ export class Banana{
     }
 
     updateBanana(scene: Scene, bananaContainer: GameObjects.Container){
-        //update banana customization images?
-
         //remove banana images
         this.bananaImage.setVisible(false);
         this.faceImage.setVisible(false);
@@ -112,7 +125,7 @@ export class Banana{
     }
 
     private addToContainer(container: GameObjects.Container){ //move to addBanana?
-        container.add(this.bananaImage).sendToBack(this.bananaImage);
+        container.add(this.bananaImage);
         container.add(this.faceImage);
         container.add(this.glassesImage);
         container.add(this.shirtImage);
@@ -122,9 +135,9 @@ export class Banana{
 
     center(totalWidth: number, totalHeight: number){
         this.bananaImage.setPosition(totalWidth / 2, totalHeight / 2);
-        this.faceImage.setPosition(totalWidth / 2, totalHeight / 2); //change to add position from center
-        this.shirtImage.setPosition(totalWidth / 2, totalHeight / 2);
-        this.glassesImage.setPosition(totalWidth / 2, totalHeight / 2);
+        this.faceImage.setPosition(totalWidth / 2 + this.faceCosmetic.getXFromCenter(), totalHeight / 2 + this.faceCosmetic.getYFromCenter()); //change to add position from center
+        this.shirtImage.setPosition(totalWidth / 2 + this.shirtCosmetic.getXFromCenter(), totalHeight / 2 + this.shirtCosmetic.getYFromCenter());
+        this.glassesImage.setPosition(totalWidth / 2 + this.glassesCosmetic.getXFromCenter(), totalHeight / 2 + this.glassesCosmetic.getYFromCenter());
     }
 
 
@@ -142,9 +155,10 @@ export class Banana{
         this.aspiration = aspiration;
     }
 
-    setFace(scene: Scene, face: string, container: GameObjects.Container){
+    setFace(scene: Scene, faceCosmetic: Cosmetic, container: GameObjects.Container){ //combine into 1 method, take category as parameter?
         //set banana face
-        this.activeFace = face;
+        this.activeFace = faceCosmetic.getImageKey();
+        this.faceCosmetic = faceCosmetic;
         this.updateBanana(scene, container);
 
         //if (this.activeFace !== null){
@@ -152,15 +166,17 @@ export class Banana{
         //}
     }
 
-    setGlasses(scene: Scene, glasses: string, container: GameObjects.Container){
+    setGlasses(scene: Scene, glassesCosmetic: Cosmetic, container: GameObjects.Container){
         //set banana glasses
-        this.activeGlasses = glasses;
+        this.activeGlasses = glassesCosmetic.getImageKey();
+        this.glassesCosmetic = glassesCosmetic;
         this.updateBanana(scene, container);
     }
 
-    setShirt(scene: Scene, shirt: string, container: GameObjects.Container){
+    setShirt(scene: Scene, shirtCosmetic: Cosmetic, container: GameObjects.Container){
         //set banana shirt
-        this.activeShirt = shirt;
+        this.activeShirt = shirtCosmetic.getImageKey();
+        this.shirtCosmetic = shirtCosmetic;
         this.updateBanana(scene, container);
     }
 
