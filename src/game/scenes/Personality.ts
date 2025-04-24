@@ -2,6 +2,7 @@ import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
 import { TextButton } from "./interactives/TextButton";
+import { CategoryButton } from "./interactives/CategoryButton";
 
 export class Personality extends CustomizationTemplate{
     //horizontal: 10% border, 40% banana, 10% border, 30% menu, 10% border
@@ -27,7 +28,7 @@ export class Personality extends CustomizationTemplate{
     }
 
     create(){
-        super.customizationLoader(this);
+        super.customizationLoader(this); //don't need to use super (can use "this")?
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().width * 0.05;
@@ -46,7 +47,7 @@ export class Personality extends CustomizationTemplate{
         //     super.getMenuContainer().add(button);
         // }
 
-        super.addNextButton(this, "Aspirations");
-        super.addBackButton(this, "Name");
+        super.addNextButton(this, "Aspirations"); //don't need to use super (can use "this")?
+        super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
     }
 }

@@ -4,12 +4,7 @@ import { TextStyles } from './toolbox/TextStyles';
 import { NextButton } from './interactives/NextButton';
 
 export abstract class CustomizationTemplate extends SceneTemplate {
-    protected SIDEBORDER: number; //make constant, move to sceneTemplate?
-    protected TOPBORDER: number; //move to sceneTemplate?
-    protected HALFBORDER: number; //move to sceneTemplate?
-    protected MENUBORDER: number;
-    protected BANANAHEIGHT: number; //move to sceneTemplate?
-    protected BANANAWIDTH: number //move to sceneTemplate?
+    protected MENUBORDER: number; //make constant?
     protected MENUHEIGHT: number;
     protected MENUWIDTH: number;
     protected bananaContainer: GameObjects.Container;
@@ -30,48 +25,24 @@ export abstract class CustomizationTemplate extends SceneTemplate {
     preload(){
     }
 
-    create(){  
+    create(){
     }
 
     protected customizationLoader(scene: Scene){ //find way to move to constructor, make automatic?
         super.sceneLoader(scene);
 
         this.calculateSizes(scene);
-        this.addBananaContainer(scene);
+        this.updateBananaContainerSize();
         this.addMenuContainer(scene);
+        this.updateTitle(this.MENUWIDTH / 2, 0, this.menuContainer);
     }
 
     private calculateSizes(scene: Scene){
-        this.SIDEBORDER = scene.scale.baseSize.width * 0.08; //make constant?
-        this.TOPBORDER = scene.scale.baseSize.height * 0.08
-        this.HALFBORDER = this.SIDEBORDER / 2;
-        this.MENUBORDER = this.MENUHEIGHT * 0.1;
-        this.BANANAHEIGHT = scene.scale.baseSize.height * 0.84;
-        this.BANANAWIDTH = scene.scale.baseSize.width * 0.45;
+        this.BANANAWIDTH = scene.scale.baseSize.width * 0.45; //replaces SceneTemplate calculation
+        this.MENUBORDER = this.MENUHEIGHT * 0.1; //move to each scene?
         this.MENUHEIGHT = scene.scale.baseSize.height * 0.70; //65%?
         //this.MENUHEIGHT = this.BANANAHEIGHT;
         this.MENUWIDTH = scene.scale.baseSize.width * 0.35;
-    }
-
-    private addBananaContainer(scene: Scene){ //move to sceneTemplate?
-        //debugging
-        this.add.graphics().fillStyle(0xffffff, 1).fillRect(0, 0, this.SIDEBORDER, this.scale.baseSize.height);
-        this.add.graphics().fillStyle(0xff0000, 1).fillRect(this.SIDEBORDER, this.TOPBORDER, this.BANANAWIDTH, this.BANANAHEIGHT);
-        this.add.graphics().fillStyle(0xff0000, 1).fillRect(this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER, this.TOPBORDER, this.MENUWIDTH, this.MENUHEIGHT);
-        
-        //add container
-        this.bananaContainer = new GameObjects.Container(scene);
-        scene.add.existing(this.bananaContainer);
-        this.bananaContainer.setPosition(this.SIDEBORDER, this.TOPBORDER);
-        this.bananaContainer.setSize(this.BANANAWIDTH, this.BANANAHEIGHT);
-
-        //debugging
-        this.bananaContainer.add(scene.add.graphics().fillStyle(0x00ff00, 1).fillRect(0, 0, this.BANANAWIDTH, this.BANANAHEIGHT));
-
-        //add banana
-        var banana = scene.registry.get("banana"); //move to sceneTemplate?
-        banana.addToContainer(this.bananaContainer);
-        banana.center(this.BANANAWIDTH, this.BANANAHEIGHT);
     }
 
     private addMenuContainer(scene: Scene){
@@ -82,12 +53,12 @@ export abstract class CustomizationTemplate extends SceneTemplate {
         this.menuContainer.setSize(this.MENUWIDTH, this.MENUHEIGHT);
 
         //debugging
-        this.menuContainer.add(scene.add.graphics().fillStyle(0x00ff00, 1).fillRect(0, 0, this.MENUWIDTH, this.MENUHEIGHT));
-
-        //add title
-        super.getTitle().setOrigin(0.5, 0); //set origin to top center of text box
-        super.getTitle().setPosition(this.MENUWIDTH / 2, 0);
-        this.menuContainer.add(super.getTitle());
+        if(this.debug){
+            var expectedBox = scene.add.graphics().fillStyle(0xff0000, 1).fillRect(this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER, this.TOPBORDER, this.MENUWIDTH, this.MENUHEIGHT);
+            scene.children.sendToBack(expectedBox);
+            var actualBox = scene.add.graphics().fillStyle(0x00ff00, 1).fillRect(0, 0, this.MENUWIDTH, this.MENUHEIGHT);
+            this.menuContainer.add(actualBox).sendToBack(actualBox);
+        }
     }
     
     protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
@@ -98,39 +69,39 @@ export abstract class CustomizationTemplate extends SceneTemplate {
 
 
     //getter methods
-    protected getSideBorder(){
+    protected getSideBorder(){ //are these not even necessary either (children inherit SIDEBORDER)??????
         return this.SIDEBORDER;
     }
 
-    protected getTopBorder(){
+    protected getTopBorder(){ //huh
         return this.TOPBORDER;
     }
 
-    protected getMenuBorder(){
+    protected getMenuBorder(){ //wow oopsies
         return this.MENUBORDER;
     }
 
-    protected getBananaHeight(){
+    protected getBananaHeight(){ //not necessary (can use container.height)?
         return this.BANANAHEIGHT;
     }
 
-    protected getBananaWidth(){
+    protected getBananaWidth(){ //not necessary either?
         return this.BANANAWIDTH;
     }
     
-    protected getMenuHeight(){
+    protected getMenuHeight(){ //or this?
         return this.MENUHEIGHT;
     }
 
-    protected getMenuWidth(){
+    protected getMenuWidth(){ //or this?
         return this.MENUWIDTH;
     }
 
-    protected getBananaContainer(){
+    protected getBananaContainer(){ //wait even this (children inherit, don't need getter method)?
         return this.bananaContainer;
     }
 
-    protected getMenuContainer(): GameObjects.Container{
+    protected getMenuContainer(): GameObjects.Container{ //and this?
         return this.menuContainer;
     }
 };

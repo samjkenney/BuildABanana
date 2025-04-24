@@ -33,7 +33,6 @@ const config: Phaser.Types.Core.GameConfig = {
     title: "Build-A-Banana",
     //url: ???,
     scene: [
-        Peel,
         MainMenu,
         Name,
         Personality,
@@ -41,6 +40,7 @@ const config: Phaser.Types.Core.GameConfig = {
         DressUp,
         Split,
         Wash,
+        Peel,
         IceCream
     ] 
 };

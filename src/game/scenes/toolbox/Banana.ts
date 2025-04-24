@@ -11,9 +11,9 @@ export class Banana{
     personality: string;
     aspiration: string;
 
-    activeFace: string;
-    activeGlasses: string;
-    activeShirt: string;
+    activeFace = "default";
+    activeGlasses = "none";
+    activeShirt = "none";
 
     bananaImage: GameObjects.Image;
     //activeFace: GameObjects.Image | null = null;
@@ -33,65 +33,77 @@ export class Banana{
         //this.bananaImage.setInteractive();
     }
 
-    addBanana(scene: Scene){
+    addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?
         //add banana image
         if(!this.peeled){ //check if peeled    
             this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.8);
         }
         else{
-            this.bananaImage = scene.add.image(0, 0, 'bananaPeeled').setScale(0.4);
+            this.bananaImage = scene.add.image(0, 0, 'bananaPeeled').setScale(0.8);
         }
 
         //add face
         if(this.activeFace !== "default" && !this.washed){ //check logic
-            scene.load.image("face", "assets/" + this.activeFace + ".png");
+            //scene.load.image("face1", "assets/" + this.activeFace + ".png"); //change from loading to setting to faceImage
+            this.faceImage = scene.add.image(0, 0, this.activeFace);
         }
-        else{
+        else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
-            scene.load.image("face", "DEFAULT FACE"); //add default face
+            this.faceImage = scene.add.image(0, 0, "defaultFace");
         }
-        this.faceImage = scene.add.image(0, 0, 'face').setScale(0.4); //add coordinates, scale in list of face dictionaries
+        //this.faceImage = scene.add.image(0, 0, 'face1').setScale(0.4); //add coordinates, scale in list of face dictionaries
 
         //add glasses
         if(this.activeGlasses !== "none" && !this.washed){
-            scene.load.image("glasses", "assets/" + this.activeGlasses + ".png");
+            //scene.load.image("glasses", "assets/" + this.activeGlasses + ".png"); //change from loading
+            this.glassesImage = scene.add.image(0, 0, this.activeGlasses);
         }
         else{
             this.activeGlasses = "none"; //set to none if null or something weird, or if washed?????
-            scene.load.image("glasses", "EMPTY"); //add empty
+            this.glassesImage = scene.add.image(0, 0, "defaultFace"); //change to empty image
         }
-        this.glassesImage = scene.add.image(0, 0, 'glasses').setScale(0.4); //add coordinates, scale in list of glasses dictionaries
+        //this.glassesImage = scene.add.image(0, 0, 'glasses').setScale(0.4); //add coordinates, scale in list of glasses dictionaries
 
         //add shirt
         if(this.activeShirt !== "none" && !this.washed){
-            scene.load.image("shirt", "assets/" + this.activeShirt + ".png");
+            //scene.load.image("shirt", "assets/" + this.activeShirt + ".png"); //change from loading
+            this.shirtImage = scene.add.image(0, 0, this.activeShirt);
         }
         else{
             this.activeShirt = "none"; //set to none if null or something weird, or if washed?????
-            scene.load.image("shirt", "EMPTY"); //add empty
+            this.shirtImage = scene.add.image(0, 0, "defaultFace"); //change to empty image
         }
-            this.shirtImage = scene.add.image(0, 0, 'shirt').setScale(0.4); //add coordinates, scale in list of shirt dictionaries
+        //this.shirtImage = scene.add.image(0, 0, 'shirt').setScale(0.4); //add coordinates, scale in list of shirt dictionaries
 
-        //positions updated in scenes
+        //positions updated in scenes? just kidding
+        this.addToContainer(container); //but would that be better?
+        this.center(container.width, container.height);
     }
 
-    updateBanana(scene: Scene){
-        //update banana customization images
+    updateBanana(scene: Scene, container: GameObjects.Container){
+        //update banana customization images?
 
         //remove banana images
-        this.addBanana(scene);
+        this.bananaImage.setVisible(false);
+        this.faceImage.setVisible(false);
+        this.glassesImage.setVisible(false);
+        this.shirtImage.setVisible(false);
+
+        this.addBanana(scene, container);
     }
 
-    addToContainer(container: GameObjects.Container){
-        container.add(this.bananaImage);
+    private addToContainer(container: GameObjects.Container){ //move to addBanana?
+        container.add(this.bananaImage).sendToBack(this.bananaImage);
         container.add(this.faceImage);
         container.add(this.glassesImage);
         container.add(this.shirtImage);
+
+        //this.center(container.width, container.height);
     }
 
     center(totalWidth: number, totalHeight: number){
         this.bananaImage.setPosition(totalWidth / 2, totalHeight / 2);
-        this.faceImage.setPosition(totalWidth / 2, totalHeight / 2);
+        this.faceImage.setPosition(totalWidth / 2, totalHeight / 2); //change to add position from center
         this.shirtImage.setPosition(totalWidth / 2, totalHeight / 2);
         this.glassesImage.setPosition(totalWidth / 2, totalHeight / 2);
     }
@@ -111,27 +123,26 @@ export class Banana{
         this.aspiration = aspiration;
     }
 
-    setFace(scene: Scene, face: string){
+    setFace(scene: Scene, face: string, container: GameObjects.Container){
         //set banana face
-        //console.log('adding', {face} );
         this.activeFace = face;
-        this.updateBanana(scene);
+        this.updateBanana(scene, container);
 
         //if (this.activeFace !== null){
             //this.activeFace.destroy();
         //}
     }
 
-    setGlasses(scene: Scene, glasses: string){
+    setGlasses(scene: Scene, glasses: string, container: GameObjects.Container){
         //set banana glasses
         this.activeGlasses = glasses;
-        this.updateBanana(scene);
+        this.updateBanana(scene, container);
     }
 
-    setShirt(scene: Scene, shirt: string){
+    setShirt(scene: Scene, shirt: string, container: GameObjects.Container){
         //set banana shirt
         this.activeShirt = shirt;
-        this.updateBanana(scene);
+        this.updateBanana(scene, container);
     }
 
 

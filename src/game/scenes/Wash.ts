@@ -1,14 +1,15 @@
 import { GameObjects, Scene } from 'phaser';
+import { CookTemplate } from './CookTemplate';
 import { NextButton } from './toolbox/NextButton';
 
-export class Wash extends Scene {
+export class Wash extends CookTemplate {
     constructor() {
-        super('Wash');
+        super('Wash', "Gently wash!", "washBackground");
     }
 
     preload() {
-        this.load.image('banana', 'assets/Banana.png'); 
-        this.load.image('background', 'assets/wash/Shower.png'); 
+        //this.load.image('banana', 'assets/Banana.png'); 
+        this.load.image('washBackground', 'assets/wash/Shower.png'); 
         this.load.image('hoseOff', 'assets/wash/Hose_off.png');
 
         this.load.image('hose', 'assets/wash/Hose.png');
@@ -45,7 +46,9 @@ export class Wash extends Scene {
     }
 
     create() {
-        this.add.image(849, 567.5, 'background');
+        this.customizationLoader(this);
+
+        //this.add.image(849, 567.5, 'background');
         this.add.image(600, 600, this.registry.get("FaceCosmetic"));
         this.add.image(600, 600, this.registry.get("GlassesCosmetic"));
         this.add.image(600, 600, this.registry.get("ShirtCosmetic"));
@@ -56,10 +59,13 @@ export class Wash extends Scene {
             .setDepth(0)
             .setVisible(false); 
 
-        const banana = this.add.image(849, 767.5, 'banana')
-            .setScale(0.55)
-            .setDepth(1)
-            .setInteractive();
+        // const banana = this.add.image(849, 767.5, 'banana')
+        //     .setScale(0.55)
+        //     .setDepth(1)
+        //     .setInteractive();
+
+        var banana = this.registry.get("banana");
+        banana.addBanana(this, this.getBananaContainer());
 
         const drops = [
             this.add.image(1000, 630, 'water'),
