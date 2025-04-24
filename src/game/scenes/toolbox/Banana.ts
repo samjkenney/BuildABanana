@@ -34,6 +34,23 @@ export class Banana{
     }
 
     addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?
+        // setTexture(textureKey: string) {
+        //     this.bananaImage.setTexture(textureKey);
+        //     this.bananaImage.setScale(0.85);
+        // }
+    
+    
+        // updateBanana(){
+        //     //update banana customizations
+        // }
+    
+        // setBananaFace(face: String){
+        //     //set banana face
+        //     this.scene.load.image('bananaFace', `assets/face trixie.png`); 
+        //     console.log('adding', {face} );
+        //     if (this.activeFace !== null){
+        //         this.activeFace.destroy();
+        
         //add banana image
         if(!this.peeled){ //check if peeled    
             this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.8);

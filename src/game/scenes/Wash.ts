@@ -12,7 +12,9 @@ export class Wash extends CookTemplate {
         this.load.image('washBackground', 'assets/wash/Shower.png'); 
         this.load.image('hoseOff', 'assets/wash/Hose_off.png');
 
-        this.load.image('hose', 'assets/wash/Hose.png');
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`hose${i}`, `assets/wash/hose${i}.png`);
+        }
         this.load.image('washButton', 'assets/wash/WashButton.png');
 
         this.load.image('puddle', 'assets/wash/puddle.png');
@@ -85,18 +87,27 @@ export class Wash extends CookTemplate {
                 .setAlpha(1)
                 .setDepth(3);
 
-            this.tweens.add({
-                targets: hose,
-                x: 849,
-                y: 600,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    this.time.delayedCall(1200, () => {
-                        hose.setTexture('hose');
-                    });
+                this.tweens.add({
+                    targets: hose,
+                    x: 849,
+                    y: 600,
+                    duration: 1000,
+                    ease: 'Power2',
+                    onComplete: () => {
+                        let hoseFrames = ['hose1', 'hose2', 'hose3'];
+                        let currentFrame = 0;
+    
+                        const hoseAnimation = this.time.addEvent({
+                            delay: 150,
+                            callback: () => {
+                                hose.setTexture(hoseFrames[currentFrame]);
+                                currentFrame = (currentFrame + 1) % hoseFrames.length;
+                            },
+                            loop: true
+                        });
 
                     this.time.delayedCall(3000, () => {
+                        hoseAnimation.remove();
                         hose.setTexture('hoseOff');
                         puddle.setVisible(true);
                         drops.forEach(drop => drop.setVisible(true));
@@ -121,3 +132,4 @@ export class Wash extends CookTemplate {
         });
     }
 }
+

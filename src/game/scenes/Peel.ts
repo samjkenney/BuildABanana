@@ -10,62 +10,71 @@ export class Peel extends Scene {
     preload() {
         this.load.image('backgroundP', 'assets/peel/Peel_BKG.png');
         this.load.image('nextButton', 'assets/nextButton.png');
-        this.load.image('openHandCursor', 'assets/peel/open_hand.png');
-        this.load.image('banana', 'assets/Banana.png');
-        this.load.image('scissors', 'assets/peel/scissors.png');
+        this.load.image('banana', 'assets/Banana.png'); //TODO: banana og position problems
+
+        for (let i = 0; i <= 4; i++) {
+            this.load.image(`banana${i}`, `assets/peel/bananaPeel${i}.png`);
+        }
+
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`frame${i}`, `assets/peel/frame${i}.png`);
+        }
     }
 
     create() {
         this.add.image(849, 567.5, 'backgroundP');
-        //const banana = new Banana(this, 823, 535, 'banana');
 
+        const banana = new Banana(this, 823, 535, 'banana');
+        banana.bananaImage.setAlpha(1).setDepth(3);
+    
+        const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
+        let currentFrame = 0;
+    
         
+        const peelSprite = this.add.sprite(1300, 535, 'frame1');
+        peelSprite.setDepth(2);
+    
+        // frames animation --> TODO: move to sprite sheet to cut down code
+        this.anims.create({
+            key: 'peelLoop',
+            frames: [
+                { key: 'frame1' },
+                { key: 'frame2' },
+                { key: 'frame3' },
+            ],
+            frameRate: 6, //rate
+            repeat: -1, //loop
+        });
+    
+        peelSprite.play('peelLoop');
+    
+        banana.bananaImage.setInteractive();
+        this.input.setDraggable(banana.bananaImage);
+    
+        let lastPeelTime = 0;
+        const peelCooldown = 800;
+    
+        banana.bananaImage.on('drag', (pointer: Phaser.Input.Pointer) => {
+            const now = this.time.now; // grabbing the current time so we can check how long it’s been since the last peel
 
-        const startPoint = new Phaser.Math.Vector2(956, 247);
-        const controlPoint1 = new Phaser.Math.Vector2(1100, 700);   
-        const controlPoint2 = new Phaser.Math.Vector2(600, 850)
-        const endPoint = new Phaser.Math.Vector2(516, 703);
-
-        const peelCurve = new Phaser.Curves.CubicBezier(startPoint, controlPoint1, controlPoint2, endPoint);
-
-
-        const graphics = this.add.graphics();
-        graphics.lineStyle(4, 0xff0000, 1);
-        peelCurve.draw(graphics);
-
-        const scissors = this.add.image(startPoint.x, startPoint.y, 'scissors')
-            .setScale(0.3)
-            .setDepth(2)
-            .setInteractive();
-
-        this.input.setDraggable(scissors);
-
-        this.input.on('drag', (
-            pointer: Phaser.Input.Pointer,
-            gameObject: Phaser.GameObjects.GameObject,
-            dragX: number,
-            dragY: number
-        ) => {
-            let closestT = 0;
-            let minDist = Number.MAX_VALUE;
-
-            for (let t = 0; t <= 1; t += 0.01) {
-                const p = peelCurve.getPoint(t);
-                if (!p) continue;
-
-                const dist = Phaser.Math.Distance.Between(dragX, dragY, p.x, p.y);
-                if (dist < minDist) {
-                    minDist = dist;
-                    closestT = t;
+            // only let it peel if the user is dragging AND we haven’t reached the final banana frame yet
+            if (pointer.isDown && currentFrame < bananaFrames.length - 1) {
+                
+                // check if enough time has passed since the last peel so it doesn’t go super fast
+                if (now - lastPeelTime >= peelCooldown) {
+                    currentFrame++; // go to the next peel stage
+                    banana.setTexture(bananaFrames[currentFrame]); // update the banana image 
+                    // hide animation when 4th frame
+                    if (currentFrame === 4) {
+                        peelSprite.stop(); // stop animating
+                        peelSprite.setVisible(false); 
+                    }
+    
+                    lastPeelTime = now;
                 }
             }
-
-            const pointOnCurve = peelCurve.getPoint(closestT);
-            if (pointOnCurve) {
-                (gameObject as Phaser.GameObjects.Image).setPosition(pointOnCurve.x, pointOnCurve.y);
-            }
         });
-
+    
         new NextButton(this, 1550, 100, 'Split');
     }
 }

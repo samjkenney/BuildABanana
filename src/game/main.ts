@@ -38,9 +38,9 @@ const config: Phaser.Types.Core.GameConfig = {
         Personality,
         Aspirations,
         DressUp,
-        Split,
-        Wash,
         Peel,
+        Wash,
+        Split,
         IceCream
     ] 
 };
