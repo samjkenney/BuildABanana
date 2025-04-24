@@ -100,15 +100,15 @@ export class Banana{
         this.center(container.width, container.height);
     }
 
-    addImage(scene: Scene, imageKey: string, imageName: string, bananaContainer: GameObjects.Container){ //move to SceneTemplate?
-        var image = scene.add.image(0, 0, imageKey)
-        image.setName(imageName);
-        bananaContainer.add(image)
-        image.setPosition(bananaContainer.width / 2, bananaContainer.height / 2); //move to a method, change to add coordinates?
+    addCosmetic(scene: Scene, cosmetic: Cosmetic, bananaContainer: GameObjects.Container){ //move to SceneTemplate?
+        var image = scene.add.image(0, 0, cosmetic.getImageKey()).setScale(cosmetic.getScale());
+        image.setName(cosmetic.getImageKey());
+        bananaContainer.add(image);
+        image.setPosition(bananaContainer.width / 2 + cosmetic.getXFromCenter(), bananaContainer.height / 2 + cosmetic.getYFromCenter()); //move to a method, change to add coordinates?
     }
     
-    removeImage(imageNameNotKey: string, bananaContainer: GameObjects.Container){
-        var image: GameObjects.Image = bananaContainer.getByName(imageNameNotKey);
+    removeCosmetic(cosmetic: Cosmetic, bananaContainer: GameObjects.Container){
+        var image: GameObjects.Image = bananaContainer.getByName(cosmetic.getImageKey());
         if(bananaContainer.exists(image)){
             image.destroy();
         };

@@ -5,7 +5,7 @@ import { NextButton } from './toolbox/NextButton';
 
 export class Wash extends CookTemplate {
     constructor() {
-        super('Wash', "Gently rinse!", "washBackground");
+        super('Wash', "Bath time!", "washBackground");
     }
 
     preload() {

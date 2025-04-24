@@ -1,6 +1,8 @@
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
+import { Banana } from './toolbox/Banana';
+import { Cosmetic } from "./toolbox/Cosmetic";
 import { TextButton } from "./interactives/TextButton";
 
 export class Aspirations extends CustomizationTemplate{
@@ -44,27 +46,33 @@ export class Aspirations extends CustomizationTemplate{
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
 
+        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 1.6);
+        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.5);
+        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.2);
+        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.5);
+        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 1.6);
+
         //add button actions to aspiration maps
         var banana = this.registry.get("banana");
         this.aspirations[0].set("reaction", () => {
                 this.selected = true;
-                this.flashImage("cooties doctor");
+                this.flashImage(cootiesDoctor);
             });
         this.aspirations[1].set("reaction", () => {
                 this.selected = true;
-                this.flashImage("appeal lawyer");
+                this.flashImage(appealLawyer);
             });
         this.aspirations[2].set("reaction", () => {
                 this.selected = true;
-                this.flashImage("computer science professor");
+                this.flashImage(computerScienceProfessor);
             });
         this.aspirations[3].set("reaction", () => {
                 this.selected = true;
-                this.flashImage("banana foster parent");
+                this.flashImage(bananaFosterParent);
             });
         this.aspirations[4].set("reaction", () => {
                 this.selected = true;
-                this.flashImage("modern artist");
+                this.flashImage(modernArtist);
             });
 
         //add aspiration menu
@@ -82,9 +90,9 @@ export class Aspirations extends CustomizationTemplate{
         //};
     }
 
-    private flashImage(imageKey: string){
-        var banana = this.registry.get("banana");
-        this.time.delayedCall(300, () => {banana.addImage(this, imageKey, "reaction", this.bananaContainer)});
-        this.time.delayedCall(600, () => {banana.removeImage("reaction", this.bananaContainer)});
+    private flashImage(cosmetic: Cosmetic){
+        var banana: Banana = this.registry.get("banana");
+        this.time.delayedCall(400, () => {banana.addCosmetic(this, cosmetic, this.bananaContainer)});
+        this.time.delayedCall(600, () => {banana.removeCosmetic(cosmetic, this.bananaContainer)});
     }
 }
