@@ -4,7 +4,7 @@ import { NextButton } from './toolbox/NextButton';
 
 export class Wash extends CookTemplate {
     constructor() {
-        super('Wash', "Gently wash!", "washBackground");
+        super('Wash', "Gently rinse!", "washBackground");
     }
 
     preload() {
@@ -19,18 +19,6 @@ export class Wash extends CookTemplate {
 
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
-
-        for (let i = 1; i <= 4; i++) {
-            this.load.image(`Face${i}`, `assets/dressup/Face${i}.png`);
-            this.load.image(`Glasses${i}`, `assets/dressup/Glasses${i}.png`);
-            this.load.image(`Shirt${i}`, `assets/dressup/Shirt${i}.png`);
-
-
-             // Map buttons to DU images
-             this.load.image(`DU_Face${i}`, `assets/dressup/DU_Face${i}.png`);
-             this.load.image(`DU_Glasses${i}`, `assets/dressup/DU_Glasses${i}.png`);
-             this.load.image(`DU_Shirt${i}`, `assets/dressup/DU_Shirt${i}.png`);
-        }
     }
 
     private makeDropFall(drop: GameObjects.Image) {
@@ -49,25 +37,11 @@ export class Wash extends CookTemplate {
 
     create() {
         this.customizationLoader(this);
-
-        //this.add.image(849, 567.5, 'background');
-        this.add.image(600, 600, this.registry.get("FaceCosmetic"));
-        this.add.image(600, 600, this.registry.get("GlassesCosmetic"));
-        this.add.image(600, 600, this.registry.get("ShirtCosmetic"));
-
             
         const puddle = this.add.image(849, 1000, 'puddle')
             .setScale(0.95)
             .setDepth(0)
             .setVisible(false); 
-
-        // const banana = this.add.image(849, 767.5, 'banana')
-        //     .setScale(0.55)
-        //     .setDepth(1)
-        //     .setInteractive();
-
-        var banana = this.registry.get("banana");
-        banana.addBanana(this, this.getBananaContainer());
 
         const drops = [
             this.add.image(1000, 630, 'water'),
@@ -108,6 +82,12 @@ export class Wash extends CookTemplate {
 
                     this.time.delayedCall(3000, () => {
                         hoseAnimation.remove();
+
+                        var banana = this.registry.get("banana");
+                        banana.setFace(this, "default", this.bananaContainer);
+                        banana.setGlasses(this, "none", this.bananaContainer);
+                        banana.setShirt(this, "none", this.bananaContainer);
+
                         hose.setTexture('hoseOff');
                         puddle.setVisible(true);
                         drops.forEach(drop => drop.setVisible(true));
@@ -122,7 +102,7 @@ export class Wash extends CookTemplate {
                                 ease: 'Power2',
                                 onComplete: () => {
                                     hose.destroy();
-                                    new NextButton(this, 1550, 100, 'Peel');
+                                    this.addNextButton(this, "Peel");
                                 }
                             });
                         });
