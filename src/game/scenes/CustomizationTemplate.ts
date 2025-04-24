@@ -39,8 +39,8 @@ export abstract class CustomizationTemplate extends SceneTemplate {
 
     private calculateSizes(scene: Scene){
         this.BANANAWIDTH = scene.scale.baseSize.width * 0.45; //replaces SceneTemplate calculation
-        this.MENUBORDER = this.MENUHEIGHT * 0.1; //move to each scene?
         this.MENUHEIGHT = scene.scale.baseSize.height * 0.70; //65%?
+        this.MENUBORDER = this.MENUHEIGHT * 0.1; //move to each scene?
         //this.MENUHEIGHT = this.BANANAHEIGHT;
         this.MENUWIDTH = scene.scale.baseSize.width * 0.35;
     }
