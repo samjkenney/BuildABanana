@@ -72,7 +72,7 @@ export class Aspirations extends CustomizationTemplate{
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
 
             //add menu button
-            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), false, true, this.aspirations[i].get("reaction"));
+            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, this.aspirations[i].get("reaction"));
             this.menuContainer.add(button);
         };
 

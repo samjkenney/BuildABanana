@@ -88,9 +88,18 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         var contentHeight = this.content.height; //remove variable?
         var largerContentSide = Math.max(contentWidth, contentHeight);
         var smallerButtonSide = Math.min(this.width, this.height);
-        var border = smallerButtonSide / 10;
-
-        var scale = (smallerButtonSide - 2 * border) / largerContentSide; //only scale like this if smalerButtonSide and largerContentSide are same sides (width or height)?
+        var border = smallerButtonSide / 6;
+        var scale = 1;
+        
+        if(((smallerButtonSide == this.width) && (largerContentSide == this.content.width)) || ((smallerButtonSide == this.height) && (largerContentSide == this.content.height))){
+            scale = (smallerButtonSide - 2 * border) / largerContentSide; //only scale like this if smallerButtonSide and largerContentSide are same sides (width or height)
+        }
+        else if(largerContentSide == contentWidth){
+            scale = (this.width - 2 * border) / contentWidth;
+        }
+        else {
+            scale = (this.height - 2 * border) / contentHeight;
+        };
         this.content.setDisplaySize(contentWidth * scale, contentHeight * scale);
 
         //this.content.setOrigin(0.5);
