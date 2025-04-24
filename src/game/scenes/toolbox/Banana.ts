@@ -24,7 +24,7 @@ export class Banana{
     washed = false;
     peeled = false;
 
-    constructor(currentScene: Scene){
+    constructor(currentScene: Scene){ //add container
         this.scene = currentScene; 
         // this.x = x;
         // this.y = y;
@@ -33,33 +33,12 @@ export class Banana{
         //this.bananaImage.setInteractive();
     }
 
-    addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?
         setTexture(textureKey: string) {
             this.bananaImage.setTexture(textureKey);
             this.bananaImage.setScale(0.85);
         }
-    
-    
-        updateBanana(){
-            //update banana customizations
-        }
-    
-        setBananaFace(face: String){
-            //set banana face
-            this.scene.load.image('bananaFace', `assets/face trixie.png`); 
-            console.log('adding', {face} );
-            if (this.activeFace !== null){
-                this.activeFace.destroy();
-            }
-        }
 
-
-
-
-
-
-        
-        
+    addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?
         //add banana image
         if(!this.peeled){ //check if peeled    
             this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.8);
@@ -106,7 +85,21 @@ export class Banana{
         this.center(container.width, container.height);
     }
 
-    updateBanana(scene: Scene, container: GameObjects.Container){
+    addImage(scene: Scene, imageKey: string, imageName: string, bananaContainer: GameObjects.Container){ //move to SceneTemplate?
+        var image = scene.add.image(0, 0, imageKey)
+        image.setName(imageName);
+        bananaContainer.add(image)
+        image.setPosition(bananaContainer.width / 2, bananaContainer.height / 2); //move to a method, change to add coordinates?
+    }
+    
+    removeImage(imageNameNotKey: string, bananaContainer: GameObjects.Container){
+        var image: GameObjects.Image = bananaContainer.getByName(imageNameNotKey);
+        if(bananaContainer.exists(image)){
+            image.destroy();
+        };
+    }
+
+    updateBanana(scene: Scene, bananaContainer: GameObjects.Container){
         //update banana customization images?
 
         //remove banana images
@@ -115,7 +108,7 @@ export class Banana{
         this.glassesImage.setVisible(false);
         this.shirtImage.setVisible(false);
 
-        this.addBanana(scene, container);
+        this.addBanana(scene, bananaContainer);
     }
 
     private addToContainer(container: GameObjects.Container){ //move to addBanana?

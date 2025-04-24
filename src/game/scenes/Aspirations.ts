@@ -48,23 +48,23 @@ export class Aspirations extends CustomizationTemplate{
         var banana = this.registry.get("banana");
         this.aspirations[0].set("reaction", () => {
                 this.selected = true;
-                banana.addImage(this, "cooties doctor", this.bananaContainer);
+                this.flashImage("cooties doctor");
             });
         this.aspirations[1].set("reaction", () => {
                 this.selected = true;
-                banana.addImage(this,  "appeal lawyer", this.bananaContainer);
+                this.flashImage("appeal lawyer");
             });
         this.aspirations[2].set("reaction", () => {
                 this.selected = true;
-                banana.addImage(this,  "computer science professor", this.bananaContainer);
+                this.flashImage("computer science professor");
             });
         this.aspirations[3].set("reaction", () => {
                 this.selected = true;
-                banana.addImage(this,  "banana foster parent", this.bananaContainer);
+                this.flashImage("banana foster parent");
             });
         this.aspirations[4].set("reaction", () => {
                 this.selected = true;
-                banana.addImage(this,  "modern artist", this.bananaContainer);
+                this.flashImage("modern artist");
             });
 
         //add aspiration menu
@@ -74,11 +74,17 @@ export class Aspirations extends CustomizationTemplate{
             //add menu button
             var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), false, true, this.aspirations[i].get("reaction"));
             this.menuContainer.add(button);
-        }
+        };
 
         super.addBackButton(this, "Personality");
-        while(this.selected){ //only add when selected
-            super.addNextButton(this, "DressUp");
-        }
+        //while(this.selected){ //find way to continuously watch?
+                super.addNextButton(this, "DressUp");
+        //};
+    }
+
+    private flashImage(imageKey: string){
+        var banana = this.registry.get("banana");
+        this.time.delayedCall(300, () => {banana.addImage(this, imageKey, "reaction", this.bananaContainer)});
+        this.time.delayedCall(600, () => {banana.removeImage("reaction", this.bananaContainer)});
     }
 }
