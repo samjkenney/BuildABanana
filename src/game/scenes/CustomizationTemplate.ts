@@ -1,22 +1,19 @@
 import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';
 import { TextStyles } from './toolbox/TextStyles';
+import { NextButton } from './interactives/NextButton';
 
 export abstract class CustomizationTemplate extends SceneTemplate {
-    //horizontal: 10% border, 40% banana, 10% border, 30% menu, 10% border
-    //vertical: 10% border, 60% content, 10% border, 10% button, 10% border
-    protected BORDER: number; //make constant?
-    protected MENUBORDER: number;
-    protected CONTENTHEIGHT: number;
-    protected BANANAWIDTH: number
+    protected MENUBORDER: number; //make constant?
+    protected MENUHEIGHT: number;
     protected MENUWIDTH: number;
     protected bananaContainer: GameObjects.Container;
     protected menuContainer: GameObjects.Container;
 
     // constructor(sceneFileName: string, titleText: string, backButton: boolean, backgroundImagePath?: string) {
-        constructor(sceneFileName: string, titleText: string, backgroundImagePath?: string) {
+    constructor(sceneFileName: string, titleText: string, backgroundImage?: string) {
         //super(sceneFileName, titleText, 0, 0, backButton, backgroundImagePath);
-        super(sceneFileName, titleText, backgroundImagePath);
+        super(sceneFileName, titleText, backgroundImage);
         // this.BORDER = scene.scale.displaySize.width * 0.1; //make constant?
         // this.CONTENTHEIGHT = scene.scale.displaySize.height * 0.6;
         // this.BANANAWIDTH = scene.scale.displaySize.width * 0.4;
@@ -31,69 +28,80 @@ export abstract class CustomizationTemplate extends SceneTemplate {
     create(){
     }
 
-    protected loader1(scene: Scene){
-        super.loader(scene);
+    protected customizationLoader(scene: Scene){ //find way to move to constructor, make automatic?
+        super.sceneLoader(scene);
 
         this.calculateSizes(scene);
-        this.addBanana(scene);
-        this.addMenu(scene);
+        this.updateBananaContainerSize();
+        this.addMenuContainer(scene);
+        this.updateTitle(this.MENUWIDTH / 2, 0, this.menuContainer);
     }
 
     private calculateSizes(scene: Scene){
-        this.BORDER = scene.scale.baseSize.width * 0.1; //make constant?
-        this.CONTENTHEIGHT = scene.scale.baseSize.height * 0.6;
-        this.BANANAWIDTH = scene.scale.baseSize.width * 0.4;
-        this.MENUWIDTH = scene.scale.baseSize.width * 0.3;
+        this.BANANAWIDTH = scene.scale.baseSize.width * 0.45; //replaces SceneTemplate calculation
+        this.MENUHEIGHT = scene.scale.baseSize.height * 0.70; //65%?
+        this.MENUBORDER = this.MENUHEIGHT * 0.1; //move to each scene?
+        //this.MENUHEIGHT = this.BANANAHEIGHT;
+        this.MENUWIDTH = scene.scale.baseSize.width * 0.35;
     }
 
-    private addBanana(scene: Scene){
-        //add container
-        this.bananaContainer = new GameObjects.Container(scene);
-        scene.add.existing(this.bananaContainer);
-        this.bananaContainer.setPosition(this.BORDER, this.BORDER);
-        this.bananaContainer.setSize(this.BANANAWIDTH, this.CONTENTHEIGHT);
-
-        //add banana
-    }
-
-    private addMenu(scene: Scene){
+    private addMenuContainer(scene: Scene){
         //add container
         this.menuContainer = new GameObjects.Container(scene);
         scene.add.existing(this.menuContainer);
-        this.menuContainer.setPosition(this.BORDER * 2 + this.BANANAWIDTH, this.BORDER);
-        this.menuContainer.setSize(this.MENUWIDTH, this.CONTENTHEIGHT);
-        this.MENUBORDER = this.menuContainer.height * 0.1; //move to calculateSizes?
+        this.menuContainer.setPosition(this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER, this.TOPBORDER);
+        this.menuContainer.setSize(this.MENUWIDTH, this.MENUHEIGHT);
 
-        //add title
-        this.menuContainer.add(super.getTitle());
-        super.getTitle().setOrigin(0.5, 0); //set origin to top center of text box
-        super.getTitle().setPosition(this.MENUWIDTH / 2, this.BORDER);
+        //debugging
+        if(this.debug){
+            var expectedBox = scene.add.graphics().fillStyle(0xff0000, 1).fillRect(this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER, this.TOPBORDER, this.MENUWIDTH, this.MENUHEIGHT);
+            scene.children.sendToBack(expectedBox);
+            var actualBox = scene.add.graphics().fillStyle(0x00ff00, 1).fillRect(0, 0, this.MENUWIDTH, this.MENUHEIGHT);
+            this.menuContainer.add(actualBox).sendToBack(actualBox);
+        }
+    }
+    
+    protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
+        this.nextButton = new NextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER + this.MENUWIDTH / 2 - NextButton.getWidth() / 2, this.TOPBORDER + this.MENUHEIGHT + (this.BANANAHEIGHT - this.MENUHEIGHT - NextButton.getHeight()), displayText);
+        scene.add.existing(this.nextButton);
     }
 
-    protected getBorder(){
-        return this.BORDER;
+
+
+    //getter methods
+    protected getSideBorder(){ //are these not even necessary either (children inherit SIDEBORDER)??????
+        return this.SIDEBORDER;
     }
-    protected getMenuBorder(){
+
+    protected getTopBorder(){ //huh
+        return this.TOPBORDER;
+    }
+
+    protected getMenuBorder(){ //wow oopsies
         return this.MENUBORDER;
     }
 
-    protected getContentHeight(){
-        return this.CONTENTHEIGHT;
+    protected getBananaHeight(){ //not necessary (can use container.height)?
+        return this.BANANAHEIGHT;
     }
 
-    protected getBananaWidth(){
+    protected getBananaWidth(){ //not necessary either?
         return this.BANANAWIDTH;
     }
+    
+    protected getMenuHeight(){ //or this?
+        return this.MENUHEIGHT;
+    }
 
-    protected getMenuWidth(){
+    protected getMenuWidth(){ //or this?
         return this.MENUWIDTH;
     }
 
-    protected getBananaContainer(){
+    protected getBananaContainer(){ //wait even this (children inherit, don't need getter method)?
         return this.bananaContainer;
     }
 
-    protected getMenuContainer(): GameObjects.Container{
+    protected getMenuContainer(): GameObjects.Container{ //and this?
         return this.menuContainer;
     }
 };

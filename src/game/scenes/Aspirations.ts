@@ -1,6 +1,8 @@
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
+import { Banana } from './toolbox/Banana';
+import { Cosmetic } from "./toolbox/Cosmetic";
 import { TextButton } from "./interactives/TextButton";
 
 export class Aspirations extends CustomizationTemplate{
@@ -11,39 +13,86 @@ export class Aspirations extends CustomizationTemplate{
     private BUTTONHEIGHT: number;
     private COLOR = 0x000000;
 
-    private aspirations: string[] = [
-        "1",
-        "2",
-        "3"
-    ]
+    private aspirations: Map<string, any>[] = [
+        // {aspiration: "Cooties Doctor", imageKey: "cooties doctor"},
+        // {aspiration: "A-peel Lawyer", imageKey: "appeal lawyer"},
+        // {aspiration: "Computer Science Professor", imageKey: "computer science professor"},
+        // {aspiration: "Banana Foster Parent", imageKey: "banana foster parent"},
+        // {aspiration: "Modern Artist", imageKey: "modern artist"}
+        new Map([["aspiration", "Cooties Doctor"]]),
+        new Map([["aspiration", "A-peel Lawyer"]]),
+        new Map([["aspiration", "Computer Science Professor"]]),
+        new Map([["aspiration", "Banana Foster Parent"]]),
+        new Map([["aspiration", "Modern Artist"]])
+    ];
+    private selected = false;
 
     constructor(){
-        super("Aspirations", "Pick an aspiration!");
+        super("Aspirations", "Pick an\naspiration!", "labBackground");
     }
 
     preload(){
+        this.load.image("appeal lawyer", "assets/aspirations/Cosmetic Appeal Lawyer.png")
+        this.load.image("banana foster parent", "assets/aspirations/Cosmetic Banana Foster Parent.png")
+        this.load.image("computer science professor", "assets/aspirations/Cosmetic Compsci Professor.png")
+        this.load.image("cooties doctor", "assets/aspirations/Cosmetic Cooties Doctor.png")
+        this.load.image("modern artist", "assets/aspirations/Cosmetic Modern Artist.png")
     }
 
     create(){
-        super.loader1(this);
+        super.customizationLoader(this);
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
 
-        // //add aspiration menu
-        // for(var i = 0; i < this.aspirations.length; i++){
-        //     var buttonY = super.getMenuContainer().height - super.getTitle().height - super.getMenuBorder() + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
-        //     var action = () => {
-        //         console.log(this.aspirations[i]); //action, save array value to reusable variable?
-        //     };
+        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 1.6);
+        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.5);
+        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.2);
+        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.5);
+        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 1.6);
 
-        //     //add menu button
-        //     var button = new TextButton(this, 0, buttonY, super.getMenuContainer().width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i], TextStyles.getButtonStyle(this), true, true, action);
-        //     super.getMenuContainer().add(button);
-        // }
+        //add button actions to aspiration maps
+        var banana = this.registry.get("banana");
+        this.aspirations[0].set("reaction", () => {
+                this.selected = true;
+                this.flashImage(cootiesDoctor);
+            });
+        this.aspirations[1].set("reaction", () => {
+                this.selected = true;
+                this.flashImage(appealLawyer);
+            });
+        this.aspirations[2].set("reaction", () => {
+                this.selected = true;
+                this.flashImage(computerScienceProfessor);
+            });
+        this.aspirations[3].set("reaction", () => {
+                this.selected = true;
+                this.flashImage(bananaFosterParent);
+            });
+        this.aspirations[4].set("reaction", () => {
+                this.selected = true;
+                this.flashImage(modernArtist);
+            });
 
-        super.addNextButton(this, "DressUp");
+        //add aspiration menu
+        for(var i = 0; i < this.aspirations.length; i++){
+            var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
+
+            //add menu button
+            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, this.aspirations[i].get("reaction"));
+            this.menuContainer.add(button);
+        };
+
         super.addBackButton(this, "Personality");
+        //while(this.selected){ //find way to continuously watch?
+                super.addNextButton(this, "DressUp");
+        //};
+    }
+
+    private flashImage(cosmetic: Cosmetic){
+        var banana: Banana = this.registry.get("banana");
+        this.time.delayedCall(400, () => {banana.addCosmetic(this, cosmetic, this.bananaContainer)});
+        this.time.delayedCall(600, () => {banana.removeCosmetic(cosmetic, this.bananaContainer)});
     }
 }

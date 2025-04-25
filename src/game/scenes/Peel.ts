@@ -1,97 +1,81 @@
-import { Input, Scene } from 'phaser';
-import { GameObjects } from 'phaser'; 
-import { NextButton }from './toolbox/NextButton'; 
+import { Scene } from 'phaser';
+import { NextButton } from './toolbox/NextButton';
 import { Banana } from './toolbox/Banana';
 
 export class Peel extends Scene {
     constructor() {
         super('Peel');
-       
     }
 
- 
     preload() {
         this.load.image('backgroundP', 'assets/peel/Peel_BKG.png');
-        this.load.image('nextButton', 'assets/nextButton.png'); 
-        this.load.image('openHandCursor', 'assets/peel/open_hand.png');
-        this.load.image('line', 'assets/peel/Drag_lines.png');
-        this.load.image('banana', 'assets/Banana.png'); 
-        this.load.image('scissors', 'assets/peel/scissors.png');
+        this.load.image('nextButton', 'assets/nextButton.png');
+        this.load.image('banana', 'assets/Banana.png'); //TODO: banana og position problems
 
-        
-     
-        this.load.spritesheet('peel', 'assets/peel/peel.png', { 
-            frameWidth: 1698, 
-            frameHeight: 1135 
-        });
+        for (let i = 0; i <= 4; i++) {
+            this.load.image(`banana${i}`, `assets/peel/bananaPeel${i}.png`);
+        }
+
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`frame${i}`, `assets/peel/frame${i}.png`);
+        }
     }
 
     create() {
+        this.add.image(849, 567.5, 'backgroundP');
 
-        this.add.image(849, 567.5, 'backgroundP'); 
-
-        const banana = new Banana(this, 823, 535, 'banana');
-
-        this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
-
-        this.input.on('pointerdown', () => {
-            this.input.setDefaultCursor('url(assets/peel/closed_hand.png), auto');
-        });
-
-        this.input.on('pointerup', () => {
-            this.input.setDefaultCursor('url(assets/peel/open_hand.png), auto');
-        });
-
-        new NextButton(this, 1550, 100, 'Split'); // Add a next button to go to the Split scene
-
+        //const banana = new Banana(this, 823, 535, 'banana');
+        const banana = new Banana(this);
+        banana.bananaImage.setAlpha(1).setDepth(3);
+    
+        const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
+        let currentFrame = 0;
+    
+        
+        const peelSprite = this.add.sprite(1300, 535, 'frame1');
+        peelSprite.setDepth(2);
+    
+        // frames animation --> TODO: move to sprite sheet to cut down code
         this.anims.create({
-            key: 'peelAnim',
-            frames: this.anims.generateFrameNumbers('peel', { start: 0, end: 4 }), 
-            frameRate: 1.5,  
-            repeat: 0 
+            key: 'peelLoop',
+            frames: [
+                { key: 'frame1' },
+                { key: 'frame2' },
+                { key: 'frame3' },
+            ],
+            frameRate: 6, //rate
+            repeat: -1, //loop
         });
+    
+        peelSprite.play('peelLoop');
+    
+        banana.bananaImage.setInteractive();
+        this.input.setDraggable(banana.bananaImage);
+    
+        let lastPeelTime = 0;
+        const peelCooldown = 800;
+    
+        banana.bananaImage.on('drag', (pointer: Phaser.Input.Pointer) => {
+            const now = this.time.now; // grabbing the current time so we can check how long it’s been since the last peel
 
-        const peelSprite = this.add.sprite(823, 535, 'peel').setScale(0.9).setVisible(false);
-
-        const scissors = this.add.image(700, 400, 'scissors');
-        scissors.setDepth(2).setScale(0.5); 
-        
-        scissors.setInteractive({ draggable: true });
-        
-        let dragDirection: string | null = null;
-
-        
-        this.input.on('dragstart', () => {
-            dragDirection = null;
-        });
-        this.input.on(
-            'drag',
-            (
-                pointer: Phaser.Input.Pointer,
-                gameObject: Phaser.GameObjects.GameObject,
-                dragX: number,
-                dragY: number
-            ) => {
-                if (gameObject === scissors) {
-                    const image = gameObject as Phaser.GameObjects.Image;
-        
-                    //initial pos
-                    image.x = 700; 
-        
-                    //movement
-                    const minY = 100;
-                    const maxY =900;
-                    image.y = Phaser.Math.Clamp(dragY, minY, maxY);
+            // only let it peel if the user is dragging AND we haven’t reached the final banana frame yet
+            if (pointer.isDown && currentFrame < bananaFrames.length - 1) {
+                
+                // check if enough time has passed since the last peel so it doesn’t go super fast
+                if (now - lastPeelTime >= peelCooldown) {
+                    currentFrame++; // go to the next peel stage
+                    banana.setTexture(bananaFrames[currentFrame]); // update the banana image 
+                    // hide animation when 4th frame
+                    if (currentFrame === 4) {
+                        peelSprite.stop(); // stop animating
+                        peelSprite.setVisible(false); 
+                    }
+    
+                    lastPeelTime = now;
                 }
             }
-        );
-        
-        this.input.on('dragend', () => {
-            dragDirection = null;
         });
-       
-        
-    }
-
     
+        new NextButton(this, 1550, 100, 'Split');
+    }
 }

@@ -41,8 +41,8 @@ const config: Phaser.Types.Core.GameConfig = {
         PhotoShoot,
         DressUp,
         Peel,
-        Split,
         Wash,
+        Split,
         IceCream
     ] 
 };

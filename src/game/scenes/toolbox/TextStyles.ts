@@ -12,7 +12,7 @@ export class TextStyles{
     static button = {
         fontFamily: "Kitto",
         color: "#ffffff",
-        fontSize: 60
+        fontSize: 80
     }
 
     // static styleMap: { [key: string]: object } = {

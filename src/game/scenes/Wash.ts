@@ -1,33 +1,25 @@
 import { GameObjects, Scene } from 'phaser';
+import { CookTemplate } from './CookTemplate';
+import { Banana } from './toolbox/Banana';
 import { NextButton } from './toolbox/NextButton';
 
-export class Wash extends Scene {
+export class Wash extends CookTemplate {
     constructor() {
-        super('Wash');
+        super('Wash', "Bath time!", "washBackground");
     }
 
     preload() {
-        this.load.image('banana', 'assets/Banana.png'); 
-        this.load.image('background', 'assets/wash/Shower.png'); 
+        //this.load.image('banana', 'assets/Banana.png'); 
+        this.load.image('washBackground', 'assets/wash/Shower.png'); 
         this.load.image('hoseOff', 'assets/wash/Hose_off.png');
 
-        this.load.image('hose', 'assets/wash/Hose.png');
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`hose${i}`, `assets/wash/hose${i}.png`);
+        }
         this.load.image('washButton', 'assets/wash/WashButton.png');
 
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
-
-        for (let i = 1; i <= 4; i++) {
-            this.load.image(`Face${i}`, `assets/dressup/Face${i}.png`);
-            this.load.image(`Glasses${i}`, `assets/dressup/Glasses${i}.png`);
-            this.load.image(`Shirt${i}`, `assets/dressup/Shirt${i}.png`);
-
-
-             // Map buttons to DU images
-             this.load.image(`DU_Face${i}`, `assets/dressup/DU_Face${i}.png`);
-             this.load.image(`DU_Glasses${i}`, `assets/dressup/DU_Glasses${i}.png`);
-             this.load.image(`DU_Shirt${i}`, `assets/dressup/DU_Shirt${i}.png`);
-        }
     }
 
     private makeDropFall(drop: GameObjects.Image) {
@@ -45,21 +37,12 @@ export class Wash extends Scene {
     }
 
     create() {
-        this.add.image(849, 567.5, 'background');
-        this.add.image(600, 600, this.registry.get("FaceCosmetic"));
-        this.add.image(600, 600, this.registry.get("GlassesCosmetic"));
-        this.add.image(600, 600, this.registry.get("ShirtCosmetic"));
-
+        this.customizationLoader(this);
             
         const puddle = this.add.image(849, 1000, 'puddle')
             .setScale(0.95)
             .setDepth(0)
             .setVisible(false); 
-
-        const banana = this.add.image(849, 767.5, 'banana')
-            .setScale(0.55)
-            .setDepth(1)
-            .setInteractive();
 
         const drops = [
             this.add.image(1000, 630, 'water'),
@@ -79,18 +62,33 @@ export class Wash extends Scene {
                 .setAlpha(1)
                 .setDepth(3);
 
-            this.tweens.add({
-                targets: hose,
-                x: 849,
-                y: 600,
-                duration: 1000,
-                ease: 'Power2',
-                onComplete: () => {
-                    this.time.delayedCall(1200, () => {
-                        hose.setTexture('hose');
-                    });
+                this.tweens.add({
+                    targets: hose,
+                    x: 849,
+                    y: 600,
+                    duration: 1000,
+                    ease: 'Power2',
+                    onComplete: () => {
+                        let hoseFrames = ['hose1', 'hose2', 'hose3'];
+                        let currentFrame = 0;
+    
+                        const hoseAnimation = this.time.addEvent({
+                            delay: 150,
+                            callback: () => {
+                                hose.setTexture(hoseFrames[currentFrame]);
+                                currentFrame = (currentFrame + 1) % hoseFrames.length;
+                            },
+                            loop: true
+                        });
 
                     this.time.delayedCall(3000, () => {
+                        hoseAnimation.remove();
+
+                        var banana: Banana = this.registry.get("banana");
+                        banana.setFace(this, banana.defaultFaceCosmetic, this.bananaContainer);
+                        banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
+                        banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);
+
                         hose.setTexture('hoseOff');
                         puddle.setVisible(true);
                         drops.forEach(drop => drop.setVisible(true));
@@ -105,7 +103,7 @@ export class Wash extends Scene {
                                 ease: 'Power2',
                                 onComplete: () => {
                                     hose.destroy();
-                                    new NextButton(this, 1550, 100, 'Peel');
+                                    this.addNextButton(this, "Peel");
                                 }
                             });
                         });
@@ -115,3 +113,4 @@ export class Wash extends Scene {
         });
     }
 }
+
