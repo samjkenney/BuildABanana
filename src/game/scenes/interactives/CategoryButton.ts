@@ -60,10 +60,12 @@ export class CategoryButton extends ImageButton{
             //create icon button menu (move to DressUp?)
             var row = 1;
             var column = 1;
+            var buttonList = [];
             for(var i = 0; i < this.cosmeticArray.length; i++){
                 var buttonNumber = i + 1;
 
                 var button = new IconButton(scene, 0, 0, this.cosmeticArray[i], this.imageKey, iconContainer, bananaContainer);
+                buttonList.push(button);
                 iconContainer.add(button);
 
                 var x = this.SIDEBORDER * column + (column - 1) * button.getWidth();
@@ -78,6 +80,10 @@ export class CategoryButton extends ImageButton{
                 else{
                     column++;
                 }
+            }
+
+            for(var i = 0; i < this.cosmeticArray.length; i++){
+                buttonList[i].setButtonList(buttonList);
             }
         //}
     }

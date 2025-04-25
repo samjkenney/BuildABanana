@@ -97,14 +97,11 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     }
 
     updateButton(){
-    console.log(this.selected);
         if(this.selected){
             this.addRectangle(this.selectedColor);
-            console.log("update selected");
         }
         else{
             this.addRectangle(this.color);
-            console.log("update not selected");
         }
     }
 
