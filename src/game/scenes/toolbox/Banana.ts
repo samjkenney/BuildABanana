@@ -5,8 +5,9 @@ import { Cosmetic } from "./Cosmetic";
 export class Banana{
     scene: Scene;
     
-    // x: number;
-    // y: number;
+    static X = 25;
+    static Y = 70;
+    static SCALE = 0.8;
 
     name: string;
     personality: string;
@@ -34,7 +35,7 @@ export class Banana{
     peeled = false;
 
     constructor(currentScene: Scene){ //add container
-        this.scene = currentScene; 
+        this.scene = currentScene;
         // this.x = x;
         // this.y = y;
         //this.bananaImage = currentScene.add.image(x, y, 'banana'); 
@@ -50,16 +51,16 @@ export class Banana{
 
         setTexture(textureKey: string) {
             this.bananaImage.setTexture(textureKey);
-            this.bananaImage.setScale(0.85);
+            this.bananaImage.setScale(Banana.SCALE);
         }
 
     addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?
         //add banana image
         if(!this.peeled){ //check if peeled    
-            this.bananaImage = scene.add.image(0, 0, 'banana').setScale(0.8);
+            this.bananaImage = scene.add.image(0, 0, 'banana').setScale(Banana.SCALE);
         }
         else{
-            this.bananaImage = scene.add.image(0, 0, 'bananaPeeled').setScale(0.8);
+            this.bananaImage = scene.add.image(0, 0, 'bananaPeeled').setScale(Banana.SCALE);
         }
 
         //add face
@@ -134,7 +135,7 @@ export class Banana{
     }
 
     center(totalWidth: number, totalHeight: number){
-        this.bananaImage.setPosition(totalWidth / 2, totalHeight / 2);
+        this.bananaImage.setPosition(totalWidth / 2 + Banana.X, totalHeight / 2 + Banana.Y);
         this.faceImage.setPosition(totalWidth / 2 + this.faceCosmetic.getXFromCenter(), totalHeight / 2 + this.faceCosmetic.getYFromCenter()); //change to add position from center
         this.shirtImage.setPosition(totalWidth / 2 + this.shirtCosmetic.getXFromCenter(), totalHeight / 2 + this.shirtCosmetic.getYFromCenter());
         this.glassesImage.setPosition(totalWidth / 2 + this.glassesCosmetic.getXFromCenter(), totalHeight / 2 + this.glassesCosmetic.getYFromCenter());

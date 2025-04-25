@@ -1,5 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './interactives/NextButton'; //changed to interactives next button
+import { Button } from './interactives/Button';
 import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
@@ -68,12 +68,12 @@ export class DressUp extends CustomizationTemplate {
         this.customizationLoader(this);
 
         //create containers
-        this.cosmeticContainer = new GameObjects.Container(this, 0, 300); //change to calculate y
-        this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height * 0.8); //make calculateSize method?
+        this.cosmeticContainer = new GameObjects.Container(this, 0, this.getTitle().height + this.MENUBORDER);
+        this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER); //make calculateSize method?
         this.getMenuContainer().add(this.cosmeticContainer);
         //debugging
         if(this.debug){
-            this.cosmeticContainer.add(this.add.graphics().fillStyle(0x004400, 1).fillRect(0, 0, this.getMenuContainer().width, this.getMenuContainer().height * 0.8));
+            this.cosmeticContainer.add(this.add.graphics().fillStyle(0x004400, 1).fillRect(0, 0, this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER));
         }
 
         this.categoryContainer = new GameObjects.Container(this, 0, 0);
@@ -91,30 +91,30 @@ export class DressUp extends CustomizationTemplate {
 
         //make arrays of cosmetic image keys
         this.faceArray = [
-            new Cosmetic(this, "DU_Face1", 10, 0, 0.78),
-            new Cosmetic(this, "DU_Face2", 20, 0, 0.8),
-            new Cosmetic(this, "DU_Face3", 0, 0, 0.8),
-            new Cosmetic(this, "DU_Face4", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Face1", 10, 0, 0.975),
+            new Cosmetic(this, "DU_Face2", 20, 0, 1),
+            new Cosmetic(this, "DU_Face3", 0, 0, 1),
+            new Cosmetic(this, "DU_Face4", 0, 0, 1),
         ];
         // for (let i = 1; i <= 4; i++) {
         //      this.faceArray.push(`DU_Face${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
         // }
 
         this.glassesArray = [
-            new Cosmetic(this, "DU_Glasses1", 10, 0, 0.8),
-            new Cosmetic(this, "DU_Glasses2", 5, 0, 0.78),
-            new Cosmetic(this, "DU_Glasses3", 10, -190, 0.81),
-            new Cosmetic(this, "DU_Glasses4", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Glasses1", 10, 0, 1),
+            new Cosmetic(this, "DU_Glasses2", 5, 0, 0.975),
+            new Cosmetic(this, "DU_Glasses3", 10, -190, 1),
+            new Cosmetic(this, "DU_Glasses4", 0, 0, 1),
         ];
         // for (let i = 1; i <= 4; i++) {
         //      this.glassesArray.push(`DU_Glasses${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
         // }
 
         this.shirtArray = [
-            new Cosmetic(this, "DU_Shirt1", 0, 0, 0.8),
-            new Cosmetic(this, "DU_Shirt2", 0, 0, 0.8),
-            new Cosmetic(this, "DU_Shirt3", 20, 0, 0.8),
-            new Cosmetic(this, "DU_Shirt4", 0, 0, 0.8),
+            new Cosmetic(this, "DU_Shirt1", 0, 0, 1),
+            new Cosmetic(this, "DU_Shirt2", 0, 0, 1),
+            new Cosmetic(this, "DU_Shirt3", 20, 0, 1),
+            new Cosmetic(this, "DU_Shirt4", 0, 0, 1),
         ];
         // for (let i = 1; i <= 4; i++) {
         //      this.shirtArray.push(`DU_Shirt${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
@@ -130,9 +130,16 @@ export class DressUp extends CustomizationTemplate {
         //     {"name": "shirt", "array": this.shirtArray}
         // ];
 
+        var buttonList = [];
         for(var i = 0; i < categories.length; i++){
             var y = (0.25 / 2 + i * 0.25) * this.categoryContainer.height; //change to calculate from category list size?
-            this.categoryContainer.add(new CategoryButton(this, 0, y, categories[i], this.categoryContainer, this.iconContainer, categoriesMap[categories[i]], this.bananaContainer)); //save buttons to variables
+            var button = new CategoryButton(this, 0, y, categories[i], this.categoryContainer, this.iconContainer, categoriesMap[categories[i]], this.bananaContainer); //save buttons to variables
+            buttonList.push(button);
+            this.categoryContainer.add(button);
+        }
+
+        for(var i = 0; i < categories.length; i++){
+            buttonList[i].setButtonList(buttonList);
         }
         //set face button to selected
 
@@ -270,7 +277,7 @@ export class DressUp extends CustomizationTemplate {
 
     
         //new NextButton(this, 1300, 990, 'Wash');
-        this.add.existing(new NextButton(this, 'Wash', 1300, 990));
+        this.addNextButton(this, "Wash");
     }
 
    
