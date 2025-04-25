@@ -7,17 +7,21 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     originalY: number;
     width: number;
     height: number;
-    protected color: number; //necessary?
+    protected selected = false;
     protected backgroundGraphics;
+    private color: number; //necessary?
+    private selectedColor: number = 0x0000ff;
+    private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
 
     //protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
     protected cornerRadius: number;
     //protected static BORDER = 10; //make constant?
-    private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     private static HOVERSCALE = 1.2;
 
-    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, action: Function){
+    private buttonList: Button[];
+
+    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, staySelected: boolean, action: Function){
         super(currentScene, x, y);
         this.scene = currentScene;
         this.width = width;
@@ -60,7 +64,12 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //mouse leaves (hover end)
         this.on('pointerout', () => {
             //clear old rectangle
-            this.addRectangle(this.color)
+            if(staySelected && this.selected){
+                this.selectOne(this, this.buttonList);
+            }
+            else{
+                this.addRectangle(this.color)
+            }
             if(scaleOnHover){
                 this.setScale(1);
                 this.setPosition(this.originalX, this.originalY);
@@ -70,10 +79,37 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //click
         if (this.scene) { // Ensure this.scene is not null or undefined
             this.on("pointerdown", action);
+            this.on("pointerdown", () => {
+                if(staySelected && this.buttonList){
+                    this.buttonList.forEach(button => {
+                        button.selected = false;
+                        this.selected = true;
+                        button.updateButton();
+                    });
+                }
+            });
+            this.on("pointerup", () => {
+                if(staySelected && this.buttonList){
+                    this.selected = true;
+                }
+            });
+        }
+    }
+
+    updateButton(){
+    console.log(this.selected);
+        if(this.selected){
+            this.addRectangle(this.selectedColor);
+            console.log("update selected");
+        }
+        else{
+            this.addRectangle(this.color);
+            console.log("update not selected");
         }
     }
 
     protected addRectangle(color: number){
+        //clear old rectangle
         this.backgroundGraphics.fillStyle(color, 1); //move to method?
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
@@ -112,6 +148,10 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.addRectangle(color);
     }
 
+    protected setSelected(selected: boolean){
+        this.selected = selected;
+    }
+
     // protected updateSize(width: number, height: number, buttonContent: GameObjects.Text | GameObjects.Image){ //make replace Container setSize method?
     //     this.width = width;
     //     this.height = height;
@@ -128,5 +168,19 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
     protected getContent(): GameObjects.Image | GameObjects.Text{
         return this.content;
+    }
+
+    selectOne(selectedButton: Button, buttonList: Button[]){ //remove selectedButton
+        buttonList.forEach(button => {
+            button.setSelected(false);
+            button.updateButton();
+        });
+
+        selectedButton.setSelected(true);
+        selectedButton.updateButton();
+    }
+
+    setButtonList(buttonList: Button[]){
+        this.buttonList = buttonList;
     }
 }

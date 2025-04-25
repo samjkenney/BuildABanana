@@ -23,10 +23,9 @@ export class IconButton extends ImageButton{
                 banana.setShirt(scene, imageKey, bananaContainer);
             }
             //select behavior
-            //deselect?
         };
 
-        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, imageKey.getImageKey(), true, action);
+        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, imageKey.getImageKey(), true, true, action);
 
         this.calculateSizes(container);
         this.setSize(this.WIDTH, this.HEIGHT);

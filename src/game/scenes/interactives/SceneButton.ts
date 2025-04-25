@@ -13,7 +13,7 @@ export class SceneButton extends TextButton{
             scene?.scene.start(nextScene); // Use optional chaining to safely access scene
         };
 
-        super(scene, x, y, width, height, color, displayText, textStyle, scaleToButtonSize, scaleOnHover, action);
+        super(scene, x, y, width, height, color, displayText, textStyle, scaleToButtonSize, scaleOnHover, false, action);
 
     }
 }

@@ -28,7 +28,7 @@ export class Aspirations extends CustomizationTemplate{
     private selected = false;
 
     constructor(){
-        super("Aspirations", "Pick an\naspiration!", "labBackground");
+        super("Aspirations", "Choose an\naspiration!", "labBackground");
     }
 
     preload(){
@@ -46,11 +46,11 @@ export class Aspirations extends CustomizationTemplate{
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
 
-        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 1.6);
-        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.5);
-        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.2);
-        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.5);
-        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 1.6);
+        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 2);
+        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.875);
+        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.5);
+        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.875);
+        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 2);
 
         //add button actions to aspiration maps
         var banana = this.registry.get("banana");
@@ -76,13 +76,19 @@ export class Aspirations extends CustomizationTemplate{
             });
 
         //add aspiration menu
+        var buttonList = [];
         for(var i = 0; i < this.aspirations.length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
 
             //add menu button
-            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, this.aspirations[i].get("reaction"));
+            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, true, this.aspirations[i].get("reaction"));
+            buttonList.push(button);
             this.menuContainer.add(button);
         };
+
+        for(var i = 0; i < this.aspirations.length; i++){
+            buttonList[i].setButtonList(buttonList);
+        }
 
         super.addBackButton(this, "Personality");
         //while(this.selected){ //find way to continuously watch?

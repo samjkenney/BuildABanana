@@ -17,7 +17,7 @@ export class PhotoShoot extends Scene {
     create() {
         this.add.image(849, 567.5,'background2');
         this.add.video(849, 567.5, 'photoshootVideo').setScale(1.5).play(); // Play the video
-        new NextButton(this, 'DressUp',  849, 567.5, 'Next'); // Add a next button to go to the DressUp scene
+        this.add.existing(new NextButton(this, 'DressUp',  849, 567.5)); // Add a next button to go to the DressUp scene
         this.time.addEvent({
             delay: 3000,
             callback: ()=>{

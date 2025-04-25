@@ -1,5 +1,5 @@
 import { Scene } from 'phaser';
-import { NextButton } from './toolbox/NextButton';
+import { NextButton } from './interactives/NextButton';
 import { Banana } from './toolbox/Banana';
 
 export class Peel extends Scene {
@@ -25,9 +25,9 @@ export class Peel extends Scene {
         this.add.image(849, 567.5, 'backgroundP');
         new NextButton(this, 1550, 100, 'Split');
         //const banana = new Banana(this, 823, 535, 'banana');
-        const banana = new Banana(this);
-        //banana.bananaImage.setAlpha(1).setDepth(3);
-        
+        const banana = this.registry.get("banana");
+        banana.bananaImage.setAlpha(1).setDepth(3);
+    
         const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
         let currentFrame = 0;
     

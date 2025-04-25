@@ -7,11 +7,11 @@ import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
     private static COLOR = 0x000000; //make constant?
-    private static CLICKCOLOR = 0xffffff;
+    private static CLICKCOLOR = 0xffffff; //change to use Button selectedColor
     //color: number;
     private WIDTH: number; //make constant?
     private HEIGHT: number; //make constant?
-    private selected = false; //make not private?
+    //private selected = false; //make not private?
 
     private SIDEBORDER: number;
     private TOPBORDER: number;
@@ -27,12 +27,12 @@ export class CategoryButton extends ImageButton{
         var action = () => {
             console.log("Category button clicked");
 
-            this.selected = true; //find way to set to false when other selected
+            //this.selected = true; //find way to set to false when other selected
             this.createIconButtons(scene, iconContainer, bananaContainer);
             //update?
         };
 
-        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
+        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, true, action); //change width to add this.cornerRadius (instead of 10)????
         this.scene = scene;
         this.imageKey = imageKey;
         this.iconContainer = iconContainer;
@@ -52,8 +52,8 @@ export class CategoryButton extends ImageButton{
     }
 
     private createIconButtons(scene: Scene, iconContainer: GameObjects.Container, bananaContainer: GameObjects.Container){
-        if(this.selected){ //not necessary (always selected in function called)?
-            this.setColor(CategoryButton.CLICKCOLOR);
+        //if(this.selected){ //not necessary (always selected in function called)?
+            //this.setColor(CategoryButton.CLICKCOLOR);
 
             //remove existing icon button menu
 
@@ -79,17 +79,17 @@ export class CategoryButton extends ImageButton{
                     column++;
                 }
             }
-        }
+        //}
     }
 
 
 
-    getSelected(){
-        return this.selected;
-    }
+    // getSelected(){ //remove
+    //     return this.selected;
+    // }
 
-    setSelected(){
-        this.selected = true;
-        this.createIconButtons(this.scene, this.iconContainer, this.bananaContainer);
-    }
+    // setSelected(){ //remove
+    //     this.selected = true;
+    //     this.createIconButtons(this.scene, this.iconContainer, this.bananaContainer);
+    // }
 }
