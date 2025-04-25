@@ -8,7 +8,7 @@ export class IceCream extends Scene {
 
     preload() {
         this.load.image('background2', 'assets/Basic_BKG.jpeg'); //replace w custom background
-
+        this.load.image('iceCream', 'assets/icecream/Final Ice Cream Presentation.png'); //replace w custom ice cream
         //load ice cream assets
 
         
@@ -16,7 +16,8 @@ export class IceCream extends Scene {
 
     create() {
         this.add.image(849, 567.5,'background2'); 
-        new NextButton(this, 800, 654, 'MainMenu');
+        this.add.image(849, 567.5,'iceCream');
+        new NextButton(this, 1550, 1000, 'MainMenu');
         //add ice cream!
     }
 }

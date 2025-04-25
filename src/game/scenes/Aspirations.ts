@@ -86,7 +86,7 @@ export class Aspirations extends CustomizationTemplate{
 
         super.addBackButton(this, "Personality");
         //while(this.selected){ //find way to continuously watch?
-                super.addNextButton(this, "DressUp");
+                super.addNextButton(this, "PhotoShoot");
         //};
     }
 

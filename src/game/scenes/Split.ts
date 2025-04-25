@@ -60,8 +60,7 @@ export class Split extends Scene {
                 })
             }
             
-            //slice the banana
-            //add a next button
+            
            
         })
         

@@ -23,11 +23,11 @@ export class Peel extends Scene {
 
     create() {
         this.add.image(849, 567.5, 'backgroundP');
-
+        new NextButton(this, 1550, 100, 'Split');
         //const banana = new Banana(this, 823, 535, 'banana');
         const banana = new Banana(this);
-        banana.bananaImage.setAlpha(1).setDepth(3);
-    
+        //banana.bananaImage.setAlpha(1).setDepth(3);
+        
         const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
         let currentFrame = 0;
     
@@ -49,8 +49,8 @@ export class Peel extends Scene {
     
         peelSprite.play('peelLoop');
     
-        banana.bananaImage.setInteractive();
-        this.input.setDraggable(banana.bananaImage);
+        //banana.bananaImage.setInteractive();
+        //this.input.setDraggable(banana.bananaImage);
     
         let lastPeelTime = 0;
         const peelCooldown = 800;
@@ -76,6 +76,6 @@ export class Peel extends Scene {
             }
         });
     
-        new NextButton(this, 1550, 100, 'Split');
+       
     }
 }

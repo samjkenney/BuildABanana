@@ -1,5 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './toolbox/NextButton';
+import { NextButton } from './interactives/NextButton';
 
 export class PhotoShoot extends Scene {
     constructor() {
@@ -17,10 +17,11 @@ export class PhotoShoot extends Scene {
     create() {
         this.add.image(849, 567.5,'background2');
         this.add.video(849, 567.5, 'photoshootVideo').setScale(1.5).play(); // Play the video
+        new NextButton(this, 'DressUp',  849, 567.5, 'Next'); // Add a next button to go to the DressUp scene
         this.time.addEvent({
             delay: 3000,
             callback: ()=>{
-                new NextButton(this, 1550, 100, 'DressUp'); 
+                
             },
             loop: false
         })
