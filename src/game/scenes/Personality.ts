@@ -27,7 +27,7 @@ export class Personality extends CustomizationTemplate{
     }
 
     create(){
-        super.customizationLoader(this);
+        //super.customizationLoader(this);
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().width * 0.05;

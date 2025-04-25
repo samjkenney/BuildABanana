@@ -9,6 +9,7 @@ import { Split } from './scenes/Split';
 import { AUTO, Game } from 'phaser';
 import { Wash } from './scenes/Wash';
 import { IceCream } from './scenes/IceCream';
+import { PhotoShoot } from './scenes/PhotoShoot';
 
 
 
@@ -37,6 +38,7 @@ const config: Phaser.Types.Core.GameConfig = {
         Name,
         Personality,
         Aspirations,
+        PhotoShoot,
         DressUp,
         Peel,
         Split,

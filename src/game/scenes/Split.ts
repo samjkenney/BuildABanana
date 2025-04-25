@@ -53,7 +53,7 @@ export class Split extends Scene {
                         slice1.destroy();
                         slice2.destroy();
                         slice3.destroy();
-                        this.add.video(849, 567.5, 'splitVideo').play();
+                        this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
                         new NextButton(this, 1550, 100, 'IceCream');
                     },
                     loop: false
