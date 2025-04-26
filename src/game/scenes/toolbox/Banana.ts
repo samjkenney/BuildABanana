@@ -1,3 +1,5 @@
+// Represented a banana, holding the image and cosmetics
+// Constructed takes in a scene
 import { Scene } from 'phaser';
 import { GameObjects } from 'phaser';
 import { Cosmetic } from "./Cosmetic";
