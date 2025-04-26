@@ -19,9 +19,10 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     //protected static BORDER = 10; //make constant?
     private static HOVERSCALE = 1.2;
 
+    private staySelected = false;
     private buttonList: Button[];
 
-    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, staySelected: boolean, action: Function){
+    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, action: Function){
         super(currentScene, x, y);
         this.scene = currentScene;
         this.width = width;
@@ -64,8 +65,8 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //mouse leaves (hover end)
         this.on('pointerout', () => {
             //clear old rectangle
-            if(staySelected && this.selected){
-                this.selectOne(this, this.buttonList);
+            if(this.staySelected && this.selected){
+                this.selectOne(this.buttonList);
             }
             else{
                 this.addRectangle(this.color)
@@ -80,7 +81,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         if (this.scene) { // Ensure this.scene is not null or undefined
             this.on("pointerdown", action);
             this.on("pointerdown", () => {
-                if(staySelected && this.buttonList){
+                if(this.staySelected){
                     this.buttonList.forEach(button => {
                         button.selected = false;
                         this.selected = true;
@@ -89,7 +90,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
                 }
             });
             this.on("pointerup", () => {
-                if(staySelected && this.buttonList){
+                if(this.staySelected){
                     this.selected = true;
                 }
             });
@@ -139,7 +140,24 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.content.setPosition(this.width / 2, this.height / 2,); //recenter image or text
     }
 
-    protected setColor(color: number){
+    private selectOne(buttonList: Button[]){ //remove selectedButton
+        buttonList.forEach(button => {
+            button.setSelected(false);
+            button.updateButton();
+        });
+
+        this.selected = true;
+        this.updateButton();
+    }
+
+
+
+    setSelectOne(buttonList: Button[]){
+        this.staySelected = true;
+        this.buttonList = buttonList;
+    }
+
+    protected setColor(color: number){ //remove?
         //clear old rectangle?
         this.color = color;
         this.addRectangle(color);
@@ -165,19 +183,5 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
     protected getContent(): GameObjects.Image | GameObjects.Text{
         return this.content;
-    }
-
-    selectOne(selectedButton: Button, buttonList: Button[]){ //remove selectedButton
-        buttonList.forEach(button => {
-            button.setSelected(false);
-            button.updateButton();
-        });
-
-        selectedButton.setSelected(true);
-        selectedButton.updateButton();
-    }
-
-    setButtonList(buttonList: Button[]){
-        this.buttonList = buttonList;
     }
 }

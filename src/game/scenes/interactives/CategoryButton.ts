@@ -32,7 +32,7 @@ export class CategoryButton extends ImageButton{
             //update?
         };
 
-        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, true, action); //change width to add this.cornerRadius (instead of 10)????
+        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
         this.scene = scene;
         this.imageKey = imageKey;
         this.iconContainer = iconContainer;
@@ -83,7 +83,7 @@ export class CategoryButton extends ImageButton{
             }
 
             for(var i = 0; i < this.cosmeticArray.length; i++){
-                buttonList[i].setButtonList(buttonList);
+                buttonList[i].setSelectOne(buttonList);
             }
         //}
     }

@@ -139,7 +139,7 @@ export class DressUp extends CustomizationTemplate {
         }
 
         for(var i = 0; i < categories.length; i++){
-            buttonList[i].setButtonList(buttonList);
+            buttonList[i].setSelectOne(buttonList);
         }
         //set face button to selected
 

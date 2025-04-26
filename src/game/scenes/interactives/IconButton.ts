@@ -25,7 +25,7 @@ export class IconButton extends ImageButton{
             //select behavior
         };
 
-        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, imageKey.getImageKey(), true, true, action);
+        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, imageKey.getImageKey(), true, action);
 
         this.calculateSizes(container);
         this.setSize(this.WIDTH, this.HEIGHT);

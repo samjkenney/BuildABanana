@@ -25,7 +25,7 @@ export class MainMenu extends Scene {
         var banana = new Banana(this); //create new banana
         this.registry.set("banana", banana);
         
-        var startButton = new TextButton(this, background.width / 2 - 125, background.height / 2 - 50, 250, 100, 0xF9B1B4, "Start", TextStyles.getTitleStyle(this), false, true, false, () => {this.scene.start('Name')});
+        var startButton = new TextButton(this, background.width / 2 - 125, background.height / 2 - 50, 250, 100, 0xF9B1B4, "Start", TextStyles.getTitleStyle(this), false, true, () => {this.scene.start('Name')});
         this.add.existing(startButton).setInteractive();
 
         //this.add.graphics().fillStyle(0x000000, 1).fillCircle(100, 100, 5);
