@@ -45,7 +45,7 @@ export class Eulogy extends Scene {
         
         this.tweens.add({
             targets: titleText,
-            y: { from: 1000, to: -1750 },  // Move from bottom to top 
+            y: { from: 1000, to: -1950 },  // Move from bottom to top 
             duration: 20000,           // Animation duration (in milliseconds)
             ease: 'Linear',           // Animation easing function
             repeat: 0,              // Repeat indefinitely

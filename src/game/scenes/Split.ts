@@ -1,9 +1,11 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './toolbox/NextButton';
+import { CookTemplate } from './CookTemplate';
+import { NextButton } from './interactives/NextButton';
+//import { NextButton } from './toolbox/NextButton';
 
-export class Split extends Scene {
+export class Split extends CookTemplate {
     constructor() {
-        super('Split');
+        super('Split','Slice it up!');
     }
 
     preload() {
@@ -54,7 +56,9 @@ export class Split extends Scene {
                         slice2.destroy();
                         slice3.destroy();
                         this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
-                        new NextButton(this, 1550, 100, 'IceCream');
+                        new NextButton(this,'IceCream', 1550, 100, 'Yum!');
+                        this.scene.start('IceCream');
+                        //this.addNextButton(this, 'IceCream', 'Yum!');
                     },
                     loop: false
                 })

@@ -102,7 +102,7 @@ export class Wash extends CookTemplate {
                                 ease: 'Power2',
                                 onComplete: () => {
                                     hose.destroy();
-                                    this.addNextButton(this, "Peel");
+                                    this.addNextButton(this, "Split");
                                 }
                             });
                         });
