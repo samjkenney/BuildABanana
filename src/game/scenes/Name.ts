@@ -1,5 +1,4 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './toolbox/NextButton';
 import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';
 
@@ -62,7 +61,7 @@ export class Name extends CustomizationTemplate {
         inputBox.style.height = '100px'; 
 
         
-        
+
         inputBox.addEventListener('input', () => {
             if (inputBox.value !== '') { //add character limit (function)
                 this.getNextButton().setVisible(true);  

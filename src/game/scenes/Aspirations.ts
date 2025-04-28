@@ -25,10 +25,10 @@ export class Aspirations extends CustomizationTemplate{
         new Map([["aspiration", "Banana Foster Parent"]]),
         new Map([["aspiration", "Modern Artist"]])
     ];
-    private selected = false;
+    private selected = false; //get from registry (so can go back and keep selected button)
 
     constructor(){
-        super("Aspirations", "Pick an\naspiration!", "labBackground");
+        super("Aspirations", "Choose an\naspiration!", "labBackground");
     }
 
     preload(){
@@ -46,48 +46,56 @@ export class Aspirations extends CustomizationTemplate{
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
 
-        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 1.6);
-        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.5);
-        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.2);
-        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.5);
-        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 1.6);
+        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 2);
+        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.875);
+        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.5);
+        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.875);
+        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 2);
 
         //add button actions to aspiration maps
-        var banana = this.registry.get("banana");
+        //var banana = this.registry.get("banana");
         this.aspirations[0].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(cootiesDoctor);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[1].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(appealLawyer);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[2].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(computerScienceProfessor);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[3].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(bananaFosterParent);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[4].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(modernArtist);
+                this.addNextButton(this, "PhotoShoot");
             });
 
         //add aspiration menu
+        var buttonList = [];
         for(var i = 0; i < this.aspirations.length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
 
             //add menu button
             var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, this.aspirations[i].get("reaction"));
+            buttonList.push(button);
             this.menuContainer.add(button);
         };
 
+        for(var i = 0; i < this.aspirations.length; i++){
+            buttonList[i].setSelectOne(buttonList);
+        }
+
         super.addBackButton(this, "Personality");
-        //while(this.selected){ //find way to continuously watch?
-                super.addNextButton(this, "PhotoShoot");
-        //};
     }
 
     private flashImage(cosmetic: Cosmetic){

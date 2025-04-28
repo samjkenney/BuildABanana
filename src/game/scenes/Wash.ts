@@ -1,7 +1,6 @@
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
 import { Banana } from './toolbox/Banana';
-import { NextButton } from './toolbox/NextButton';
 
 export class Wash extends CookTemplate {
     constructor() {
@@ -53,7 +52,7 @@ export class Wash extends CookTemplate {
             drop.setScale(0.14).setDepth(2).setVisible(false);
         });
 
-        const washButton = this.add.image(792, 500, 'washButton').setScale(0.8);
+        const washButton = this.add.image(792, 500, 'washButton').setScale(0.6);
 
         this.input.once('pointerdown', () => {
             washButton.destroy();

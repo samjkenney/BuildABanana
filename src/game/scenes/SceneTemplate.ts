@@ -6,7 +6,7 @@ import { BackButton } from './interactives/BackButton';
 
 export abstract class SceneTemplate extends Scene {
     //debugging
-    protected debug = false;
+    protected debug = true;
     borderBox: GameObjects.Graphics;
     expectedBox: GameObjects.Graphics;
     actualBox: GameObjects.Graphics;
@@ -39,6 +39,8 @@ export abstract class SceneTemplate extends Scene {
         if(backgroundImage){
             this.backgroundImage = backgroundImage //replace background if given new one
         }
+
+        //add sceneLoader?
     };
 
     preload(){
@@ -60,7 +62,7 @@ export abstract class SceneTemplate extends Scene {
         this.addBananaContainer(scene);
 
         var banana = scene.registry.get("banana");
-        banana.addBanana(scene, this.bananaContainer);
+        banana.addBanana(scene, this.bananaContainer); //move to method, call in children (so can have scene with no banana)
     }
 
     private calculateSizes1(scene: Scene){
@@ -128,8 +130,14 @@ export abstract class SceneTemplate extends Scene {
 
 
 
-    protected addNextButton(scene: Scene, nextScene: string, displayText?: string){ //add x, y parameters, replaced in template addNextButton definitions?
-        this.nextButton = new NextButton(this, nextScene, 0, 0, displayText);
+    protected addNextButton(scene: Scene, nextScene: string, displayText?: string, x?: number, y?: number){ //add x, y parameters, replaced in template addNextButton definitions, remove?
+        if(!x){
+            x = 0;
+        }
+        if (!y){
+            y = 0;
+        }
+        this.nextButton = new NextButton(this, nextScene, x, y, displayText);
         scene.add.existing(this.nextButton);
     }
 

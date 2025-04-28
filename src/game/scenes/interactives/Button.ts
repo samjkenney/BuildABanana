@@ -7,15 +7,20 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     originalY: number;
     width: number;
     height: number;
-    protected color: number; //necessary?
+    protected selected = false;
     protected backgroundGraphics;
+    private color: number; //necessary?
+    private selectedColor: number = 0x0000ff;
+    private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
 
     //protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
     protected cornerRadius: number;
     //protected static BORDER = 10; //make constant?
-    private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     private static HOVERSCALE = 1.2;
+
+    private staySelected = false;
+    private buttonList: Button[];
 
     constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, action: Function){
         super(currentScene, x, y);
@@ -48,7 +53,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.originalX = this.x;
             this.originalY = this.y;
             //clear old rectangle
-            this.addRectangle(Button.TINT);
+            if(this.color !== 0){
+                this.addRectangle(Button.TINT);
+            }
             if(scaleOnHover){
                 var widthChange = width * Button.HOVERSCALE - width
                 var heightChange = height * Button.HOVERSCALE - height
@@ -60,7 +67,12 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //mouse leaves (hover end)
         this.on('pointerout', () => {
             //clear old rectangle
-            this.addRectangle(this.color)
+            if(this.staySelected && this.selected){
+                this.selectOne(this.buttonList);
+            }
+            else{
+                this.addRectangle(this.color)
+            }
             if(scaleOnHover){
                 this.setScale(1);
                 this.setPosition(this.originalX, this.originalY);
@@ -70,11 +82,40 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //click
         if (this.scene) { // Ensure this.scene is not null or undefined
             this.on("pointerdown", action);
+            this.on("pointerdown", () => {
+                if(this.staySelected){
+                    this.buttonList.forEach(button => {
+                        button.selected = false;
+                        this.selected = true;
+                        button.updateButton();
+                    });
+                }
+            });
+            this.on("pointerup", () => {
+                if(this.staySelected){
+                    this.selected = true;
+                }
+            });
+        }
+    }
+
+    updateButton(){
+        if(this.selected){
+            this.addRectangle(this.selectedColor);
+        }
+        else{
+            this.addRectangle(this.color);
         }
     }
 
     protected addRectangle(color: number){
-        this.backgroundGraphics.fillStyle(color, 1); //move to method?
+        //clear old rectangle
+        if(color == 0){
+            this.backgroundGraphics.fillStyle(0xffffff, 0);
+        }
+        else{
+            this.backgroundGraphics.fillStyle(color, 1); //move to method?
+        }
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
 
@@ -106,10 +147,31 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.content.setPosition(this.width / 2, this.height / 2,); //recenter image or text
     }
 
-    protected setColor(color: number){
+    private selectOne(buttonList: Button[]){ //remove selectedButton
+        buttonList.forEach(button => {
+            button.setSelected(false);
+            button.updateButton();
+        });
+
+        this.selected = true;
+        this.updateButton();
+    }
+
+
+
+    setSelectOne(buttonList: Button[]){
+        this.staySelected = true;
+        this.buttonList = buttonList;
+    }
+
+    protected setColor(color: number){ //remove?
         //clear old rectangle?
         this.color = color;
         this.addRectangle(color);
+    }
+
+    protected setSelected(selected: boolean){
+        this.selected = selected;
     }
 
     // protected updateSize(width: number, height: number, buttonContent: GameObjects.Text | GameObjects.Image){ //make replace Container setSize method?

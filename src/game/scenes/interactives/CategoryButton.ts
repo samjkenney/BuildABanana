@@ -7,11 +7,11 @@ import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
     private static COLOR = 0x000000; //make constant?
-    private static CLICKCOLOR = 0xffffff;
+    private static CLICKCOLOR = 0xffffff; //change to use Button selectedColor
     //color: number;
     private WIDTH: number; //make constant?
     private HEIGHT: number; //make constant?
-    private selected = false; //make not private?
+    //private selected = false; //make not private?
 
     private SIDEBORDER: number;
     private TOPBORDER: number;
@@ -27,9 +27,7 @@ export class CategoryButton extends ImageButton{
         var action = () => {
             console.log("Category button clicked");
 
-            this.selected = true; //find way to set to false when other selected
-            this.createIconButtons(scene, iconContainer, bananaContainer);
-            //update?
+            this.createIconButtons(scene, iconContainer, bananaContainer); //change to use existing icon menu
         };
 
         super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
@@ -52,18 +50,20 @@ export class CategoryButton extends ImageButton{
     }
 
     private createIconButtons(scene: Scene, iconContainer: GameObjects.Container, bananaContainer: GameObjects.Container){
-        if(this.selected){ //not necessary (always selected in function called)?
-            this.setColor(CategoryButton.CLICKCOLOR);
+        //if(this.selected){ //not necessary (always selected in function called)?
+            //this.setColor(CategoryButton.CLICKCOLOR);
 
             //remove existing icon button menu
 
-            //create icon button menu (move to DressUp?)
+            //create icon button menu (move to DressUp, change to just set menu visible or bring to front?)
             var row = 1;
             var column = 1;
+            var buttonList = [];
             for(var i = 0; i < this.cosmeticArray.length; i++){
                 var buttonNumber = i + 1;
 
                 var button = new IconButton(scene, 0, 0, this.cosmeticArray[i], this.imageKey, iconContainer, bananaContainer);
+                buttonList.push(button);
                 iconContainer.add(button);
 
                 var x = this.SIDEBORDER * column + (column - 1) * button.getWidth();
@@ -79,17 +79,21 @@ export class CategoryButton extends ImageButton{
                     column++;
                 }
             }
-        }
+
+            for(var i = 0; i < this.cosmeticArray.length; i++){
+                buttonList[i].setSelectOne(buttonList);
+            }
+        //}
     }
 
 
 
-    getSelected(){
-        return this.selected;
-    }
+    // getSelected(){ //remove
+    //     return this.selected;
+    // }
 
-    setSelected(){
-        this.selected = true;
-        this.createIconButtons(this.scene, this.iconContainer, this.bananaContainer);
-    }
+    // setSelected(){ //remove
+    //     this.selected = true;
+    //     this.createIconButtons(this.scene, this.iconContainer, this.bananaContainer);
+    // }
 }
