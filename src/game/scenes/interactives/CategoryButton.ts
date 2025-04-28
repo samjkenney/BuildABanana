@@ -27,9 +27,7 @@ export class CategoryButton extends ImageButton{
         var action = () => {
             console.log("Category button clicked");
 
-            //this.selected = true; //find way to set to false when other selected
-            this.createIconButtons(scene, iconContainer, bananaContainer);
-            //update?
+            this.createIconButtons(scene, iconContainer, bananaContainer); //change to use existing icon menu
         };
 
         super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
@@ -57,7 +55,7 @@ export class CategoryButton extends ImageButton{
 
             //remove existing icon button menu
 
-            //create icon button menu (move to DressUp?)
+            //create icon button menu (move to DressUp, change to just set menu visible or bring to front?)
             var row = 1;
             var column = 1;
             var buttonList = [];

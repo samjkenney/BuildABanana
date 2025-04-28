@@ -53,7 +53,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.originalX = this.x;
             this.originalY = this.y;
             //clear old rectangle
-            this.addRectangle(Button.TINT);
+            if(this.color !== 0){
+                this.addRectangle(Button.TINT);
+            }
             if(scaleOnHover){
                 var widthChange = width * Button.HOVERSCALE - width
                 var heightChange = height * Button.HOVERSCALE - height
@@ -108,7 +110,12 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
     protected addRectangle(color: number){
         //clear old rectangle
-        this.backgroundGraphics.fillStyle(color, 1); //move to method?
+        if(color == 0){
+            this.backgroundGraphics.fillStyle(0xffffff, 0);
+        }
+        else{
+            this.backgroundGraphics.fillStyle(color, 1); //move to method?
+        }
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
 

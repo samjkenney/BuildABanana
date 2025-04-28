@@ -25,7 +25,7 @@ export class Aspirations extends CustomizationTemplate{
         new Map([["aspiration", "Banana Foster Parent"]]),
         new Map([["aspiration", "Modern Artist"]])
     ];
-    private selected = false;
+    private selected = false; //get from registry (so can go back and keep selected button)
 
     constructor(){
         super("Aspirations", "Choose an\naspiration!", "labBackground");
@@ -53,26 +53,31 @@ export class Aspirations extends CustomizationTemplate{
         var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 2);
 
         //add button actions to aspiration maps
-        var banana = this.registry.get("banana");
+        //var banana = this.registry.get("banana");
         this.aspirations[0].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(cootiesDoctor);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[1].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(appealLawyer);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[2].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(computerScienceProfessor);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[3].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(bananaFosterParent);
+                this.addNextButton(this, "PhotoShoot");
             });
         this.aspirations[4].set("reaction", () => {
                 this.selected = true;
                 this.flashImage(modernArtist);
+                this.addNextButton(this, "PhotoShoot");
             });
 
         //add aspiration menu
@@ -91,9 +96,6 @@ export class Aspirations extends CustomizationTemplate{
         }
 
         super.addBackButton(this, "Personality");
-        //while(this.selected){ //find way to continuously watch?
-                super.addNextButton(this, "PhotoShoot");
-        //};
     }
 
     private flashImage(cosmetic: Cosmetic){
