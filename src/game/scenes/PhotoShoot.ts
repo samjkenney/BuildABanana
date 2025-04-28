@@ -21,10 +21,10 @@ export class PhotoShoot extends Scene {
         this.time.addEvent({
             delay: 3000,
             callback: ()=>{
-                
+                this.scene.start('DressUp');
             },
             loop: false
         })
-        
+       
     }
 }

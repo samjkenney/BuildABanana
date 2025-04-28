@@ -17,7 +17,7 @@ export class IceCream extends Scene {
     create() {
         this.add.image(849, 567.5,'background2'); 
         this.add.image(849, 567.5,'iceCream');
-        new NextButton(this, 1550, 1000, 'MainMenu');
+        new NextButton(this, 1550, 1000, 'Eulogy');
         //add ice cream!
     }
 }

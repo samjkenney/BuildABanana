@@ -10,6 +10,7 @@ import { AUTO, Game } from 'phaser';
 import { Wash } from './scenes/Wash';
 import { IceCream } from './scenes/IceCream';
 import { PhotoShoot } from './scenes/PhotoShoot';
+import { Eulogy } from './scenes/Eulogy';
 
 
 
@@ -43,7 +44,8 @@ const config: Phaser.Types.Core.GameConfig = {
         Peel,
         Wash,
         Split,
-        IceCream
+        IceCream,
+        Eulogy
     ] 
 };
 
