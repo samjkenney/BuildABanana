@@ -3,6 +3,7 @@
 import { Scene } from 'phaser';
 import { GameObjects } from 'phaser';
 import { Cosmetic } from "./Cosmetic";
+import { Characteristic } from './Characteristic';
 
 export class Banana{
     scene: Scene;
@@ -12,8 +13,8 @@ export class Banana{
     static SCALE = 0.8;
 
     name: string;
-    personality: string;
-    aspiration: string;
+    personality: Characteristic;
+    aspiration: Characteristic;
 
     activeFace = "default"; //combine with faceCosmetic somehow?
     activeGlasses = "none";
@@ -150,11 +151,11 @@ export class Banana{
         this.name = name;
     }
 
-    setPersonality(personality: string){
+    setPersonality(personality: Characteristic){
         this.personality = personality;
     }
 
-    setAspiration(aspiration: string){
+    setAspiration(aspiration: Characteristic){
         this.aspiration = aspiration;
     }
 
