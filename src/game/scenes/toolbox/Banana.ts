@@ -52,9 +52,16 @@ export class Banana{
         this.shirtCosmetic = this.noShirtCosmetic;
     }
 
-        setTexture(textureKey: string) {
-            this.bananaImage.setTexture(textureKey);
-            this.bananaImage.setScale(Banana.SCALE);
+    //peel help methods
+    setTexture(textureKey: string) {
+        this.bananaImage.setTexture(textureKey);
+        this.bananaImage.setScale(Banana.SCALE);
+        }
+    
+     setScale(scale: number) {
+        if (this.bananaImage) {
+            this.bananaImage.setScale(scale);
+        }
         }
 
     addBanana(scene: Scene, container: GameObjects.Container){ //make container optional (in case banana not in a container in some special scene)?

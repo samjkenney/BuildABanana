@@ -88,6 +88,8 @@ export class Wash extends CookTemplate {
                         banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
                         banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);
 
+                        // this.registry.set("banana", banana); //add banana to next scene
+
                         hose.setTexture('hoseOff');
                         puddle.setVisible(true);
                         drops.forEach(drop => drop.setVisible(true));
@@ -102,7 +104,7 @@ export class Wash extends CookTemplate {
                                 ease: 'Power2',
                                 onComplete: () => {
                                     hose.destroy();
-                                    this.addNextButton(this, "Split");
+                                    this.addNextButton(this, "Peel");
                                 }
                             });
                         });

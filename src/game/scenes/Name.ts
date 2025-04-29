@@ -55,7 +55,6 @@ export class Name extends CustomizationTemplate {
         this.getMenuContainer().add(element);
         // custom
         inputBox.style.backgroundColor = '#ffccd2'; //move to html file with other style stuff?
-        // inputBox.style.border = '1px solid ##ffccd2'; 
         inputBox.style.border = 'none';
         inputBox.style.width = this.getMenuContainer().width + 'px';
         inputBox.style.height = '100px'; 
