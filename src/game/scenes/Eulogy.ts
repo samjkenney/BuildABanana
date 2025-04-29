@@ -1,4 +1,5 @@
 import { Scene } from "phaser";
+import { Banana } from "./toolbox/Banana";
 
 export class Eulogy extends Scene {
 
@@ -15,15 +16,19 @@ export class Eulogy extends Scene {
     //TODO: implement name and personality/aspiration
     //TODO: font style?
     create(){
+        const name : String = this.registry.get("banana").getName();
+        const personality = this.registry.get("banana").getPersonality();
+        const aspiration = this.registry.get("banana").getAspiration();
         
+
         const bg = this.add.image(849, 567.5,'backgroundT').setScale(1.5); //replace w custom background
        
-        const eulogyText = "Here lies {Name) the Banana\n" +
+        const eulogyText = "Here lies " + name + " the Banana\n" +
          "Who was loved by all; \n" +
           "a devoted friend, child, and sibling. \n" +
          "They were a banana of many talents. \n" +
-         "{Name} personality.getEulogy() \n" +
-         "{Name} aspiration.getEulogy() \n" +
+         name + personality.getEulogy() +  "\n" +
+         name + aspiration.getEulogy() +  "\n" +
          "They will be missed by all who knew them. \n" +
             "May they rest in peace.\n" +
             "\n \n \n \n \n" +
