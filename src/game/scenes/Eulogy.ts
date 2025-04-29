@@ -1,0 +1,57 @@
+import { Scene } from "phaser";
+
+export class Eulogy extends Scene {
+
+    constructor(){
+        super("Eulogy");
+    }
+
+    preload(){
+        //load background
+        this.load.image("backgroundT", "assets/Basic_BKG.jpeg"); 
+    }
+    //TODO: add images?? 
+    //TODO: fix spacing
+    //TODO: implement name and personality/aspiration
+    //TODO: font style?
+    create(){
+        
+        const bg = this.add.image(849, 567.5,'backgroundT').setScale(1.5); //replace w custom background
+       
+        const eulogyText = "Here lies {Name) the Banana\n" +
+         "Who was loved by all; \n" +
+          "a devoted friend, child, and sibling. \n" +
+         "They were a banana of many talents. \n" +
+         "{Name} personality.getEulogy() \n" +
+         "{Name} aspiration.getEulogy() \n" +
+         "They will be missed by all who knew them. \n" +
+            "May they rest in peace.\n" +
+            "\n \n \n \n \n" +
+            "This game was made by: \n" +
+            "Daisy Chan \n" +
+            "Sam Kenney \n" +
+            "Nadya Konadu \n" +
+            "Zander Leong \n" +
+            "Special thanks to: \n" +
+            "Paul Cantrell \n" +
+            "Jim Marigmen \n" +
+            "Kaliana Andriamananjara \n";
+       
+        const titleText = this.add.text(400, 1000, eulogyText);
+        titleText.setStyle({ fontSize: '60px', color: '#000000' });
+        titleText.setWordWrapWidth(1200);
+        titleText.setLineSpacing(20);
+        
+        
+        this.tweens.add({
+            targets: titleText,
+            y: { from: 1000, to: -1950 },  // Move from bottom to top 
+            duration: 20000,           // Animation duration (in milliseconds)
+            ease: 'Linear',           // Animation easing function
+            repeat: 0,              // Repeat indefinitely
+            yoyo: false          
+          });
+
+        
+    }
+}

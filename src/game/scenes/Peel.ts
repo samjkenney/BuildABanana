@@ -23,7 +23,7 @@ export class Peel extends Scene {
 
     create() {
         this.add.image(849, 567.5, 'backgroundP');
-        new NextButton(this, 1550, 100, 'Split');
+        new NextButton(this, 'Split', 1550, 100, 'Peel');
         //const banana = new Banana(this, 823, 535, 'banana');
         const banana = this.registry.get("banana");
         banana.bananaImage.setAlpha(1).setDepth(3);
