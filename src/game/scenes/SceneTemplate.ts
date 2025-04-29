@@ -6,7 +6,7 @@ import { BackButton } from './interactives/BackButton';
 
 export abstract class SceneTemplate extends Scene {
     //debugging
-    protected debug = true;
+    protected debug = false;
     borderBox: GameObjects.Graphics;
     expectedBox: GameObjects.Graphics;
     actualBox: GameObjects.Graphics;
