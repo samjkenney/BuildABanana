@@ -11,7 +11,7 @@ export class Aspirations extends CustomizationTemplate{
     //content vertical: 10% title???, 10% border, 70/3% button, 5% border, 70/3% button, 5% border, 70/3% button,
     private MENUHALFBORDER: number;
     private BUTTONHEIGHT: number;
-    private COLOR = 0x000000;
+    private COLOR = 0xff0000;
 
     private aspirations: Map<string, any>[] = [
         // {aspiration: "Cooties Doctor", imageKey: "cooties doctor"},
