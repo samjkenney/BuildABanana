@@ -1,3 +1,4 @@
+//This file is pulled from the Phaser template, and was not modified
 import { Events } from 'phaser';
 
 // Used to emit events between React components and Phaser scenes

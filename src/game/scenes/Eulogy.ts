@@ -1,5 +1,6 @@
 import { Scene } from "phaser";
 import { Banana } from "./toolbox/Banana";
+import { Characteristic } from "./toolbox/Characteristic";
 
 export class Eulogy extends Scene {
 
@@ -13,12 +14,12 @@ export class Eulogy extends Scene {
     }
     //TODO: add images?? 
     //TODO: fix spacing
-    //TODO: implement name and personality/aspiration
+    //TODO: implement personality/aspiration
     //TODO: font style?
     create(){
         const name : String = this.registry.get("banana").getName();
-        const personality = this.registry.get("banana").getPersonality();
-        const aspiration = this.registry.get("banana").getAspiration();
+       // const personality : Characteristic = this.registry.get("banana").getPersonality();
+       // const aspiration : Characteristic = this.registry.get("banana").getAspiration();
         
 
         const bg = this.add.image(849, 567.5,'backgroundT').setScale(1.5); //replace w custom background
@@ -27,8 +28,8 @@ export class Eulogy extends Scene {
          "Who was loved by all; \n" +
           "a devoted friend, child, and sibling. \n" +
          "They were a banana of many talents. \n" +
-         name + personality.getEulogy() +  "\n" +
-         name + aspiration.getEulogy() +  "\n" +
+         name + "personality.getEulogyEntry()" +  "\n" +
+         name + "aspiration.getEulogyEntry()" +  "\n" +
          "They will be missed by all who knew them. \n" +
             "May they rest in peace.\n" +
             "\n \n \n \n \n" +
@@ -37,20 +38,22 @@ export class Eulogy extends Scene {
             "Sam Kenney \n" +
             "Nadya Konadu \n" +
             "Zander Leong \n" +
+            "\n \n \n \n \n" +
             "Special thanks to: \n" +
             "Paul Cantrell \n" +
             "Jim Marigmen \n" +
-            "Kaliana Andriamananjara \n";
+            "Kaliana Andriamananjara \n" +
+            "Guy the cat";
        
         const titleText = this.add.text(400, 1000, eulogyText);
         titleText.setStyle({ fontSize: '60px', color: '#000000' });
-        titleText.setWordWrapWidth(1200);
-        titleText.setLineSpacing(20);
+        titleText.setWordWrapWidth(1000);
+        titleText.setLineSpacing(50);
         
         
         this.tweens.add({
             targets: titleText,
-            y: { from: 1000, to: -1950 },  // Move from bottom to top 
+            y: { from: 1000, to: -3000 },  // Move from bottom to top 
             duration: 20000,           // Animation duration (in milliseconds)
             ease: 'Linear',           // Animation easing function
             repeat: 0,              // Repeat indefinitely

@@ -56,9 +56,9 @@ export class Split extends CookTemplate {
                         slice2.destroy();
                         slice3.destroy();
                         this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
-                        new NextButton(this,'IceCream', 1550, 100, 'Yum!');
+                        // new NextButton(this,'IceCream', 1550, 100, 'Yum!');
                         this.scene.start('IceCream');
-                        //this.addNextButton(this, 'IceCream', 'Yum!');
+                        this.addNextButton(this, 'IceCream', 'Yum!');
                     },
                     loop: false
                 })
