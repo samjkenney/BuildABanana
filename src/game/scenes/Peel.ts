@@ -1,19 +1,19 @@
 import { Banana } from './toolbox/Banana';
 import { CookTemplate } from './CookTemplate';
+import { TextStyles } from './toolbox/TextStyles';
 
 export class Peel extends CookTemplate {
     constructor() {
         // set scene title and background image
         super('Peel', 'Peel Your Banana', 'peelBackground');
+
     }
 
     preload() {
         super.preload(); // load any assets from the parent class if needed
 
         this.load.image('peelBackground', 'assets/peel/Peel_BKG.png'); 
-        this.load.image('openHand', 'assets/peel/open_hand.png'); // open hand image //TODO: make class for cursors??
-        this.load.image('closedHand', 'assets/peel/closed_hand.png'); // closed hand image
-
+    
 
         // load all banana peel images
         for (let i = 1; i <= 4; i++) {
@@ -28,11 +28,13 @@ export class Peel extends CookTemplate {
 
     create() {
 
+        TextStyles.setTitleStyle('#ffcbd2', '#eda3a9');
+        
+
         super.create(); // set up the base class things
     
         this.customizationLoader(this); // custom function to handle any extra setup
     
-        let isDraggingBanana = false;
 
         let banana: Banana = this.registry.get('banana');
     
@@ -56,7 +58,7 @@ export class Peel extends CookTemplate {
                 { key: 'frame2' },
                 { key: 'frame3' },
             ],
-            frameRate: 6, // how fast it changes frames
+            frameRate: 5, // how fast it changes frames
             repeat: -1, // loop forever
         });
 
@@ -64,8 +66,8 @@ export class Peel extends CookTemplate {
 
         // make the banana image draggable
         banana.bananaImage.setInteractive({
-            pixelPerfect: true,
-            // useHandCursor: true
+            pixelPerfect: true, //uggh transparent bkg prblms
+            useHandCursor: true
         });
         this.input.setDraggable(banana.bananaImage);
 
@@ -73,16 +75,15 @@ export class Peel extends CookTemplate {
         const peelCooldown = 800; // time between peel actions
 
 
-         // default cursor is the open hand when not interacting
-         this.input.setDefaultCursor('url(assets/peel/open_hand.png), pointer');
 
         // handle dragging
         this.input.on('drag', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
             console.log('Dragging:', (gameObject as Phaser.GameObjects.Image).texture?.key); // debug test
         
+            // get current time to track how long since last peel
             const now = this.time.now;
-            if (pointer.isDown && currentFrame < bananaFrames.length - 1) {
-                if (now - lastPeelTime >= peelCooldown) {
+            if (pointer.isDown && currentFrame < bananaFrames.length - 1) { // check if the pointer is down and we're not at the last peel frame yet
+                if (now - lastPeelTime >= peelCooldown) { // make sure enough time has passed since last peel
                     currentFrame++; // move to the next peel frame
                     banana.setTexture(bananaFrames[currentFrame]);
                     banana.setScale(1);
@@ -99,20 +100,6 @@ export class Peel extends CookTemplate {
             }
         });
 
-        // change cursor to closed hand on pointer down
-        this.input.on('pointerdown', () => {
-            this.input.setDefaultCursor('url(assets/peel/closed_hand.png), pointer');
-        });
-
-        // revert cursor to open hand on pointer up
-        this.input.on('pointerup', () => {
-            this.input.setDefaultCursor('url(assets/peel/open_hand.png), pointer');
-        });
-        
-        // reset cursor to default when scene shuts down
-        this.events.on('shutdown', () => {
-            this.input.setDefaultCursor('default');
-        });
         
     }
 }

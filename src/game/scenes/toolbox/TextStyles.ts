@@ -49,6 +49,14 @@ export class TextStyles{
     //     return new GameObjects.Text(scene, 0, 0, "", TextStyles.styleMap1.get(styleType)).style;
     // }
 
+
+    //change text style for peel n dress up
+    static setTitleStyle(color: string, border: string) {
+        TextStyles.title.color = color;
+        TextStyles.title.stroke = border;
+    }
+
+
     static getTitleStyle(scene: Scene){
         return new GameObjects.Text(scene, 0, 0, "", TextStyles.title).style;
     }
