@@ -10,10 +10,13 @@ export class Peel extends CookTemplate {
     preload() {
         super.preload(); // load any assets from the parent class if needed
 
-        this.load.image('peelBackground', 'assets/peel/Peel_BKG.png'); // load the background image
+        this.load.image('peelBackground', 'assets/peel/Peel_BKG.png'); 
+        this.load.image('openHand', 'assets/peel/open_hand.png'); // open hand image //TODO: make class for cursors??
+        this.load.image('closedHand', 'assets/peel/closed_hand.png'); // closed hand image
+
 
         // load all banana peel images
-        for (let i = 0; i <= 4; i++) {
+        for (let i = 1; i <= 4; i++) {
             this.load.image(`banana${i}`, `assets/peel/bananaPeel${i}.png`);
         }
 
@@ -60,73 +63,56 @@ export class Peel extends CookTemplate {
         dragAnimation.play('dragLoop'); // start the animation
 
         // make the banana image draggable
-        banana.bananaImage.setInteractive();
+        banana.bananaImage.setInteractive({
+            pixelPerfect: true,
+            // useHandCursor: true
+        });
         this.input.setDraggable(banana.bananaImage);
 
         let lastPeelTime = 0; // track the time for peeling cooldown
-        const peelCooldown = 800; // time between peel actions in ms
+        const peelCooldown = 800; // time between peel actions
 
-        // handling the drag event (peeling the banana)
-        // banana.bananaImage.on('drag', (pointer: Phaser.Input.Pointer) => {
-        //     const now = this.time.now;
 
-        //     // only allow peeling if the banana isn't fully peeled yet
-        //     if (pointer.isDown && currentFrame < bananaFrames.length - 1) {
-        //         if (now - lastPeelTime >= peelCooldown) {
-        //             currentFrame++; // move to the next peel frame
-        //             banana.setTexture(bananaFrames[currentFrame]);
-        //             banana.setScale(1); // ensure banana is scaled correctly
+         // default cursor is the open hand when not interacting
+         this.input.setDefaultCursor('url(assets/peel/open_hand.png), pointer');
 
-        //             // stop the drag animation when fully peeled
-        //             if (currentFrame === 4) {
-        //                 dragAnimation.stop();
-        //                 dragAnimation.setVisible(false); // hide the drag animation
-        //                 this.addNextButton(this, 'Split'); // show the next button
-        //             }
-
-        //             lastPeelTime = now; // update last peel time
-        //         }
-        //     }
-        // });
-
-        // Set flag when drag starts
-    this.input.on('dragstart', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        isDraggingBanana = (gameObject === banana.bananaImage);
-        if (isDraggingBanana) {
-            console.log(`Drag started on banana at position: (${pointer.x}, ${pointer.y})`);
-        } else {
-            console.log(`Drag started on another object at position: (${pointer.x}, ${pointer.y})`);
-        }
-    });
-
-    // Reset flag when drag ends
-    this.input.on('dragend', () => {
-        isDraggingBanana = false;
-    });
-
-    // On drag, peel the banana only if it is the banana image being dragged
-    this.input.on('drag', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
-        const now = this.time.now;
-
-        if (isDraggingBanana && pointer.isDown && currentFrame < bananaFrames.length - 1) {
-            if (now - lastPeelTime >= peelCooldown) {
-                currentFrame++;
-                banana.bananaImage.setTexture(bananaFrames[currentFrame]);
-                banana.bananaImage.setScale(1);
-
-                if (currentFrame === 4) {
-                    dragAnimation.stop();
-                    dragAnimation.setVisible(false);
-                    this.addNextButton(this, 'Split');
+        // handle dragging
+        this.input.on('drag', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
+            console.log('Dragging:', (gameObject as Phaser.GameObjects.Image).texture?.key); // debug test
+        
+            const now = this.time.now;
+            if (pointer.isDown && currentFrame < bananaFrames.length - 1) {
+                if (now - lastPeelTime >= peelCooldown) {
+                    currentFrame++; // move to the next peel frame
+                    banana.setTexture(bananaFrames[currentFrame]);
+                    banana.setScale(1);
+        
+                    // stop the drag animation once the banana is fully peeled
+                    if (currentFrame === 4) {
+                        dragAnimation.stop();
+                        dragAnimation.setVisible(false);
+                        this.addNextButton(this, 'Split'); // show next button
+                    }
+        
+                    lastPeelTime = now; // update the last peel time
                 }
-
-                lastPeelTime = now;
             }
-        }
-    });
+        });
 
+        // change cursor to closed hand on pointer down
+        this.input.on('pointerdown', () => {
+            this.input.setDefaultCursor('url(assets/peel/closed_hand.png), pointer');
+        });
 
-
+        // revert cursor to open hand on pointer up
+        this.input.on('pointerup', () => {
+            this.input.setDefaultCursor('url(assets/peel/open_hand.png), pointer');
+        });
+        
+        // reset cursor to default when scene shuts down
+        this.events.on('shutdown', () => {
+            this.input.setDefaultCursor('default');
+        });
         
     }
 }
