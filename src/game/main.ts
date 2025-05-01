@@ -47,8 +47,8 @@ const config: Phaser.Types.Core.GameConfig = {
         Aspirations,
         PhotoShoot,
         DressUp,
-        Peel,
         Wash,
+        Peel,
         Split,
         IceCream,
         Eulogy

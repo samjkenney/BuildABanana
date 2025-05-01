@@ -3,7 +3,9 @@ import { GameObjects, Scene } from 'phaser';
 export class TextStyles{
     static title = {
             fontFamily: "Kitto",
-            color: "#ffffff",
+            color: "#B4E6E7",
+            stroke: "#4FB0B0", 
+            strokeThickness: 6, 
             fontSize: 100,
             align: "center",
             //increase line spacing
