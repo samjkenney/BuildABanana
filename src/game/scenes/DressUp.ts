@@ -4,6 +4,7 @@ import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
 import { Cosmetic } from './toolbox/Cosmetic';
+import { TextButton } from './interactives/TextButton';
 
 export class DressUp extends CustomizationTemplate {
     //TODO: Data Manager -> transfer choices to next scene
@@ -275,8 +276,20 @@ export class DressUp extends CustomizationTemplate {
             
         // });
 
-    
-        //new NextButton(this, 1300, 990, 'Wash');
+        //TODO: IMPLEMENT ZOOM IN ON BANANA HEAD
+        // new button()    
+        // on Next Button click ->
+        // zoom in on the banana forehead
+        // this.scene.tweens.add({
+        //targets     : this ,
+        //scale       : 10
+        //ease        : 'Linear',
+        //duration    : 500,
+        //});
+        //transition to Personality scene
+        //this.scene.start('Personality');
+
+
         this.addNextButton(this, "Wash");
     }
 
