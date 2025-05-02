@@ -24,7 +24,7 @@ export class CharacteristicHandler{
     ];
 
     //TODO: update sizing!
-    PERSONALITIES: Characteristic[] = [
+    static PERSONALITIES: Characteristic[] = [
         new Characteristic("Diva",
             new Cosmetic("assets/personality/personality diva.png", 80, 0, 2),
             "the Banana dreamed of being the first banana to win RuPeel's Drag Race."),
@@ -41,15 +41,16 @@ export class CharacteristicHandler{
             new Cosmetic("assets/personality/personality strong.png", 80, 0, 2),   
             "the Banana dreamed of bunching 450 pounds.")
     ]
+    
     constructor(){  
     }
 
     static getAspirations(){
-        return CharacteristicHandler.ASPIRATIONS;
+        return this.ASPIRATIONS;
     }
 
     static getPersonalities(){
-        return CharacteristicHandler.PERSONALITIES;
+        return this.PERSONALITIES;
     }
 
     
