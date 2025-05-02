@@ -2,10 +2,10 @@ import { Cosmetic } from "./Cosmetic";
 
 export class Characteristic{
     name: string;
-    img: string;
+    img: Cosmetic;
     eulogyEntry: string;
 
-    constructor(name: string, img: string, eulogyEntry: string){
+    constructor(name: string, img: Cosmetic, eulogyEntry: string){
         this.name = name;
         this.img = img;
         this.eulogyEntry = eulogyEntry;

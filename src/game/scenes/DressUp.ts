@@ -81,27 +81,27 @@ export class DressUp extends CustomizationTemplate {
 
         //make arrays of cosmetic image keys
         this.faceArray = [
-            new Cosmetic(this, "DU_Face1", 10, 0, 0.975),
-            new Cosmetic(this, "DU_Face2", 20, 0, 1),
-            new Cosmetic(this, "DU_Face3", 0, 0, 1),
-            new Cosmetic(this, "DU_Face4", 0, 0, 1),
+            new Cosmetic( "DU_Face1", 10, 0, 0.975),
+            new Cosmetic("DU_Face2", 20, 0, 1),
+            new Cosmetic("DU_Face3", 0, 0, 1),
+            new Cosmetic("DU_Face4", 0, 0, 1),
         ];
         // for (let i = 1; i <= 4; i++) {
         //      this.faceArray.push(`DU_Face${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
         // }
 
         this.glassesArray = [
-            new Cosmetic(this, "DU_Glasses1", 10, 0, 1),
-            new Cosmetic(this, "DU_Glasses2", 5, 0, 0.975),
-            new Cosmetic(this, "DU_Glasses3", 10, -190, 1),
-            new Cosmetic(this, "DU_Glasses4", 0, 0, 1),
+            new Cosmetic("DU_Glasses1", 10, 0, 1),
+            new Cosmetic("DU_Glasses2", 5, 0, 0.975),
+            new Cosmetic("DU_Glasses3", 10, -190, 1),
+            new Cosmetic("DU_Glasses4", 0, 0, 1),
         ];
 
         this.shirtArray = [
-            new Cosmetic(this, "DU_Shirt1", 0, 0, 1),
-            new Cosmetic(this, "DU_Shirt2", 0, 0, 1),
-            new Cosmetic(this, "DU_Shirt3", 20, 0, 1),
-            new Cosmetic(this, "DU_Shirt4", 0, 0, 1),
+            new Cosmetic("DU_Shirt1", 0, 0, 1),
+            new Cosmetic("DU_Shirt2", 0, 0, 1),
+            new Cosmetic("DU_Shirt3", 20, 0, 1),
+            new Cosmetic("DU_Shirt4", 0, 0, 1),
         ];
     
 
