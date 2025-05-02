@@ -5,7 +5,7 @@ import { Banana } from '../toolbox/Banana';
 import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class IconButton extends ImageButton{
-    private static COLOR = 0xff0000; //make constant?
+    private static COLOR = 0xfeeaed; //make constant?
     private WIDTH: number; //make constant?
     private HEIGHT: number; //make constant?
 

@@ -9,7 +9,7 @@ export class Cosmetic{
     scale =  Banana.SCALE;
     image: GameObjects.Image;
 
-    constructor(scene: Scene, imageKey: string, xFromCenter: number, yFromCenter: number, scale: number){
+    constructor(imageKey: string, xFromCenter: number, yFromCenter: number, scale: number){
         this.imageKey = imageKey;
         this.x += xFromCenter;
         this.y += yFromCenter;

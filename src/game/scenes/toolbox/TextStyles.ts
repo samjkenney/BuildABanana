@@ -3,7 +3,9 @@ import { GameObjects, Scene } from 'phaser';
 export class TextStyles{
     static title = {
             fontFamily: "Kitto",
-            color: "#ffffff",
+            color: "#B4E6E7",
+            stroke: "#4FB0B0", 
+            strokeThickness: 6, 
             fontSize: 100,
             align: "center",
             //increase line spacing
@@ -46,6 +48,14 @@ export class TextStyles{
     // static getStyle(scene: Scene, styleType: string){
     //     return new GameObjects.Text(scene, 0, 0, "", TextStyles.styleMap1.get(styleType)).style;
     // }
+
+
+    //change text style for peel n dress up
+    static setTitleStyle(color: string, border: string) {
+        TextStyles.title.color = color;
+        TextStyles.title.stroke = border;
+    }
+
 
     static getTitleStyle(scene: Scene){
         return new GameObjects.Text(scene, 0, 0, "", TextStyles.title).style;
