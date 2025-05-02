@@ -10,8 +10,8 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     protected selected = false;
     protected backgroundGraphics;
     private color: number; //necessary?
-    private selectedColor: number = 0x0000ff;
-    private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
+    private selectedColor: number = 0xc5d7d7;
+    private static TINT: number = 0xffabb5; //make constant, move to different types of buttons?
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
 
     //protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?

@@ -6,7 +6,7 @@ import { IconButton } from './IconButton';
 import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
-    private static COLOR = 0xff0000; //make constant?
+    private static COLOR = 0xfa94a9; //make constant?
     private static CLICKCOLOR = 0xffffff; //change to use Button selectedColor
     //color: number;
     private WIDTH: number; //make constant?
