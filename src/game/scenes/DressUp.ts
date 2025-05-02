@@ -112,6 +112,8 @@ export class DressUp extends CustomizationTemplate {
         for(var i = 0; i < categories.length; i++){
             buttonList[i].setSelectOne(buttonList);
         }
+
+        buttonList[0].selectCategory();
        
         
         //TODO: IMPLEMENT ZOOM IN ON BANANA HEAD
