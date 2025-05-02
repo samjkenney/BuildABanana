@@ -57,7 +57,7 @@ export class DressUp extends CustomizationTemplate {
     create() {
         this.customizationLoader(this);
 
-        //create containers
+        //create containers, move to function
         this.cosmeticContainer = new GameObjects.Container(this, 0, this.getTitle().height + this.MENUBORDER);
         this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER); //make calculateSize method?
         this.getMenuContainer().add(this.cosmeticContainer);
@@ -81,7 +81,7 @@ export class DressUp extends CustomizationTemplate {
 
         //make arrays of cosmetic image keys
         this.faceArray = [
-            new Cosmetic( "DU_Face1", 10, 0, 0.975),
+            new Cosmetic("DU_Face1", 10, 0, 0.975),
             new Cosmetic("DU_Face2", 20, 0, 1),
             new Cosmetic("DU_Face3", 0, 0, 1),
             new Cosmetic("DU_Face4", 0, 0, 1),

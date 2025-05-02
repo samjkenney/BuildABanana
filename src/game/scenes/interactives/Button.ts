@@ -13,6 +13,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     private selectedColor: number = 0x0000ff;
     private static TINT: number = 0xe58da6; //make constant, move to different types of buttons?
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
+    protected transparent = 1; //0 transparent, 1 not
 
     //protected static CORNERRADIUS: number = 20; //make constant, make private, not static to later access, set (button styles, customization category tabs, etc.)?
     protected cornerRadius: number;
@@ -86,7 +87,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
                 if(this.staySelected){
                     this.buttonList.forEach(button => {
                         button.selected = false;
-                        this.selected = true;
+                        this.selected = true; //stays selected if transparent background
                         button.updateButton();
                     });
                 }
@@ -114,7 +115,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.backgroundGraphics.fillStyle(0xffffff, 0);
         }
         else{
-            this.backgroundGraphics.fillStyle(color, 1); //move to method?
+            this.backgroundGraphics.fillStyle(color, this.transparent); //move to method?
         }
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
@@ -168,6 +169,12 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         //clear old rectangle?
         this.color = color;
         this.addRectangle(color);
+    }
+
+    setTransparent(){
+        console.log("hmmm");
+        this.transparent = 0;
+        this.updateButton();
     }
 
     protected setSelected(selected: boolean){

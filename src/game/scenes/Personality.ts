@@ -1,7 +1,7 @@
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
-import { TextButton } from "./interactives/TextButton";
+import { ImageButton } from "./interactives/ImageButton";
 import { CategoryButton } from "./interactives/CategoryButton";
 
 export class Personality extends CustomizationTemplate{
@@ -25,6 +25,16 @@ export class Personality extends CustomizationTemplate{
     }
 
     preload(){
+        for (let i = 1; i <= 5; i++) {
+            this.load.image(`Personality menu ${i}`, `assets/personality/personality menu ${i}.png`);
+            this.load.image(`Personality label ${i}`, `assets/personality/personality label ${i}.png`);
+        }
+        
+        this.load.image("diva", "assets/personality/personality diva.png")
+        this.load.image("flexible", "assets/personality/personality flexible.png")
+        this.load.image("geni", "assets/personality/personality diva.png")
+        this.load.image("diva", "assets/personality/personality diva.png")
+        this.load.image("diva", "assets/personality/personality diva.png")
     }
 
     create(){
@@ -47,7 +57,66 @@ export class Personality extends CustomizationTemplate{
         //     super.getMenuContainer().add(button);
         // }
 
+        //Positioning, TODO: Make it an Array instead???
+        var h = 150;
+        var buttonWidth = 200
+        var center = this.MENUWIDTH / 2 - buttonWidth / 2;
+        var yStart = 0;
+        const positions = [ //some math way to calculate in loop????
+                { x: center, y: yStart}, //1 (top)
+                { x: center + (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))}, //2 (bottom right)
+                { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //3 (top right)
+                { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)) - h, y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //4 (top left)
+                { x: center - (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))} //5 (bottom left)
+                // { x: 1000, y: 600 }, //1 (top)
+                // { x: 1020, y: 610 }, //2 (right)
+                // { x: 1013, y: 630 }, //3 (right bottom)
+                // { x: 987, y: 630 }, //4 (left bottom)
+                // { x: 980, y: 610 } //5 left
+            ];
+        this.createMenu(positions);
+
         super.addNextButton(this, "Aspirations"); //don't need to use super (can use "this")?
         super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
     }
+
+        private createMenu(positions: { x: number, y: number }[]){
+            //const buttons: Phaser.GameObjects.Image[] = [];
+            let currentButton: Phaser.GameObjects.Image | null = null;
+
+            for (let i = 1; i <= 5; i++) {
+                var button = new ImageButton(this, positions[i - 1].x, positions[i - 1].y, 300, 300, 0x0000ff, `Personality menu ${i}`, false, () => console.log("huh"));
+                button.setTransparent();
+                this.add.existing(button);
+                this.menuContainer.add(button);
+                // const button = this.add.image(positions[i - 1].x, positions[i - 1].y, `Personality menu ${i}`);
+                // button.setInteractive({ pixelPerfect: true }).setScale(0.7); //make image buttons, set not interactive (just image is interactive?)
+                
+                // button.on('pointerdown', () => {
+
+
+                //     if (currentButton) {
+                //         currentButton.clearTint();
+                //     }
+                //     button.setTint(0xe1a8a0);
+                //     currentButton = button;
+                // });
+
+                // var label: GameObjects.Image;
+                // button.on('pointerover', () => {
+                //     button.setTint(0xe1a8a0);
+                //     //button.setScale(0.9);
+                //     label = this.add.image(positions[i - 1].x, positions[i - 1].y, `Personality label ${i}`);
+                //     label.setScale(0.7)
+                // });
+
+                // button.on('pointerout', () => {
+                //     button.clearTint();
+                //     //buton.setScale(0.7);
+                //     label.setVisible(false); //destroy?
+                // });
+                //buttons.push(button);
+            }
+        };
+
 }
