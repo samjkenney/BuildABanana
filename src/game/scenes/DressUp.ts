@@ -4,6 +4,7 @@ import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
 import { Cosmetic } from './toolbox/Cosmetic';
+import { TextButton } from './interactives/TextButton';
 
 export class DressUp extends CustomizationTemplate {
     //TODO: Data Manager -> transfer choices to next scene
@@ -11,9 +12,7 @@ export class DressUp extends CustomizationTemplate {
     private categoryContainer: GameObjects.Container;
     private iconContainer: GameObjects.Container;
 
-    // private faceArray: string[];
-    // private glassesArray: string[];
-    // private shirtArray: string[];
+
     private faceArray: Cosmetic[];
     private glassesArray: Cosmetic[];
     private shirtArray: Cosmetic[];
@@ -61,40 +60,32 @@ export class DressUp extends CustomizationTemplate {
         this.cosmeticContainer = new GameObjects.Container(this, 0, this.getTitle().height + this.MENUBORDER);
         this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER); //make calculateSize method?
         this.getMenuContainer().add(this.cosmeticContainer);
-        //debugging
-        if(this.debug){
-            this.cosmeticContainer.add(this.add.graphics().fillStyle(0x004400, 1).fillRect(0, 0, this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER));
-        }
+
 
         this.categoryContainer = new GameObjects.Container(this, 0, 0);
         this.categoryContainer.setSize(this.cosmeticContainer.width * 0.25, this.cosmeticContainer.height);
         this.cosmeticContainer.add(this.categoryContainer);
-        //debugging
-        if(this.debug){
-            this.categoryContainer.add(this.add.graphics().fillStyle(0x008800, 1).fillRect(0, 0, this.cosmeticContainer.width * 0.25, this.cosmeticContainer.height));
-        }
+    
 
         this.iconContainer = new GameObjects.Container(this, this.categoryContainer.width, 0);
         this.iconContainer.setSize(this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height);
         this.cosmeticContainer.add(this.iconContainer);
-        this.iconContainer.add(this.add.graphics().fillStyle(0xffffff, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
+        this.iconContainer.add(this.add.graphics().fillStyle(0xffc9d2, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
 
         //make arrays of cosmetic image keys
         this.faceArray = [
-            new Cosmetic("DU_Face1", 10, 0, 0.975),
-            new Cosmetic("DU_Face2", 20, 0, 1),
-            new Cosmetic("DU_Face3", 0, 0, 1),
-            new Cosmetic("DU_Face4", 0, 0, 1),
+            new Cosmetic( "DU_Face1", 185, 0, 0.975),
+            new Cosmetic("DU_Face2", 200, 0, 1),
+            new Cosmetic("DU_Face3", 195, 0, 1.1),
+            new Cosmetic("DU_Face4", 180, 0, 1),
         ];
-        // for (let i = 1; i <= 4; i++) {
-        //      this.faceArray.push(`DU_Face${i}`); //change to defined array at start (so don't have to calculate image key, can just loop over array)?
-        // }
+      
 
         this.glassesArray = [
-            new Cosmetic("DU_Glasses1", 10, 0, 1),
-            new Cosmetic("DU_Glasses2", 5, 0, 0.975),
-            new Cosmetic("DU_Glasses3", 10, -190, 1),
-            new Cosmetic("DU_Glasses4", 0, 0, 1),
+            new Cosmetic("DU_Glasses1", 180, -220, 1),
+            new Cosmetic("DU_Glasses2", 175, -220, 0.975),
+            new Cosmetic("DU_Glasses3", 180, -220, 1),
+            new Cosmetic("DU_Glasses4", 170, -220, 1),
         ];
 
         this.shirtArray = [
@@ -122,52 +113,24 @@ export class DressUp extends CustomizationTemplate {
             buttonList[i].setSelectOne(buttonList);
         }
        
-        //Maps for Image
+        
+        //TODO: IMPLEMENT ZOOM IN ON BANANA HEAD
+        // new button()    
+        // on Next Button click ->
+        // zoom in on the banana forehead
+        // this.scene.tweens.add({
+        //targets     : this ,
+        //scale       : 10
+        //ease        : 'Linear',
+        //duration    : 500,
+        //});
+        //transition to Personality scene
+        //this.scene.start('Personality');
 
-        this.imageMap = {
-            'Face1': this.add.image(450, 714, 'DU_Face1').setVisible(false).setScale(0.65),
-            'Face2': this.add.image(450, 714, 'DU_Face2').setVisible(false).setScale(0.65),
-            'Face3': this.add.image(450, 714, 'DU_Face3').setVisible(false).setScale(0.65),
-            'Face4': this.add.image(450, 714, 'DU_Face4').setVisible(false).setScale(0.65),
 
-            'Glasses1': this.add.image(450, 714, 'DU_Glasses1').setVisible(false).setScale(0.65),
-            'Glasses2': this.add.image(450, 714, 'DU_Glasses2').setVisible(false).setScale(0.65),
-            'Glasses3': this.add.image(450, 714, 'DU_Glasses3').setVisible(false).setScale(0.65),
-            'Glasses4': this.add.image(450, 714, 'DU_Glasses4').setVisible(false).setScale(0.65),
-
-            'Shirt1': this.add.image(450, 714, 'DU_Shirt1').setVisible(false).setScale(0.65),
-            'Shirt2': this.add.image(450, 714, 'DU_Shirt2').setVisible(false).setScale(0.65),
-            'Shirt3': this.add.image(450, 714, 'DU_Shirt3').setVisible(false).setScale(0.65),
-            'Shirt4': this.add.image(450, 714, 'DU_Shirt4').setVisible(false).setScale(0.65)
-        };
-
-        this.registry.set("imageMap", this.imageMap);
-
-    
-        //new NextButton(this, 1300, 990, 'Wash');
         this.addNextButton(this, "Wash");
     }
 
    
-    //put cosmetic on banana
-    // private toggleImage(imageKey: string) { //passes in category and number ("Face1")
-    //     const category = imageKey.match(/[a-zA-Z]+/g)?.[0]; //get category ("Face")
-    //     var cosmetic = category + "Cosmetic";
-    //     if (!category) return;
-
-    //     for (const key in this.imageMap) { //loop through all items in imageMap
-    //         if (key.startsWith(category)) {
-    //             this.imageMap[key].setVisible(false); //hide all cosmetics in category
-    //         }
-    //     }
-
-    //     //show selected cosmetic
-    //     if (this.imageMap[imageKey]) { //check if null
-    //         this.imageMap[imageKey].setVisible(true); //find selected image in imageMap, set visible
-    //     }
-
-    //     this.registry.set(cosmetic, "DU_" + imageKey);
-    //     // console.log(this.registry.get(category.toLowerCase()));
-       
-    // }
+  
 }
