@@ -5,7 +5,7 @@ import { Cosmetic } from "./Cosmetic";
 import { Aspirations } from "../Aspirations";
 
 export class CharacteristicHandler{
-    ASPIRATIONS: Characteristic[] = [
+    static ASPIRATIONS: Characteristic[] = [
         new Characteristic("Cooties Doctor",
              new Cosmetic("assets/aspirations/Cosmetic Cooties Doctor.png", 120, 0, 1.875), 
               "the Banana would have cured ten million bananas from cooties."),
@@ -44,12 +44,12 @@ export class CharacteristicHandler{
     constructor(){  
     }
 
-    getAspirations(){
-        return this.ASPIRATIONS;
+    static getAspirations(){
+        return CharacteristicHandler.ASPIRATIONS;
     }
 
-    getPersonalities(){
-        return this.PERSONALITIES;
+    static getPersonalities(){
+        return CharacteristicHandler.PERSONALITIES;
     }
 
     
