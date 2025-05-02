@@ -3,11 +3,13 @@ import { Cosmetic } from "./Cosmetic";
 export class Characteristic{
     name: string;
     img: string;
+    reactionCosmetic: Cosmetic;
     eulogyEntry: string;
 
-    constructor(name: string, img: string, eulogyEntry: string){
+    constructor(name: string, imgKey: string, reactionCosmetic: Cosmetic, eulogyEntry: string){
         this.name = name;
-        this.img = img;
+        this.img = imgKey;
+        this.reactionCosmetic = reactionCosmetic;
         this.eulogyEntry = eulogyEntry;
     }
 
@@ -15,8 +17,12 @@ export class Characteristic{
         return this.name;
     }
 
-    getImage(){
+    getImageKey(){
         return this.img;
+    }
+
+    getReactionCosmetic(){
+        return this.reactionCosmetic;
     }
 
     getEulogyEntry(){

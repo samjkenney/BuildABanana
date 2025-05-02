@@ -44,9 +44,9 @@ export class Banana{
         //this.bananaImage = currentScene.add.image(x, y, 'banana'); 
         //this.bananaImage.setScale(0.65);  
         //this.bananaImage.setInteractive();
-        this.defaultFaceCosmetic = new Cosmetic(currentScene, "defaultFace", 100, 100, 1.4);
-        this.noGlassesCosmetic = new Cosmetic(currentScene, "defaultFace", 0, 0, 1); //add defaults
-        this.noShirtCosmetic = new Cosmetic(currentScene, "defaultFace", 0, 0, 1);
+        this.defaultFaceCosmetic = new Cosmetic("defaultFace", 100, 100, 1.4);
+        this.noGlassesCosmetic = new Cosmetic("defaultFace", 0, 0, 1); //add defaults
+        this.noShirtCosmetic = new Cosmetic("defaultFace", 0, 0, 1);
         this.faceCosmetic = this.defaultFaceCosmetic;
         this.glassesCosmetic = this.noGlassesCosmetic;
         this.shirtCosmetic = this.noShirtCosmetic;

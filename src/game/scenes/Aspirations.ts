@@ -2,6 +2,7 @@ import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
 import { Banana } from './toolbox/Banana';
+import { CharacteristicHandler } from './toolbox/CharacteristicHandler';
 import { Cosmetic } from "./toolbox/Cosmetic";
 import { TextButton } from "./interactives/TextButton";
 
@@ -13,18 +14,18 @@ export class Aspirations extends CustomizationTemplate{
     private BUTTONHEIGHT: number;
     private COLOR = 0xff0000;
 
-    private aspirations: Map<string, any>[] = [
-        // {aspiration: "Cooties Doctor", imageKey: "cooties doctor"},
-        // {aspiration: "A-peel Lawyer", imageKey: "appeal lawyer"},
-        // {aspiration: "Computer Science Professor", imageKey: "computer science professor"},
-        // {aspiration: "Banana Foster Parent", imageKey: "banana foster parent"},
-        // {aspiration: "Modern Artist", imageKey: "modern artist"}
-        new Map([["aspiration", "Cooties Doctor"]]),
-        new Map([["aspiration", "A-peel Lawyer"]]),
-        new Map([["aspiration", "Computer Science Professor"]]),
-        new Map([["aspiration", "Banana Foster Parent"]]),
-        new Map([["aspiration", "Modern Artist"]])
-    ];
+    // private aspirations: Map<string, any>[] = [
+    //     // {aspiration: "Cooties Doctor", imageKey: "cooties doctor"},
+    //     // {aspiration: "A-peel Lawyer", imageKey: "appeal lawyer"},
+    //     // {aspiration: "Computer Science Professor", imageKey: "computer science professor"},
+    //     // {aspiration: "Banana Foster Parent", imageKey: "banana foster parent"},
+    //     // {aspiration: "Modern Artist", imageKey: "modern artist"}
+    //     new Map([["aspiration", "Cooties Doctor"]]),
+    //     new Map([["aspiration", "A-peel Lawyer"]]),
+    //     new Map([["aspiration", "Computer Science Professor"]]),
+    //     new Map([["aspiration", "Banana Foster Parent"]]),
+    //     new Map([["aspiration", "Modern Artist"]])
+    // ];
     private selected = false; //get from registry (so can go back and keep selected button)
 
     constructor(){
@@ -44,54 +45,48 @@ export class Aspirations extends CustomizationTemplate{
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
-        this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
-
-        var appealLawyer = new Cosmetic(this, "appeal lawyer", 80, 0, 2);
-        var bananaFosterParent = new Cosmetic(this, "banana foster parent", 90, -100, 1.875);
-        var computerScienceProfessor = new Cosmetic(this, "computer science professor", 80, 0, 1.5);
-        var cootiesDoctor = new Cosmetic(this, "cooties doctor", 120, 0, 1.875);
-        var modernArtist = new Cosmetic(this, "modern artist", 50, -20, 2);
+        this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getAspirations().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getAspirations().length;
 
         //add button actions to aspiration maps
         //var banana = this.registry.get("banana");
-        this.aspirations[0].set("reaction", () => {
+        var action = () => {
                 this.selected = true;
-                this.flashImage(cootiesDoctor);
+                //this.flashImage(CharacteristicHandler.getAspirations());
                 this.addNextButton(this, "PhotoShoot");
-            });
-        this.aspirations[1].set("reaction", () => {
-                this.selected = true;
-                this.flashImage(appealLawyer);
-                this.addNextButton(this, "PhotoShoot");
-            });
-        this.aspirations[2].set("reaction", () => {
-                this.selected = true;
-                this.flashImage(computerScienceProfessor);
-                this.addNextButton(this, "PhotoShoot");
-            });
-        this.aspirations[3].set("reaction", () => {
-                this.selected = true;
-                this.flashImage(bananaFosterParent);
-                this.addNextButton(this, "PhotoShoot");
-            });
-        this.aspirations[4].set("reaction", () => {
-                this.selected = true;
-                this.flashImage(modernArtist);
-                this.addNextButton(this, "PhotoShoot");
-            });
+            };
+        // this.aspirations[1].set("reaction", () => {
+        //         this.selected = true;
+        //         this.flashImage(appealLawyer);
+        //         this.addNextButton(this, "PhotoShoot");
+        //     });
+        // this.aspirations[2].set("reaction", () => {
+        //         this.selected = true;
+        //         this.flashImage(computerScienceProfessor);
+        //         this.addNextButton(this, "PhotoShoot");
+        //     });
+        // this.aspirations[3].set("reaction", () => {
+        //         this.selected = true;
+        //         this.flashImage(bananaFosterParent);
+        //         this.addNextButton(this, "PhotoShoot");
+        //     });
+        // this.aspirations[4].set("reaction", () => {
+        //         this.selected = true;
+        //         this.flashImage(modernArtist);
+        //         this.addNextButton(this, "PhotoShoot");
+        //     });
 
         //add aspiration menu
         var buttonList = [];
-        for(var i = 0; i < this.aspirations.length; i++){
+        for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
 
             //add menu button
-            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.aspirations[i].get("aspiration"), TextStyles.getButtonStyle(this), true, true, this.aspirations[i].get("reaction"));
+            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             buttonList.push(button);
             this.menuContainer.add(button);
         };
 
-        for(var i = 0; i < this.aspirations.length; i++){
+        for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             buttonList[i].setSelectOne(buttonList);
         }
 
