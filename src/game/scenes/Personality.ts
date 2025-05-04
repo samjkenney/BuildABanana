@@ -52,7 +52,6 @@ export class Personality extends CustomizationTemplate{
 
         this.createMenu();
 
-        super.addNextButton(this, "Aspirations"); //don't need to use super (can use "this")?
         super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
     }
 
