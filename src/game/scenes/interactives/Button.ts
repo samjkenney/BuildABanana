@@ -55,7 +55,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.originalX = this.x;
             this.originalY = this.y;
             //clear old rectangle
-            if(this.color !== 0){
+            if(this.color !== 0){ //only if not selected
                 this.addRectangle(Button.TINT); //use setTint?
             }
             if(scaleOnHover){
@@ -156,7 +156,6 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     private selectOne(buttonList: Button[]){ //remove selectedButton
         buttonList.forEach(button => {
             button.setSelected(false);
-            button.updateButton();
         });
 
         this.selected = true;
@@ -182,8 +181,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.updateButton();
     }
 
-    protected setSelected(selected: boolean){
+    setSelected(selected: boolean){ //make protected?
         this.selected = selected;
+        this.updateButton();
     }
 
     // protected updateSize(width: number, height: number, buttonContent: GameObjects.Text | GameObjects.Image){ //make replace Container setSize method?

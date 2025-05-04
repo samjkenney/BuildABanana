@@ -112,6 +112,7 @@ export class DressUp extends CustomizationTemplate {
             buttonList[i].setSelectOne(buttonList);
         }
 
+        buttonList[0].setSelected(true);
         buttonList[0].selectCategory();
        
         
