@@ -40,52 +40,32 @@ export class Aspirations extends CustomizationTemplate{
 
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getAspirations().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getAspirations().length;
 
-        var action = () => {
+        //add aspiration menu
+        var actions = new Map;
+        var buttonList = [];
+        for(let i = 0; i < CharacteristicHandler.getAspirations().length; i++){
+            var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
+            var action = () => {
                 this.selected = true;
-                //this.flashImage(CharacteristicHandler.getAspirations());
+                actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getAspirations()[i].getReactionCosmetic()));
                 this.addNextButton(this, "PhotoShoot");
             };
-        // this.aspirations[1].set("reaction", () => {
-        //         this.selected = true;
-        //         this.flashImage(appealLawyer);
-        //         this.addNextButton(this, "PhotoShoot");
-        //     });
-        // this.aspirations[2].set("reaction", () => {
-        //         this.selected = true;
-        //         this.flashImage(computerScienceProfessor);
-        //         this.addNextButton(this, "PhotoShoot");
-        //     });
-        // this.aspirations[3].set("reaction", () => {
-        //         this.selected = true;
-        //         this.flashImage(bananaFosterParent);
-        //         this.addNextButton(this, "PhotoShoot");
-        //     });
-        // this.aspirations[4].set("reaction", () => {
-        //         this.selected = true;
-        //         this.flashImage(modernArtist);
-        //         this.addNextButton(this, "PhotoShoot");
-        //     });
-
-        //add aspiration menu
-        var buttonList = [];
-        for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
-            var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
 
             //add menu button
             var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
-            button.setTransparent();
+            //button.setTransparent();
             buttonList.push(button);
             this.menuContainer.add(button);
         };
 
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             buttonList[i].setSelectOne(buttonList);
-        }
+        };
 
         super.addBackButton(this, "Personality");
     }
 
-    private flashImage(cosmetic: Cosmetic){
+    private flashCosmetic(cosmetic: Cosmetic){
         var banana: Banana = this.registry.get("banana");
         this.time.delayedCall(400, () => {banana.addCosmetic(this, cosmetic, this.bananaContainer)});
         this.time.delayedCall(600, () => {banana.removeCosmetic(cosmetic, this.bananaContainer)});

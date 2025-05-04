@@ -80,7 +80,6 @@ export class DressUp extends CustomizationTemplate {
             new Cosmetic("DU_Face4", 180, 0, 1),
         ];
       
-
         this.glassesArray = [
             new Cosmetic("DU_Glasses1", 180, -220, 1),
             new Cosmetic("DU_Glasses2", 175, -220, 0.975),

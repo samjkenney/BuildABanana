@@ -7,19 +7,19 @@ import { Aspirations } from "../Aspirations";
 export class CharacteristicHandler{
     static ASPIRATIONS: Characteristic[] = [
         new Characteristic("Cooties Doctor",
-             new Cosmetic("assets/aspirations/Cosmetic Cooties Doctor.png", 120, 0, 1.875), 
+             new Cosmetic("cooties doctor", 120, 0, 1.875), 
               "the Banana would have cured ten million bananas from cooties."),
         new Characteristic("A-peel Lawyer",
-             new Cosmetic("assets/aspirations/Cosmetic Appeal Lawyer.png", 80, 0, 2),  
+             new Cosmetic("appeal lawyer", 80, 0, 2),  
             "the Banana would have overturned an unfair ruling in the Supreme Court."),
         new Characteristic("Computer Science Professor",
-             new Cosmetic ("assets/aspirations/Cosmetic Compsci Professor.png", 80, 0, 1.5),   
+             new Cosmetic ("computer science professor", 80, 0, 1.5),   
              "the Banana would have made an awesome game about build ing bonsai trees."),
         new Characteristic("Banana Foster Parent",
-             new Cosmetic("assets/aspirations/Cosmetic Banana Foster Parent.png", 90, -100, 1.875),    
+             new Cosmetic("banana foster parent", 90, -100, 1.875),    
              "the Banana would have given a bunch of bananas a loving home."),
         new Characteristic("Modern Artist",
-             new Cosmetic("assets/aspirations/Cosmetic Modern Artist.png", 50, -20, 2),  
+             new Cosmetic("modern artist", 50, -20, 2),  
              "the Banana would have sold millions of dollars worth of duct tape art.")
     ];
 
