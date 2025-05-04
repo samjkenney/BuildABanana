@@ -86,6 +86,11 @@ export class CategoryButton extends ImageButton{
         //}
     }
 
+    // to fix the bug of not starting in  the face category
+    public selectCategory() {
+        this.createIconButtons(this.scene, this.iconContainer, this.bananaContainer);
+    }
+
 
 
     // getSelected(){ //remove
