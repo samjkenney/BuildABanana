@@ -15,10 +15,6 @@ export class Aspirations extends CustomizationTemplate{
     private BUTTONHEIGHT: number;
     private COLOR = 0xff0000;
 
-    private aspirations: Characteristic[] = CharacteristicHandler.getAspirations();
-       
-    private selected = false; //get from registry (so can go back and keep selected button)
-
     constructor(){
         super("Aspirations", "Choose an\naspiration!", "labBackground");
     }
@@ -36,22 +32,25 @@ export class Aspirations extends CustomizationTemplate{
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
-        this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((this.aspirations.length - 1) * this.MENUHALFBORDER)) / this.aspirations.length;
-
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getAspirations().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getAspirations().length;
 
-        //add aspiration menu
+        this.createMenu();
+
+        super.addBackButton(this, "Personality");
+    }
+
+    private createMenu(){
+        //create buttons
         var actions = new Map;
         var buttonList = [];
         for(let i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
-                this.selected = true;
                 actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getAspirations()[i].getReactionCosmetic()));
                 this.addNextButton(this, "PhotoShoot");
             };
 
-            //add menu button
+            //add button
             var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             //button.setTransparent();
             buttonList.push(button);
@@ -61,11 +60,9 @@ export class Aspirations extends CustomizationTemplate{
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             buttonList[i].setSelectOne(buttonList);
         };
-
-        super.addBackButton(this, "Personality");
     }
 
-    private flashCosmetic(cosmetic: Cosmetic){
+    private flashCosmetic(cosmetic: Cosmetic){ //move to banana?
         var banana: Banana = this.registry.get("banana");
         this.time.delayedCall(400, () => {banana.addCosmetic(this, cosmetic, this.bananaContainer)});
         this.time.delayedCall(600, () => {banana.removeCosmetic(cosmetic, this.bananaContainer)});

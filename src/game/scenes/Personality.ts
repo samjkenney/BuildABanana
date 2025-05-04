@@ -1,8 +1,12 @@
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';
+import { Banana } from './toolbox/Banana';
+import { Cosmetic } from "./toolbox/Cosmetic";
 import { ImageButton } from "./interactives/ImageButton";
-import { CategoryButton } from "./interactives/CategoryButton";
+import { TextButton } from "./interactives/TextButton";
+import { CharacteristicHandler } from './toolbox/CharacteristicHandler';
+import { Characteristic } from './toolbox/Characteristic';
 
 export class Personality extends CustomizationTemplate{
     //horizontal: 10% border, 40% banana, 10% border, 30% menu, 10% border
@@ -12,13 +16,13 @@ export class Personality extends CustomizationTemplate{
     private MENUHALFBORDER: number;
     private BUTTONHEIGHT: number;
     private BUTTONWIDTH: number;
-    private COLOR = 0x000000;
+    private COLOR = 0xff0000;
 
-    private personalities: string[] = [
-        "1",
-        "2",
-        "3"
-    ]
+    // private personalities: string[] = [
+    //     "1",
+    //     "2",
+    //     "3"
+    // ];
 
     constructor(){
         super("Personality", "Pick a\npersonality!", "labBackground");
@@ -28,13 +32,13 @@ export class Personality extends CustomizationTemplate{
         for (let i = 1; i <= 5; i++) {
             this.load.image(`Personality menu ${i}`, `assets/personality/personality menu ${i}.png`);
             this.load.image(`Personality label ${i}`, `assets/personality/personality label ${i}.png`);
-        }
+        };
         
-        this.load.image("diva", "assets/personality/personality diva.png")
-        this.load.image("flexible", "assets/personality/personality flexible.png")
-        this.load.image("geni", "assets/personality/personality diva.png")
-        this.load.image("diva", "assets/personality/personality diva.png")
-        this.load.image("diva", "assets/personality/personality diva.png")
+        this.load.image("diva", "assets/personality/personality diva.png");
+        this.load.image("flexible", "assets/personality/personality flexible.png");
+        this.load.image("genius", "assets/personality/personality genius.png");
+        this.load.image("honest", "assets/personality/personality honest.png");
+        this.load.image("strong", "assets/personality/personality strong.png");
     }
 
     create(){
@@ -42,53 +46,78 @@ export class Personality extends CustomizationTemplate{
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().width * 0.05;
-        this.BUTTONWIDTH = (super.getMenuContainer().width - ((this.personalities.length - 1) * this.MENUHALFBORDER)) / this.personalities.length;
-        this.BUTTONHEIGHT = super.getMenuContainer().height * 0.8;
+        //this.BUTTONWIDTH = (super.getMenuContainer().width - ((this.personalities.length - 1) * this.MENUHALFBORDER)) / this.personalities.length;
+        //this.BUTTONHEIGHT = super.getMenuContainer().height * 0.8;
+        this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getPersonalities().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getPersonalities().length;
 
-        // //add personality menu
-        // for(var i = 0; i < this.personalities.length; i++){
-        //     var buttonY = super.getMenuContainer().height - super.getTitle().height - super.getMenuBorder() + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
-        //     var action = () => {
-        //         console.log(this.personalities[i]); //action, save array value to reusable variable?
-        //     };
-
-        //     //add menu button
-        //     var button = new TextButton(this, 0, buttonY, super.getMenuContainer().width, this.BUTTONHEIGHT, this.COLOR, this.personalities[i], TextStyles.getButtonStyle(this), true, true, action);
-        //     super.getMenuContainer().add(button);
-        // }
-
-        //Positioning, TODO: Make it an Array instead???
-        var h = 150;
-        var buttonWidth = 200
-        var center = this.MENUWIDTH / 2 - buttonWidth / 2;
-        var yStart = 0;
-        const positions = [ //some math way to calculate in loop????
-                { x: center, y: yStart}, //1 (top)
-                { x: center + (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))}, //2 (bottom right)
-                { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //3 (top right)
-                { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)) - h, y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //4 (top left)
-                { x: center - (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))} //5 (bottom left)
-                // { x: 1000, y: 600 }, //1 (top)
-                // { x: 1020, y: 610 }, //2 (right)
-                // { x: 1013, y: 630 }, //3 (right bottom)
-                // { x: 987, y: 630 }, //4 (left bottom)
-                // { x: 980, y: 610 } //5 left
-            ];
-        this.createMenu(positions);
+        this.createMenu();
 
         super.addNextButton(this, "Aspirations"); //don't need to use super (can use "this")?
         super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
     }
 
-        private createMenu(positions: { x: number, y: number }[]){
-            //const buttons: Phaser.GameObjects.Image[] = [];
-            let currentButton: Phaser.GameObjects.Image | null = null;
+    private createMenu(){
+        //create buttons
+        var actions = new Map;
+        var buttonList = [];
+        for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
+            var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
+            var action = () => {
+                actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic()));
+                this.addNextButton(this, "Aspirations");
+            };
 
-            for (let i = 1; i <= 5; i++) {
-                var button = new ImageButton(this, positions[i - 1].x, positions[i - 1].y, 300, 300, 0x0000ff, `Personality menu ${i}`, false, () => console.log("huh"));
-                button.setTransparent();
-                this.add.existing(button);
-                this.menuContainer.add(button);
+            //add button
+            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
+            //button.setTransparent();
+            buttonList.push(button);
+            this.menuContainer.add(button);
+        };
+
+        for(var i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
+            buttonList[i].setSelectOne(buttonList);
+        };
+    }
+
+    private createMenu1(){
+        //Pentagon positioning
+        var h = 150;
+        var buttonWidth = 300
+        var center = this.MENUWIDTH / 2 - buttonWidth / 2;
+        var yStart = this.getTitle().height + this.MENUBORDER;
+        const positions = [ //some math way to calculate in loop????
+            { x: center, y: yStart}, //1 (top)
+            { x: center + (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))}, //2 (bottom right)
+            { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //3 (top right)
+            { x: center + (h * Math.sin(54 * Math.PI / 180)) - (h * Math.cos(72 * Math.PI / 180)) - h, y: yStart + (h * Math.cos(54 * Math.PI / 180)) + (h * Math.sin(72 * Math.PI / 180))}, //4 (top left)
+            { x: center - (h * Math.sin(54 * Math.PI / 180)), y: yStart + (h * Math.cos(54 * Math.PI / 180))} //5 (bottom left)
+        ];
+
+        //create buttons
+        var actions = new Map;
+        var buttonList = [];
+        for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
+            var action = () => {
+                actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic()));
+                this.addNextButton(this, "Aspirations");
+            };
+            
+            //add button
+            var button = new ImageButton(this, positions[i].x, positions[i].y, 300, 300, 0xffffff, `Personality menu ${i + 1}`, false, action);
+            //button.setInteractive(false);
+            //button.getContent().setInteractive();
+            button.setTransparent();
+            buttonList.push(button);
+
+            button.on('pointerover', () => {
+                button.getContent().setTint(0x000000);
+            });
+
+            buttonList.push(button);
+            this.menuContainer.add(button);
+
+
+
                 // const button = this.add.image(positions[i - 1].x, positions[i - 1].y, `Personality menu ${i}`);
                 // button.setInteractive({ pixelPerfect: true }).setScale(0.7); //make image buttons, set not interactive (just image is interactive?)
                 
@@ -116,7 +145,12 @@ export class Personality extends CustomizationTemplate{
                 //     label.setVisible(false); //destroy?
                 // });
                 //buttons.push(button);
-            }
         };
+    }
 
+    private flashCosmetic(cosmetic: Cosmetic){ //move to banana?
+        var banana: Banana = this.registry.get("banana");
+        this.time.delayedCall(400, () => {banana.addCosmetic(this, cosmetic, this.bananaContainer)});
+        this.time.delayedCall(600, () => {banana.removeCosmetic(cosmetic, this.bananaContainer)});
+    }
 }

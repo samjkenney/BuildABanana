@@ -12,6 +12,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     private color: number; //necessary?
     private selectedColor: number = 0xc5d7d7;
     private static TINT: number = 0xffabb5; //make constant, move to different types of buttons?
+    
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
     protected transparent = 1; //0 transparent, 1 not
 
@@ -55,7 +56,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.originalY = this.y;
             //clear old rectangle
             if(this.color !== 0){
-                this.addRectangle(Button.TINT);
+                this.addRectangle(Button.TINT); //use setTint?
             }
             if(scaleOnHover){
                 var widthChange = width * Button.HOVERSCALE - width
@@ -110,9 +111,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     }
 
     protected addRectangle(color: number){
-        //clear old rectangle
-        if(color == 0){
-            this.backgroundGraphics.fillStyle(0xffffff, 0);
+        this.backgroundGraphics.clear();
+        if(color == 0){ //replace with this.transparent
+            this.backgroundGraphics.fillStyle(0xffffff, this.transparent);
         }
         else{
             this.backgroundGraphics.fillStyle(color, this.transparent); //move to method?
@@ -137,10 +138,14 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             scale = (smallerButtonSide - 2 * border) / largerContentSide; //only scale like this if smallerButtonSide and largerContentSide are same sides (width or height)
         }
         else if(largerContentSide == contentWidth){
-            scale = (this.width - 2 * border) / contentWidth;
+            var widthScale = (this.width - 2 * border) / contentWidth;
+            var heightScale = (this.height - 2 * border) / contentHeight;
+            scale = Math.min(widthScale, heightScale);
         }
         else {
-            scale = (this.height - 2 * border) / contentHeight;
+            var widthScale = (this.width - 2 * border) / contentWidth;
+            var heightScale = (this.height - 2 * border) / contentHeight;
+            scale = Math.min(widthScale, heightScale);
         };
         this.content.setDisplaySize(contentWidth * scale, contentHeight * scale);
 
@@ -195,7 +200,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     //     //need to update eventEmitter somehow
     // }
 
-    protected getContent(): GameObjects.Image | GameObjects.Text{
+    getContent(): GameObjects.Image | GameObjects.Text{ //make protected?
         return this.content;
     }
 }

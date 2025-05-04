@@ -26,19 +26,19 @@ export class CharacteristicHandler{
     //TODO: update sizing!
     static PERSONALITIES: Characteristic[] = [
         new Characteristic("Diva",
-            new Cosmetic("assets/personality/personality diva.png", 80, 0, 2),
+            new Cosmetic("diva", 60, 20, 2),
             "the Banana dreamed of being the first banana to win RuPeel's Drag Race."),
         new Characteristic("Flexible",
-            new Cosmetic("assets/personality/personality flexible.png", 80, 0, 2),
+            new Cosmetic("flexible", 0, 0, 1.8),
             "the Banana dreamed of being the first banana to win gold in the Olympics."),
         new Characteristic("Genius",
-            new Cosmetic("assets/personality/personality genius.png", 80, 0, 2),
+            new Cosmetic("genius", 140, -40, 2),
             "the Banana dreamed of being the first banana to win a Nobel Prize."),
         new Characteristic("Honest",
-            new Cosmetic("assets/personality/personality honest.png", 80, 0, 2),
+            new Cosmetic("honest", 40, -60, 2),
             "the Banana dreamed of always telling their friends when they had spinach in their teeth."),
         new Characteristic("Strong",
-            new Cosmetic("assets/personality/personality strong.png", 80, 0, 2),   
+            new Cosmetic("strong", 100, 0, 1.8),   
             "the Banana dreamed of bunching 450 pounds.")
     ]
     
