@@ -42,6 +42,16 @@ The name of the scene should be added to src/main.ts in the form of an import st
 
 ## Known Bugs
 
+## Future Work
+- Adding in more options for recipes: banana bread, banana smoothie.
+- Adding in more customization options
+- Adding in minigames to bond with your banana
+- Randomizing eulogy entry from a set
+- Scoop ice cream for the banana split
+- Add sound effects
+- Use keyboard to handle interactions (Enter for Next)
+- Make the game accesssible for screen readers
+
 ## Frequently Asked Questions
 **Did you guys make all the art?**
 Yes! Daisy made all of the art in Ibis Paint. 

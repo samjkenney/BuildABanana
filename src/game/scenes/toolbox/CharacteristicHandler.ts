@@ -15,7 +15,7 @@ export class CharacteristicHandler{
             "the Banana would have overturned an unfair ruling in the Supreme Court."),
         new Characteristic("Computer Science Professor",
              new Cosmetic ("computer science professor", 80, 0, 1.5),   
-             "the Banana would have made an awesome game about build ing bonsai trees."),
+             "the Banana would have made an awesome game about building bonsai trees."),
         new Characteristic("Banana Foster Parent",
              new Cosmetic("banana foster parent", 90, -100, 1.875),    
              "the Banana would have given a bunch of bananas a loving home."),
