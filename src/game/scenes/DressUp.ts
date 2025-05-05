@@ -5,6 +5,7 @@ import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
 import { Cosmetic } from './toolbox/Cosmetic';
 import { TextButton } from './interactives/TextButton';
+import { TextStyles } from './toolbox/TextStyles';
 
 export class DressUp extends CustomizationTemplate {
     //TODO: Data Manager -> transfer choices to next scene
@@ -74,24 +75,28 @@ export class DressUp extends CustomizationTemplate {
 
         //make arrays of cosmetic image keys
         this.faceArray = [
-            new Cosmetic( "DU_Face1", 185, 0, 0.975),
-            new Cosmetic("DU_Face2", 200, 0, 1),
-            new Cosmetic("DU_Face3", 195, 0, 1.1),
-            new Cosmetic("DU_Face4", 180, 0, 1),
+            new Cosmetic( "DU_Face1", 195, -30, 0.95),
+            new Cosmetic("DU_Face2", 200, -30, 1),
+            new Cosmetic("DU_Face3", 195, -30, 1),
+            new Cosmetic("DU_Face4", 180, -30, 1),
         ];
       
         this.glassesArray = [
-            new Cosmetic("DU_Glasses1", 180, -220, 1),
-            new Cosmetic("DU_Glasses2", 175, -220, 0.975),
-            new Cosmetic("DU_Glasses3", 180, -220, 1),
-            new Cosmetic("DU_Glasses4", 170, -220, 1),
+            new Cosmetic("DU_Glasses1", 200, -300, 0.975),
+            new Cosmetic("DU_Glasses2", 170, -350, 0.975),
+            new Cosmetic("DU_Glasses3", 150, -450, 0.95),
+            new Cosmetic("DU_Glasses4", 210, -300, 1),
         ];
 
         this.shirtArray = [
-            new Cosmetic("DU_Shirt1", 0, 0, 1),
-            new Cosmetic("DU_Shirt2", 0, 0, 1),
-            new Cosmetic("DU_Shirt3", 20, 0, 1),
-            new Cosmetic("DU_Shirt4", 0, 0, 1),
+            //Minion Overalls
+            new Cosmetic("DU_Shirt1", 100, 180, 1),
+            //Jester Necklace
+            new Cosmetic("DU_Shirt2", 85, 170, 1.1),
+            //Pointer
+            new Cosmetic("DU_Shirt3", -60, 30, 1),
+            //Tie
+            new Cosmetic("DU_Shirt4", 130, 210, 1.05),
         ];
     
 

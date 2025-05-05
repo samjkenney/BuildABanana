@@ -56,7 +56,7 @@ export class Eulogy extends Scene {
             y: { from: 1000, to: -5000 },  // Move from bottom to top 
             duration: 20000,           // Animation duration (in milliseconds)
             ease: 'Linear',           // Animation easing function
-            repeat: 0,              // Repeat indefinitely
+            repeat: 0,              
             yoyo: false          
           });
 
