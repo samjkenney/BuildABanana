@@ -55,7 +55,6 @@ export class Aspirations extends CustomizationTemplate{
 
             //add button
             let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
-            //button.setTransparent();
             buttonList.push(button);
             this.menuContainer.add(button);
 

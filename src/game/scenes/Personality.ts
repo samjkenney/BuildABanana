@@ -61,7 +61,9 @@ export class Personality extends CustomizationTemplate{
         for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
-                this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
+                var banana: Banana = this.registry.get("banana");
+                //this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
+                banana.setPersonality(CharacteristicHandler.getPersonalities()[i]);
                 this.addNextButton(this, "Aspirations");
             };
 
@@ -70,6 +72,28 @@ export class Personality extends CustomizationTemplate{
             //button.setTransparent();
             buttonList.push(button);
             this.menuContainer.add(button);
+
+            button.on('pointerover', () => {
+                var banana: Banana = this.registry.get("banana");
+                //remove all cosmetics
+                CharacteristicHandler.getPersonalities().forEach(characteristic => {
+                    banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
+                });
+
+                banana.addCosmetic(this, CharacteristicHandler.getPersonalities()[i].getReactionCosmetic(), this.bananaContainer);
+            });
+
+            button.on('pointerout', () => {
+                var banana: Banana = this.registry.get("banana");
+                if(!button.getSelected()){
+                    banana.removeCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic(), this.bananaContainer);
+                    //add selected cosmetic
+                    if(banana.getPersonality() !== undefined){
+                        var cosmetic = banana.getPersonality().getReactionCosmetic();
+                        banana.addCosmetic(this, cosmetic, this.bananaContainer);
+                    }
+                }
+            });
         };
 
         for(var i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
@@ -77,6 +101,7 @@ export class Personality extends CustomizationTemplate{
         };
     }
 
+    //for pentagon menu
     private createMenu1(){
         //Pentagon positioning
         var h = 150;
