@@ -80,7 +80,7 @@ export abstract class SceneTemplate extends Scene {
     }
 
     private addTitle(scene: Scene, text: string){
-        this.title = new GameObjects.Text(scene, 0, 0, text, TextStyles.getTitleStyle(scene));
+        this.title = new GameObjects.Text(scene, 0, 0, text, TextStyles.title);
         scene.add.existing(this.title);
         //position updated in child classes
     }

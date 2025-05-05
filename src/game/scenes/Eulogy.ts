@@ -1,5 +1,6 @@
 import { Scene } from "phaser";
 import { Banana } from "./toolbox/Banana";
+import { TextStyles } from "./toolbox/TextStyles";
 import { Characteristic } from "./toolbox/Characteristic";
 
 export class Eulogy extends Scene {
@@ -46,7 +47,7 @@ export class Eulogy extends Scene {
             "Guy the cat";
        
         const titleText = this.add.text(400, 1000, eulogyText);
-        titleText.setStyle({ fontSize: '60px', color: '#000000' });
+        titleText.setStyle(TextStyles.body);
         titleText.setWordWrapWidth(1000);
         titleText.setLineSpacing(50);
         

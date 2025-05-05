@@ -2,20 +2,26 @@ import { GameObjects, Scene } from 'phaser';
 
 export class TextStyles{
     static title = {
-            fontFamily: "Kitto",
-            color: "#B4E6E7",
-            stroke: "#4FB0B0", 
-            strokeThickness: 6, 
-            fontSize: 100,
-            align: "center",
-            //increase line spacing
-        };
+        fontFamily: "Kitto",
+        fontSize: 100,
+        color: "#B4E6E7",
+        stroke: "#4FB0B0",
+        strokeThickness: 6,
+        align: "center",
+        //increase line spacing
+    };
+
+    static body = {
+        fontFamily: "Kitto",
+        fontSize: 60,
+        color: '#ffffff' 
+    };
         
     static button = {
         fontFamily: "Kitto",
         color: "#ffffff",
         fontSize: 80
-    }
+    };
 
     // static styleMap: { [key: string]: object } = {
     //     "title": {
@@ -59,6 +65,10 @@ export class TextStyles{
 
     static getTitleStyle(scene: Scene){
         return new GameObjects.Text(scene, 0, 0, "", TextStyles.title).style;
+    }
+
+    static getBodyStyle(scene: Scene){
+        return new GameObjects.Text(scene, 0, 0, "", TextStyles.body).style;
     }
 
     static getButtonStyle(scene: Scene){
