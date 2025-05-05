@@ -27,21 +27,9 @@ export class Name extends CustomizationTemplate {
     }
 
     create() {
-        //this.add.image(849, 567.5, 'NameBackground'); 
         this.customizationLoader(this);
 
-        this.anims.create({
-            key:'blink',
-            frames:this.anims.generateFrameNumbers('blinking_sheet',{frames: [0, 1, 2]}),
-            frameRate:1,
-            repeat:-1
-        });
-
-        this.expression = this.add.sprite(530,714, 'blinking_sheet');
-        this.expression.setFrame(0);
-        this.expression.play('blink',true);
-        this.expression.setDepth(1);
-        this.expression.setScale(1.6); 
+        //this.addBlink();
 
         //const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the Personality scene
         //nextButton.setVisible(false);
@@ -78,9 +66,22 @@ export class Name extends CustomizationTemplate {
                 //debugging 
                 console.log('Saved name:', inputBox.value);  
                 console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
+            }
+        });
     }
-    });
 
- 
-}
+    private addBlink(){
+        this.anims.create({
+            key:'blink',
+            frames:this.anims.generateFrameNumbers('blinking_sheet',{frames: [0, 1, 2]}),
+            frameRate:1,
+            repeat:-1
+        });
+
+        this.expression = this.add.sprite(530,714, 'blinking_sheet');
+        this.expression.setFrame(0);
+        this.expression.play('blink',true);
+        this.expression.setDepth(1);
+        this.expression.setScale(1.6);
+    }
 }

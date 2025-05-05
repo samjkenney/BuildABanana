@@ -44,9 +44,9 @@ export class Banana{
         //this.bananaImage = currentScene.add.image(x, y, 'banana'); 
         //this.bananaImage.setScale(0.65);  
         //this.bananaImage.setInteractive();
-        this.defaultFaceCosmetic = new Cosmetic("defaultFace", 100, 100, 1.4);
-        this.noGlassesCosmetic = new Cosmetic("defaultFace", 0, 0, 1); //add defaults
-        this.noShirtCosmetic = new Cosmetic("defaultFace", 0, 0, 1);
+        this.defaultFaceCosmetic = new Cosmetic("defaultFace", 35, 20, 1);
+        this.noGlassesCosmetic = new Cosmetic("none", 0, 0, 1);
+        this.noShirtCosmetic = new Cosmetic("none", 0, 0, 1);
         this.faceCosmetic = this.defaultFaceCosmetic;
         this.glassesCosmetic = this.noGlassesCosmetic;
         this.shirtCosmetic = this.noShirtCosmetic;
@@ -80,7 +80,7 @@ export class Banana{
         }
         else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
-            this.faceImage = scene.add.image(0, 0, "defaultFace");
+            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey()).setScale(this.defaultFaceCosmetic.getScale());
         }
         //this.faceImage = scene.add.image(0, 0, 'face1').setScale(0.4); //add coordinates, scale in list of face dictionaries
 
@@ -91,7 +91,7 @@ export class Banana{
         }
         else{
             this.activeGlasses = "none"; //set to none if null or something weird, or if washed?????
-            this.glassesImage = scene.add.image(0, 0, "defaultFace"); //change to empty image
+            this.glassesImage = scene.add.image(0, 0, "none");
         }
         //this.glassesImage = scene.add.image(0, 0, 'glasses').setScale(0.4); //add coordinates, scale in list of glasses dictionaries
 
@@ -102,7 +102,7 @@ export class Banana{
         }
         else{
             this.activeShirt = "none"; //set to none if null or something weird, or if washed?????
-            this.shirtImage = scene.add.image(0, 0, "defaultFace"); //change to empty image
+            this.shirtImage = scene.add.image(0, 0, "none");
         }
         //this.shirtImage = scene.add.image(0, 0, 'shirt').setScale(0.4); //add coordinates, scale in list of shirt dictionaries
 

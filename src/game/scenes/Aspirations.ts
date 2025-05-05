@@ -60,6 +60,7 @@ export class Aspirations extends CustomizationTemplate{
 
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
+                banana.getFaceImage().setVisible(false); //remove default face
                 //remove all cosmetics
                 CharacteristicHandler.getAspirations().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -76,6 +77,9 @@ export class Aspirations extends CustomizationTemplate{
                     if(banana.getAspiration() !== undefined){
                         var cosmetic = banana.getAspiration().getReactionCosmetic();
                         banana.addCosmetic(this, cosmetic, this.bananaContainer);
+                    }
+                    else{
+                        banana.getFaceImage().setVisible(true); //add back default face
                     }
                 }
             });

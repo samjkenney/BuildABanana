@@ -68,13 +68,14 @@ export class Personality extends CustomizationTemplate{
             };
 
             //add button
-            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
+            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             //button.setTransparent();
             buttonList.push(button);
             this.menuContainer.add(button);
 
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
+                banana.getFaceImage().setVisible(false); //remove default face
                 //remove all cosmetics
                 CharacteristicHandler.getPersonalities().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -91,6 +92,9 @@ export class Personality extends CustomizationTemplate{
                     if(banana.getPersonality() !== undefined){
                         var cosmetic = banana.getPersonality().getReactionCosmetic();
                         banana.addCosmetic(this, cosmetic, this.bananaContainer);
+                    }
+                    else{
+                        banana.getFaceImage().setVisible(true); //add back default face
                     }
                 }
             });
