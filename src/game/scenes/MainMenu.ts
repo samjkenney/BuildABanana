@@ -1,6 +1,6 @@
 import { GameObjects, Scene } from 'phaser';
 import { Banana } from "./toolbox/Banana";
-import { TextButton } from './interactives/TextButton';
+import { SceneButton } from './interactives/SceneButton';
 import { NextButton } from './interactives/NextButton';
 import { TextStyles } from './toolbox/TextStyles';
 
@@ -26,7 +26,7 @@ export class MainMenu extends Scene {
         var banana = new Banana(this); //create new banana
         this.registry.set("banana", banana);
         
-        var startButton = new TextButton(this, background.width / 2 - 125, background.height / 2+ 130, 250, 100, 0xF9B1B4, "Start", TextStyles.getTitleStyle(this), false, true, () => {this.scene.start('Name')});
+        var startButton = new SceneButton(this, background.width / 2 - 150, background.height / 2 + 130, 300, 100, 0xF9B1B4, "Start", TextStyles.getTitleStyle(this), false, true, 'Name');
         this.add.existing(startButton).setInteractive();
 
         //this.add.graphics().fillStyle(0x000000, 1).fillCircle(100, 100, 5);
