@@ -114,12 +114,14 @@ export class Banana{
     addCosmetic(scene: Scene, cosmetic: Cosmetic, bananaContainer: GameObjects.Container){ //move to SceneTemplate?
         var image = scene.add.image(0, 0, cosmetic.getImageKey()).setScale(cosmetic.getScale());
         image.setName(cosmetic.getImageKey());
+        //image.setName("cosmetic");
         bananaContainer.add(image);
         image.setPosition(bananaContainer.width / 2 + cosmetic.getXFromCenter(), bananaContainer.height / 2 + cosmetic.getYFromCenter()); //move to a method, change to add coordinates?
     }
     
     removeCosmetic(cosmetic: Cosmetic, bananaContainer: GameObjects.Container){
         var image: GameObjects.Image = bananaContainer.getByName(cosmetic.getImageKey());
+        //var image: GameObjects.Image = bananaContainer.getByName("cosmetic");
         if(bananaContainer.exists(image)){
             image.destroy();
         };

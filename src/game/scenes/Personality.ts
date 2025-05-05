@@ -57,12 +57,11 @@ export class Personality extends CustomizationTemplate{
 
     private createMenu(){
         //create buttons
-        var actions = new Map;
         var buttonList = [];
         for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
-                actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic()));
+                this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
                 this.addNextButton(this, "Aspirations");
             };
 

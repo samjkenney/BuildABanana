@@ -41,23 +41,48 @@ export class Aspirations extends CustomizationTemplate{
 
     private createMenu(){
         //create buttons
-        var actions = new Map;
         var buttonList = [];
         for(let i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
-                actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getAspirations()[i].getReactionCosmetic()));
+                var banana: Banana = this.registry.get("banana");
+                //this.flashCosmetic(CharacteristicHandler.getAspirations()[i].getReactionCosmetic());
+                //banana.removeCosmetic(new Cosmetic("uhh", 0, 0, 0), this.bananaContainer);
+                //banana.addCosmetic(this, CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
+                banana.setAspiration(CharacteristicHandler.getAspirations()[i]);
                 this.addNextButton(this, "PhotoShoot");
             };
 
             //add button
-            var button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
+            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             //button.setTransparent();
             buttonList.push(button);
             this.menuContainer.add(button);
+
+            button.on('pointerover', () => {
+                var banana: Banana = this.registry.get("banana");
+                //remove all cosmetics
+                CharacteristicHandler.getAspirations().forEach(characteristic => {
+                    banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
+                });
+
+                banana.addCosmetic(this, CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
+            });
+
+            button.on('pointerout', () => {
+                var banana: Banana = this.registry.get("banana");
+                if(!button.getSelected()){
+                    banana.removeCosmetic(CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
+                    //add selected cosmetic
+                    if(banana.getAspiration() !== undefined){
+                        var cosmetic = banana.getAspiration().getReactionCosmetic();
+                        banana.addCosmetic(this, cosmetic, this.bananaContainer);
+                    }
+                }
+            });
         };
 
-        for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){
+        for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){ //move to previous loop
             buttonList[i].setSelectOne(buttonList);
         };
     }

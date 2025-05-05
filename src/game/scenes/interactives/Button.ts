@@ -7,7 +7,6 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     originalY: number;
     width: number;
     height: number;
-    protected selected = false;
     protected backgroundGraphics;
     private color: number; //necessary?
     private selectedColor: number = 0xc5d7d7;
@@ -21,6 +20,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     //protected static BORDER = 10; //make constant?
     private static HOVERSCALE = 1.2;
 
+    protected selected = false;
     private staySelected = false;
     private buttonList: Button[];
 
@@ -54,8 +54,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.on('pointerover', () => {
             this.originalX = this.x;
             this.originalY = this.y;
-            //clear old rectangle
-            if(this.color !== 0){ //only if not selected
+            if(this.color !== 0){ //only if not selected, change to use this.transparent
                 this.addRectangle(Button.TINT); //use setTint?
             }
             if(scaleOnHover){
@@ -68,7 +67,6 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
         //mouse leaves (hover end)
         this.on('pointerout', () => {
-            //clear old rectangle
             if(this.staySelected && this.selected){
                 this.selectOne(this.buttonList);
             }
@@ -88,9 +86,10 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
                 if(this.staySelected){
                     this.buttonList.forEach(button => {
                         button.selected = false;
-                        this.selected = true; //stays selected if transparent background
                         button.updateButton();
                     });
+                    this.selected = true; //stays selected if transparent background
+                    this.updateButton();
                 }
             });
             this.on("pointerup", () => {
@@ -202,5 +201,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
     getContent(): GameObjects.Image | GameObjects.Text{ //make protected?
         return this.content;
+    }
+
+    getSelected(){
+        return this.selected;
     }
 }
