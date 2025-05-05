@@ -5,6 +5,7 @@ import { Cosmetic } from "./Cosmetic";
 import { Aspirations } from "../Aspirations";
 
 export class CharacteristicHandler{
+    //All of the avaiable aspirations
     static ASPIRATIONS: Characteristic[] = [
         new Characteristic("Cooties Doctor",
              new Cosmetic("cooties doctor", 120, 0, 1.875), 
@@ -23,7 +24,7 @@ export class CharacteristicHandler{
              "the Banana would have sold millions of dollars worth of duct tape art.")
     ];
 
-    //TODO: update sizing!
+    //All of the available personalities
     static PERSONALITIES: Characteristic[] = [
         new Characteristic("Diva",
             new Cosmetic("diva", 60, 20, 2),
@@ -42,8 +43,6 @@ export class CharacteristicHandler{
             "the Banana dreamed of bunching 450 pounds.")
     ]
     
-    constructor(){  
-    }
 
     static getAspirations(){
         return this.ASPIRATIONS;

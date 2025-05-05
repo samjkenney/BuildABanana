@@ -15,13 +15,15 @@ export class Eulogy extends Scene {
     }
     
     create(){
+        //gets information frmo the banana object
         const name : String = this.registry.get("banana").getName();
         const personality : Characteristic = this.registry.get("banana").getPersonality();
-       const aspiration : Characteristic = this.registry.get("banana").getAspiration();
+        const aspiration : Characteristic = this.registry.get("banana").getAspiration();
         
 
         const bg = this.add.image(849, 567.5,'backgroundT').setScale(1.5); //replace w custom background
        
+        //custom text to be displayed 
         const eulogyText = "Here lies " + name + " the Banana\n" +
          "Who was loved by all; \n" +
           "a devoted friend, child, and sibling. \n" +
@@ -42,13 +44,14 @@ export class Eulogy extends Scene {
             "Jim Marigmen \n" +
             "Kaliana Andriamananjara \n" +
             "Guy the cat";
-       
+
+       //add text ot the screen
         const titleText = this.add.text(400, 1000, eulogyText);
         titleText.setStyle(TextStyles.body);
         titleText.setWordWrapWidth(1000);
         titleText.setLineSpacing(50);
         
-        
+        //animation for autoscroll
         this.tweens.add({
             targets: titleText,
             y: { from: 1000, to: -5000 },  // Move from bottom to top 

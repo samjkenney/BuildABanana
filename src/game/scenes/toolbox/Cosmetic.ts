@@ -1,3 +1,5 @@
+//represents any assets that is placed on the banana, such as a hat or glasses
+//takes an image path, x and y distance from the center, and scale
 import { Scene } from 'phaser';
 import { GameObjects } from 'phaser';
 import { Banana } from "./Banana";

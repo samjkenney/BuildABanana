@@ -1,3 +1,4 @@
+//Contains our Kitto text styles
 import { GameObjects, Scene } from 'phaser';
 
 export class TextStyles{

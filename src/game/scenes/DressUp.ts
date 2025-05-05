@@ -8,7 +8,7 @@ import { TextButton } from './interactives/TextButton';
 import { TextStyles } from './toolbox/TextStyles';
 
 export class DressUp extends CustomizationTemplate {
-    //TODO: Data Manager -> transfer choices to next scene
+    
     private cosmeticContainer: GameObjects.Container;
     private categoryContainer: GameObjects.Container;
     private iconContainer: GameObjects.Container;
