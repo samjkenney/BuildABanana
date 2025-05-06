@@ -90,10 +90,10 @@ export class Personality extends CustomizationTemplate{
             var index = CharacteristicHandler.getPersonalities().indexOf(characteristic); //select button
             this.buttonList[index].setSelected(true);
 
-            this.addNextButton(this, "Aspirations");
+            this.createNextButton();
         }
 
-        super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
+        super.addBackButton(this, "DressUp"); //don't need to use super (can use "this")?
     }
 
     private createMenu(){
@@ -104,7 +104,7 @@ export class Personality extends CustomizationTemplate{
                 var banana: Banana = this.registry.get("banana");
                 //this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
                 banana.setPersonality(CharacteristicHandler.getPersonalities()[i]);
-                this.addNextButton(this, "Aspirations");
+                this.addNextButton(this, "Aspirations", "Next");
             };
 
             //add button
@@ -145,8 +145,18 @@ export class Personality extends CustomizationTemplate{
         };
     }
 
+    private createNextButton(){
+        //ADD WATER ANIMATION
+        //add fade cosmetics
+        this.time.delayedCall(300, () => {
+            this.addNextButton(this, "Aspirations", "Next");
+        });
+    }
+
+
+
     //for pentagon menu
-    private createMenu1(){
+    private createPentagonMenu(){
         //Pentagon positioning
         var h = 150;
         var buttonWidth = 300
@@ -166,7 +176,7 @@ export class Personality extends CustomizationTemplate{
         for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
             var action = () => {
                 actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic()));
-                this.addNextButton(this, "Aspirations");
+                this.addNextButton(this, "Aspirations", "Next");
             };
             
             //add button

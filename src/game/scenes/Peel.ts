@@ -92,7 +92,7 @@ export class Peel extends CookTemplate {
                     if (currentFrame === 4) {
                         dragAnimation.stop();
                         dragAnimation.setVisible(false);
-                        this.addNextButton(this, 'Split'); // show next button
+                        this.addNextButton(this, 'Split', "Next"); // show next button
                     }
         
                     lastPeelTime = now; // update the last peel time

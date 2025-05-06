@@ -31,10 +31,10 @@ export class Eulogy extends Scene {
          "They were a banana of many talents. \n" +
          name + " " + personality.getEulogyEntry() +  "\n" +
          name + " " + aspiration.getEulogyEntry() +  "\n" +
-         "They will be missed by all who knew them. \n" +
+         "They will be missed by all who knew them.\n\n" +
             "May they rest in peace.\n" +
             "\n \n \n \n \n" +
-            "This game was made by: \n" +
+            "This game was made by:\n" +
             "Daisy Chan \n" +
             "Sam Kenney \n" +
             "Nadya Konadu \n" +

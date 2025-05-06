@@ -8,8 +8,11 @@ export class SceneButton extends TextButton{
     //private static width: number; //make constant?
     //private static height: number; //make constant?
 
-    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string,){
+    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string, extraAction?: Function){
         var action = () => {
+            if(extraAction){
+                extraAction();
+            }
             scene?.scene.start(nextScene); // Use optional chaining to safely access scene
         };
 

@@ -75,7 +75,7 @@ export class Aspirations extends CustomizationTemplate{
             var index = CharacteristicHandler.getAspirations().indexOf(characteristic); //select button
             this.buttonList[index].setSelected(true);
 
-            this.addNextButton(this, "Wash");
+            this.addNextButton(this, "Wash", "Next");
         }
 
         super.addBackButton(this, "Personality");
@@ -91,7 +91,7 @@ export class Aspirations extends CustomizationTemplate{
                 //banana.removeCosmetic(new Cosmetic("uhh", 0, 0, 0), this.bananaContainer);
                 //banana.addCosmetic(this, CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
                 banana.setAspiration(CharacteristicHandler.getAspirations()[i]);
-                this.addNextButton(this, "Wash");
+                this.createNextButton();
             };
 
             //add button
@@ -129,6 +129,14 @@ export class Aspirations extends CustomizationTemplate{
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){ //move to previous loop
             this.buttonList[i].setSelectOne(this.buttonList);
         };
+    }
+
+    private createNextButton(){
+        //ADD WATER ANIMATION
+        //add fade cosmetics
+        this.time.delayedCall(300, () => {
+            this.addNextButton(this, "Wash", "Next");
+        });
     }
 
     private flashCosmetic(cosmetic: Cosmetic){ //move to banana?

@@ -65,7 +65,7 @@ export abstract class CustomizationTemplate extends SceneTemplate {
         }
     }
     
-    protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
+    protected addNextButton(scene: Scene, nextScene: string, displayText: string){
         this.nextButton = new NextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER + this.MENUWIDTH / 2 - NextButton.getWidth() / 2, this.TOPBORDER + this.MENUHEIGHT + (this.BANANAHEIGHT - this.MENUHEIGHT - NextButton.getHeight()), displayText);
         scene.add.existing(this.nextButton);
     }

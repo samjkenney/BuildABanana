@@ -34,7 +34,7 @@ export class Name extends CustomizationTemplate {
         //const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the Personality scene
         //nextButton.setVisible(false);
         //const myBanana = new Banana(this, 400, 714, 'banana'); // Create a new Banana object
-        this.addNextButton(this, "PhotoShoot");
+        this.addNextButton(this, "PhotoShoot", "Next");
         this.getNextButton().setVisible(false);
 
         const element = this.add.dom(0, 300).createFromCache('nameform'); //update y!!!
