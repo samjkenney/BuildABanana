@@ -44,16 +44,9 @@ export class IceCream extends Scene {
             loop: false
         })
         
-        //TODO: add implement next button to Eulogy
-        new NextButton(this,'Eulogy', 1550, 1000, 'Yum!');
-        this.time.addEvent({
-            delay: 11000,
-            callback: ()=>{
-                this.scene.start('Eulogy');
-                //this.addNextButton(this, 'IceCream', 'Yum!');
-            },
-            loop: false
-        })
+        
+        this.add.existing(new NextButton(this,'Eulogy', 1400, 1000, 'Yum!'));
+       
         
     }
 }

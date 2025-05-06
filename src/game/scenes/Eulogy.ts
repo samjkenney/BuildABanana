@@ -2,6 +2,7 @@ import { Scene } from "phaser";
 import { Banana } from "./toolbox/Banana";
 import { TextStyles } from "./toolbox/TextStyles";
 import { Characteristic } from "./toolbox/Characteristic";
+import { NextButton } from "./interactives/NextButton";
 
 export class Eulogy extends Scene {
 
@@ -61,6 +62,14 @@ export class Eulogy extends Scene {
             yoyo: false          
           });
 
-      //TODO: add a button to go back to the main menu  
+      //TODO: add a button to go back to the main menu 
+      this.time.addEvent({
+        delay: 40000, // Delay before starting the animation
+        callback: () => {
+            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!')); // Add a next button to go to the MainMenu scene
+        },
+        loop: false
+      });  
+        
     }
 }
