@@ -68,6 +68,8 @@ export class Aspirations extends CustomizationTemplate{
         var banana = this.registry.get("banana");
         if(banana.getAspiration() !== undefined){
             banana.getFaceImage().setVisible(false); //remove default face
+            banana.getGlassesImage().setVisible(false);
+            banana.getShirtImage().setVisible(false);
 
             var characteristic = banana.getAspiration(); //add selected cosmetic
             banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -102,6 +104,9 @@ export class Aspirations extends CustomizationTemplate{
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
                 banana.getFaceImage().setVisible(false); //remove default face
+                banana.getGlassesImage().setVisible(false);
+                banana.getShirtImage().setVisible(false);
+
                 //remove all cosmetics
                 CharacteristicHandler.getAspirations().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -121,6 +126,8 @@ export class Aspirations extends CustomizationTemplate{
                     }
                     else{
                         banana.getFaceImage().setVisible(true); //add back default face
+            banana.getGlassesImage().setVisible(true);
+            banana.getShirtImage().setVisible(true);
                     }
                 }
             });

@@ -83,6 +83,8 @@ export class Personality extends CustomizationTemplate{
         // this.bananaContainer.setDepth(1); 
         if(banana.getPersonality() !== undefined){
             banana.getFaceImage().setVisible(false); //remove default face
+            banana.getGlassesImage().setVisible(false);
+            banana.getShirtImage().setVisible(false);
 
             var characteristic = banana.getPersonality(); //add selected cosmetic
             banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -116,6 +118,9 @@ export class Personality extends CustomizationTemplate{
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
                 banana.getFaceImage().setVisible(false); //remove default face
+                banana.getGlassesImage().setVisible(false);
+                banana.getShirtImage().setVisible(false);
+
                 //remove all cosmetics
                 CharacteristicHandler.getPersonalities().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -135,6 +140,8 @@ export class Personality extends CustomizationTemplate{
                     }
                     else{
                         banana.getFaceImage().setVisible(true); //add back default face
+            banana.getGlassesImage().setVisible(true);
+            banana.getShirtImage().setVisible(true);
                     }
                 }
             });
