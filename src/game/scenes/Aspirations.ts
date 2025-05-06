@@ -50,7 +50,7 @@ export class Aspirations extends CustomizationTemplate{
             var index = CharacteristicHandler.getAspirations().indexOf(characteristic); //select button
             this.buttonList[index].setSelected(true);
 
-            this.addNextButton(this, "PhotoShoot");
+            this.addNextButton(this, "Wash");
         }
 
         super.addBackButton(this, "Personality");
@@ -66,7 +66,7 @@ export class Aspirations extends CustomizationTemplate{
                 //banana.removeCosmetic(new Cosmetic("uhh", 0, 0, 0), this.bananaContainer);
                 //banana.addCosmetic(this, CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
                 banana.setAspiration(CharacteristicHandler.getAspirations()[i]);
-                this.addNextButton(this, "PhotoShoot");
+                this.addNextButton(this, "Wash");
             };
 
             //add button

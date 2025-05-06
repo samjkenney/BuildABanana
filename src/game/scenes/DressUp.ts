@@ -56,7 +56,7 @@ export class DressUp extends CustomizationTemplate {
 
     create() {
         this.customizationLoader(this);
-
+        
         //create containers, move to function
         this.cosmeticContainer = new GameObjects.Container(this, 0, this.getTitle().height + this.MENUBORDER);
         this.cosmeticContainer.setSize(this.getMenuContainer().width, this.getMenuContainer().height - this.getTitle().height - this.MENUBORDER); //make calculateSize method?
@@ -120,22 +120,23 @@ export class DressUp extends CustomizationTemplate {
         buttonList[0].setSelected(true);
         buttonList[0].selectCategory();
        
+        var zoom = () => {
+            this.tweens.add({
+                targets: this.bananaContainer,
+                zoom: 10,
+                scale: 2,
+                ease: 'Linear',
+                duration: 10000,
+                onComplete: () => {
+                    this.scene.start('Personality');
+                }
+            });
+        }
         
-        //TODO: IMPLEMENT ZOOM IN ON BANANA HEAD
-        // new button()    
-        // on Next Button click ->
-        // zoom in on the banana forehead
-        // this.scene.tweens.add({
-        //targets     : this ,
-        //scale       : 10
-        //ease        : 'Linear',
-        //duration    : 500,
-        //});
-        //transition to Personality scene
-        //this.scene.start('Personality');
-
-
-        this.addNextButton(this, "Wash");
+       
+        this.add.existing(new TextButton(this, 1000, 500, 400, 100,
+             0xF9B1B4, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
+             true, true, zoom))
     }
 
    
