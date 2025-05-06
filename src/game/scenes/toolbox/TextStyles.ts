@@ -15,7 +15,8 @@ export class TextStyles{
     static body = {
         fontFamily: "Kitto",
         fontSize: 60,
-        color: '#ffffff' 
+        color: '#ffffff',
+        align: "center"
     };
         
     static button = {
