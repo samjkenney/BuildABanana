@@ -1,7 +1,7 @@
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
 import { NextButton } from './interactives/NextButton';
-//import { NextButton } from './toolbox/NextButton';
+
 
 export class Split extends CookTemplate {
     constructor() {
@@ -24,22 +24,27 @@ export class Split extends CookTemplate {
 
     create() {
         this.cookLoader(this);
+
         this.add.image(849, 567.5,'splitBackground'); 
+
         const banana = this.add.image(823, 535, 'splitBanana');  
         banana.setInteractive();
 
         const text = this.add.image(849, 567.5, 'text');
 
+        //load the slice images but don't show them yet
         const slice1 = this.add.image(849, 567.5, 'slice1');
         slice1.setVisible(false);
         const slice2 = this.add.image(849, 567.5, 'slice2');
         slice2.setVisible(false);
         const slice3 = this.add.image(849, 567.5, 'slice3');
         slice3.setVisible(false);
+
+
         let click: number = 0; 
         //when the banana is clicked
         banana.on('pointerdown', () => {
-            click++;;
+            click++;
             if (click === 1){
                 slice1.setVisible(true);
             }
@@ -49,6 +54,7 @@ export class Split extends CookTemplate {
             else if (click === 3)  {
                 slice3.setVisible(true);
                 text.destroy();
+                //after one second, play the video
                 this.time.addEvent({
                     delay: 1000,
                     callback: ()=>{
@@ -57,16 +63,7 @@ export class Split extends CookTemplate {
                         slice2.destroy();
                         slice3.destroy();
                         this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
-                        // new NextButton(this,'IceCream', 1550, 100, 'Yum!');
-                        //this.scene.start('IceCream');
-                        this.time.addEvent({
-                            delay: 3000,
-                            callback: ()=>{
-                                this.scene.start('IceCream');
-                            },
-                            loop: false
-                        })
-                        this.addNextButton(this, 'IceCream', 'Yum!');
+                        this.addNextButton(this, 'IceCream', 'Oops!');
                     },
                     loop: false
                 })

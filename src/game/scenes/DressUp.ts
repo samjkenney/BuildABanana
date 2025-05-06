@@ -120,6 +120,7 @@ export class DressUp extends CustomizationTemplate {
         buttonList[0].setSelected(true);
         buttonList[0].selectCategory();
        
+        //zoom function
         var zoom = () => {
             var cam = this.cameras.main;
             
@@ -137,7 +138,7 @@ export class DressUp extends CustomizationTemplate {
             });
         }
         
-       
+       //add button to zoom in on banana and transition to next scene
         this.add.existing(new TextButton(this, 1050, 1000, 400, 100,
              0xF9B1B4, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
              true, true, zoom))

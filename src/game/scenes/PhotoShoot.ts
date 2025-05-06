@@ -21,7 +21,7 @@ export class PhotoShoot extends SceneTemplate {
         // this.add.image(849, 567.5,'background2');
         var video = this.add.video(this.bananaContainer.width / 2, this.bananaContainer.height / 2, 'photoshootVideo').setAlpha(1).setScale(1.35).setOrigin(0.5).play(); // Play the video
         this.bananaContainer.add(video);
-        //this.add.existing(new NextButton(this, 'DressUp',  849, 567.5)); // Add a next button to go to the DressUp scene
+        
         this.time.addEvent({ //delayedCall?
             delay: 3000,
             callback: ()=>{

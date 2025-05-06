@@ -62,7 +62,7 @@ export class Eulogy extends Scene {
             yoyo: false          
           });
 
-      //TODO: add a button to go back to the main menu 
+      
       this.time.addEvent({
         delay: 40000, // Delay before starting the animation
         callback: () => {
