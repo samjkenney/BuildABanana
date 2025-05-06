@@ -37,7 +37,7 @@ export class Wash extends CookTemplate {
     }
 
     create() {
-        this.customizationLoader(this);
+        this.cookLoader(this);
 
         const drops = [
             this.add.image(1100, 510, 'water'),

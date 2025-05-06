@@ -33,7 +33,7 @@ export class Peel extends CookTemplate {
 
         super.create(); // set up the base class things
     
-        this.customizationLoader(this); // custom function to handle any extra setup
+        this.cookLoader(this); // custom function to handle any extra setup
     
 
         let banana: Banana = this.registry.get('banana');

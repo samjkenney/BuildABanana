@@ -21,7 +21,7 @@ export abstract class CookTemplate extends SceneTemplate {
     create(){  
     }
 
-    protected customizationLoader(scene: Scene){ //find way to move to constructor, make automatic?
+    protected cookLoader(scene: Scene){ //find way to move to constructor, make automatic?
         super.sceneLoader(scene);
 
         //this.calculateSizes(scene);

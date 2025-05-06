@@ -23,7 +23,7 @@ export class Split extends CookTemplate {
     }
 
     create() {
-        this.customizationLoader(this);
+        this.cookLoader(this);
         this.add.image(849, 567.5,'splitBackground'); 
         const banana = this.add.image(823, 535, 'splitBanana');  
         banana.setInteractive();
@@ -57,8 +57,16 @@ export class Split extends CookTemplate {
                         slice2.destroy();
                         slice3.destroy();
                         this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
-                        this.addNextButton(this, 'IceCream', 'Oops!');
-                        
+                        // new NextButton(this,'IceCream', 1550, 100, 'Yum!');
+                        //this.scene.start('IceCream');
+                        this.time.addEvent({
+                            delay: 3000,
+                            callback: ()=>{
+                                this.scene.start('IceCream');
+                            },
+                            loop: false
+                        })
+                        this.addNextButton(this, 'IceCream', 'Yum!');
                     },
                     loop: false
                 })
