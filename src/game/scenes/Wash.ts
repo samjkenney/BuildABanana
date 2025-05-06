@@ -39,6 +39,32 @@ export class Wash extends CookTemplate {
     create() {
         this.cookLoader(this);
 
+        //get camera
+        var cam = this.cameras.main;
+        // get camera starting information 
+        var camX = cam.x;
+        var camY = cam.y;
+        var camWidth = cam.width;
+        var camHeight = cam.height;
+        var centerX = cam.centerX;
+        var centerY = cam.centerY;
+       //zoom in on banana forehead
+        cam.centerOn(1010, 520);
+        cam.setZoom(20);
+        //zoom out to original size 
+        this.tweens.add({
+            targets: cam,
+            zoom: 1,
+            ease: 'Linear',
+            duration: 1500,    
+            onComplete: () => {
+                cam.setPosition(camX, camY);
+                cam.centerOn(centerX, centerY);
+                cam.setSize(camWidth, camHeight);
+                cam.setZoom(1);
+            }
+        });
+
         const drops = [
             this.add.image(1100, 510, 'water'),
             this.add.image(900, 850, 'water')

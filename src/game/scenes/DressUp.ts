@@ -121,12 +121,16 @@ export class DressUp extends CustomizationTemplate {
         buttonList[0].selectCategory();
        
         var zoom = () => {
+            var cam = this.cameras.main;
+            
+            cam.setPosition(0, 0);
+            cam.centerOn(720, 400);
+            
             this.tweens.add({
-                targets: this.bananaContainer,
-                zoom: 10,
-                scale: 2,
+                targets: cam,
+                zoom: 20,
                 ease: 'Linear',
-                duration: 10000,
+                duration: 1500,
                 onComplete: () => {
                     this.scene.start('Personality');
                 }
@@ -134,7 +138,7 @@ export class DressUp extends CustomizationTemplate {
         }
         
        
-        this.add.existing(new TextButton(this, 1000, 500, 400, 100,
+        this.add.existing(new TextButton(this, 1050, 1000, 400, 100,
              0xF9B1B4, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
              true, true, zoom))
     }
