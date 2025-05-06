@@ -14,7 +14,7 @@ export default function Home() {
                 <title>Build A Banana</title>
                 <meta name="description" content="A Phaser 3 Next.js project that demonstrates Next.js with React communication and uses Vite for bundling." />
                 <meta name="viewport" content="width=device-width, initial-scale=1" />
-                <link rel="icon" href="/banana.png" />
+                <link rel="icon" href="assets/favicon.png" />
             </Head>
             <main className={`${styles.main} ${inter.className}`}>
                 <AppWithoutSSR />
