@@ -15,6 +15,8 @@ export class Aspirations extends CustomizationTemplate{
     private BUTTONHEIGHT: number;
     private COLOR = 0xff0000;
 
+    private buttonList: TextButton[] = [];
+
     constructor(){
         super("Aspirations", "Choose an\naspiration!", "labBackground");
     }
@@ -34,14 +36,28 @@ export class Aspirations extends CustomizationTemplate{
         this.MENUHALFBORDER = super.getMenuContainer().height * 0.05;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getAspirations().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getAspirations().length;
 
+        this.buttonList = []; //clear buttonList (for back button stuff)
         this.createMenu();
+
+        //check if Aspiration already selected (used back button)
+        var banana = this.registry.get("banana");
+        if(banana.getAspiration() !== undefined){
+            banana.getFaceImage().setVisible(false); //remove default face
+
+            var characteristic = banana.getAspiration(); //add selected cosmetic
+            banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
+
+            var index = CharacteristicHandler.getAspirations().indexOf(characteristic); //select button
+            this.buttonList[index].setSelected(true);
+
+            this.addNextButton(this, "PhotoShoot");
+        }
 
         super.addBackButton(this, "Personality");
     }
 
     private createMenu(){
         //create buttons
-        var buttonList = [];
         for(let i = 0; i < CharacteristicHandler.getAspirations().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
@@ -55,7 +71,7 @@ export class Aspirations extends CustomizationTemplate{
 
             //add button
             let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
-            buttonList.push(button);
+            this.buttonList.push(button);
             this.menuContainer.add(button);
 
             button.on('pointerover', () => {
@@ -86,7 +102,7 @@ export class Aspirations extends CustomizationTemplate{
         };
 
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){ //move to previous loop
-            buttonList[i].setSelectOne(buttonList);
+            this.buttonList[i].setSelectOne(this.buttonList);
         };
     }
 

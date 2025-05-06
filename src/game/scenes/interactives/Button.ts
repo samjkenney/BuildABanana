@@ -84,12 +84,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
             this.on("pointerdown", action);
             this.on("pointerdown", () => {
                 if(this.staySelected){
-                    this.buttonList.forEach(button => {
-                        button.selected = false;
-                        button.updateButton();
-                    });
-                    this.selected = true; //stays selected if transparent background
-                    this.updateButton();
+                    this.selectOne(this.buttonList);
                 }
             });
             this.on("pointerup", () => {
@@ -163,7 +158,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
 
 
-    setSelectOne(buttonList: Button[]){
+    setSelectOne(buttonList: Button[]){ //set list of buttons to only have 1 button selected at a time
         this.staySelected = true;
         this.buttonList = buttonList;
     }
@@ -175,7 +170,6 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     }
 
     setTransparent(){
-        console.log("hmmm");
         this.transparent = 0;
         this.updateButton();
     }

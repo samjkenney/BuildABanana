@@ -18,6 +18,8 @@ export class Personality extends CustomizationTemplate{
     private BUTTONWIDTH: number;
     private COLOR = 0xff0000;
 
+    private buttonList: TextButton[] = [];
+
     // private personalities: string[] = [
     //     "1",
     //     "2",
@@ -49,15 +51,29 @@ export class Personality extends CustomizationTemplate{
         //this.BUTTONWIDTH = (super.getMenuContainer().width - ((this.personalities.length - 1) * this.MENUHALFBORDER)) / this.personalities.length;
         //this.BUTTONHEIGHT = super.getMenuContainer().height * 0.8;
         this.BUTTONHEIGHT = (super.getMenuContainer().height * 0.9 - super.getTitle().height - ((CharacteristicHandler.getPersonalities().length - 1) * this.MENUHALFBORDER)) / CharacteristicHandler.getPersonalities().length;
-
+        
+        this.buttonList = []; //clear list (for back button)
         this.createMenu();
+
+        //check if Personality already selected (used back button)
+        var banana = this.registry.get("banana");
+        if(banana.getPersonality() !== undefined){
+            banana.getFaceImage().setVisible(false); //remove default face
+
+            var characteristic = banana.getPersonality(); //add selected cosmetic
+            banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
+
+            var index = CharacteristicHandler.getPersonalities().indexOf(characteristic); //select button
+            this.buttonList[index].setSelected(true);
+
+            this.addNextButton(this, "Aspirations");
+        }
 
         super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
     }
 
     private createMenu(){
         //create buttons
-        var buttonList = [];
         for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
             var buttonY = super.getTitle().height + this.MENUBORDER + i * (this.MENUHALFBORDER + this.BUTTONHEIGHT);
             var action = () => {
@@ -70,7 +86,7 @@ export class Personality extends CustomizationTemplate{
             //add button
             let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             //button.setTransparent();
-            buttonList.push(button);
+            this.buttonList.push(button);
             this.menuContainer.add(button);
 
             button.on('pointerover', () => {
@@ -100,8 +116,8 @@ export class Personality extends CustomizationTemplate{
             });
         };
 
-        for(var i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
-            buttonList[i].setSelectOne(buttonList);
+        for(var i = 0; i < CharacteristicHandler.getPersonalities().length; i++){ //move to previous loop?
+            this.buttonList[i].setSelectOne(this.buttonList);
         };
     }
 
