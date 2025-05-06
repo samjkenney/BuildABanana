@@ -41,6 +41,10 @@ export class Personality extends CustomizationTemplate{
         this.load.image("genius", "assets/personality/personality genius.png");
         this.load.image("honest", "assets/personality/personality honest.png");
         this.load.image("strong", "assets/personality/personality strong.png");
+
+        for (let i = 1; i <= 3; i++) {
+            this.load.image(`water_${i}`, `assets/personality/water_${i}.png`);
+        }
     }
 
     create(){
@@ -55,8 +59,28 @@ export class Personality extends CustomizationTemplate{
         this.buttonList = []; //clear list (for back button)
         this.createMenu();
 
+         // animated water
+         const water = this.add.image(900, 560, 'water_1')
+         .setDepth(0)// layering
+         .setScale(1.15) // scale
+         .setAlpha(0.6); 
+ 
+         let waterFrames = ['water_1', 'water_2', 'water_3'];
+         let currentFrame = 0;
+ 
+         this.time.addEvent({
+             delay: 220, // speed
+             loop: true,
+             callback: () => {
+             water.setTexture(waterFrames[currentFrame]);
+             currentFrame = (currentFrame + 1) % waterFrames.length;
+             }
+         });
+
+        
         //check if Personality already selected (used back button)
         var banana = this.registry.get("banana");
+        // this.bananaContainer.setDepth(1); 
         if(banana.getPersonality() !== undefined){
             banana.getFaceImage().setVisible(false); //remove default face
 
