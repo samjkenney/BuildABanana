@@ -35,8 +35,15 @@ export class IceCream extends Scene {
 
         this.add.image(849, 567.5,'background2'); 
         this.add.image(849, 567.5,'iceCream');
-        this.add.sprite(849, 567.5, 'frame1').play('clouds');
-
+        const cloudAnim = this.add.sprite(849, 567.5, 'frame1').play('clouds');
+        this.time.addEvent({
+            delay: 2000, // Delay before starting the animation
+            callback: () => {
+                cloudAnim.destroy(); // Start the animation after the delay
+            },
+            loop: false
+        })
+        
         //TODO: add implement next button to Eulogy
         new NextButton(this,'Eulogy', 1550, 1000, 'Yum!');
         this.time.addEvent({
