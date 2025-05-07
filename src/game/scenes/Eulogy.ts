@@ -31,10 +31,10 @@ export class Eulogy extends Scene {
          "They were a banana of many talents. \n" +
          name + " " + personality.getEulogyEntry() +  "\n" +
          name + " " + aspiration.getEulogyEntry() +  "\n" +
-         "They will be missed by all who knew them. \n" +
+         "They will be missed by all who knew them.\n\n" +
             "May they rest in peace.\n" +
             "\n \n \n \n \n" +
-            "This game was made by: \n" +
+            "This game was made by:\n" +
             "Daisy Chan \n" +
             "Sam Kenney \n" +
             "Nadya Konadu \n" +
@@ -66,7 +66,7 @@ export class Eulogy extends Scene {
       this.time.addEvent({
         delay: 40000, // Delay before starting the animation
         callback: () => {
-            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!', 0xDBFFF)); // Add a next button to go to the MainMenu scene
+            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!',  0xDBFFF)); // Add a next button to go to the MainMenu scene
         },
         loop: false
       });  

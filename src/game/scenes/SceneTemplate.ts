@@ -130,14 +130,14 @@ export abstract class SceneTemplate extends Scene {
 
 
 
-    protected addNextButton(scene: Scene, nextScene: string, displayText?: string, x?: number, y?: number){ //add x, y parameters, replaced in template addNextButton definitions, remove?
+    protected addNextButton(scene: Scene, nextScene: string, displayText: string, extraAction?: Function, x?: number, y?: number){ //add x, y parameters, replaced in template addNextButton definitions, remove?
         if(!x){
             x = 0;
         }
         if (!y){
             y = 0;
         }
-        this.nextButton = new NextButton(this, nextScene, x, y, displayText);
+        this.nextButton = new NextButton(this, nextScene, x, y, displayText, extraAction);
         scene.add.existing(this.nextButton);
     }
 

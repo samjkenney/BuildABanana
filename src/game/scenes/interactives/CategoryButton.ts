@@ -1,6 +1,6 @@
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
-import { Button } from './Button';
+import { Banana } from '../toolbox/Banana';
 import { ImageButton } from './ImageButton';
 import { IconButton } from './IconButton';
 import { Cosmetic } from '../toolbox/Cosmetic';
@@ -59,12 +59,18 @@ export class CategoryButton extends ImageButton{
             var row = 1;
             var column = 1;
             var buttonList = [];
+            var banana = scene.registry.get("banana");
             for(var i = 0; i < this.cosmeticArray.length; i++){
                 var buttonNumber = i + 1;
 
                 var button = new IconButton(scene, 0, 0, this.cosmeticArray[i], this.imageKey, iconContainer, bananaContainer);
                 buttonList.push(button);
                 iconContainer.add(button);
+
+                //select button if cosmetic already on banana
+                if(this.cosmeticArray[i] == banana.getFaceCosmetic() || this.cosmeticArray[i] == banana.getGlassesCosmetic() || this.cosmeticArray[i] == banana.getShirtCosmetic()){
+                    button.setSelected(true);
+                }
 
                 var x = this.SIDEBORDER * column + (column - 1) * button.getWidth();
                 var y = this.TOPBORDER * row + (row - 1) * button.getHeight();

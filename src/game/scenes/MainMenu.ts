@@ -16,6 +16,7 @@ export class MainMenu extends Scene {
         this.load.image('banana', 'assets/Banana.png');
         this.load.image("bananaPeeled", "assets/peel/bananaPeel4.png");
         this.load.image('defaultFace', 'assets/default face.png');
+        this.load.image('eyesClosed', 'assets/eyes closed.png');
         this.load.image('none', 'assets/empty.png'); //add empty image
     }
 

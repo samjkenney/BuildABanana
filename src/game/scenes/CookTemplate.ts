@@ -32,8 +32,8 @@ export abstract class CookTemplate extends SceneTemplate {
         //put title above bananaContainer (not inside) so no overlap?
     }
     
-    protected addNextButton(scene: Scene, nextScene: string, displayText?: string){
-        this.nextButton = new NextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH - NextButton.getWidth(), this.TOPBORDER + this.BANANAHEIGHT - NextButton.getHeight(), displayText);
+    protected addNextButton(scene: Scene, nextScene: string, displayText: string, extraAction?: Function, delay?: number){
+        this.nextButton = new NextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH - NextButton.getWidth(), this.TOPBORDER + this.BANANAHEIGHT - NextButton.getHeight(), displayText, extraAction, delay);
         scene.add.existing(this.nextButton);
     }
 

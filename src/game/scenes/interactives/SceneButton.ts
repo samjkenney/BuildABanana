@@ -8,9 +8,19 @@ export class SceneButton extends TextButton{
     //private static width: number; //make constant?
     //private static height: number; //make constant?
 
-    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string,){
+    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string, extraAction?: Function, delay?: number){
         var action = () => {
-            scene?.scene.start(nextScene); // Use optional chaining to safely access scene
+            if(extraAction){
+                extraAction();
+            }
+            if(delay){
+                scene.time.delayedCall(delay, () => {
+                    scene?.scene.start(nextScene);
+                });
+            }
+            else{
+                scene?.scene.start(nextScene); // Use optional chaining to safely access scene
+            }
         };
 
         super(scene, x, y, width, height, color, displayText, textStyle, scaleToButtonSize, scaleOnHover, action);

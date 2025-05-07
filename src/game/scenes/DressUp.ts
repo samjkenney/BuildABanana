@@ -14,9 +14,29 @@ export class DressUp extends CustomizationTemplate {
     private iconContainer: GameObjects.Container;
 
 
-    private faceArray: Cosmetic[];
-    private glassesArray: Cosmetic[];
-    private shirtArray: Cosmetic[];
+    //make arrays of cosmetic image keys
+    private faceArray: Cosmetic[] = [ //make static?
+        new Cosmetic( "DU_Face1", 195, -30, 0.95),
+        new Cosmetic("DU_Face2", 200, -30, 1),
+        new Cosmetic("DU_Face3", 195, -30, 1),
+        new Cosmetic("DU_Face4", 180, -30, 1),
+    ];
+    private glassesArray: Cosmetic[] = [
+        new Cosmetic("DU_Glasses1", 200, -300, 0.975),
+        new Cosmetic("DU_Glasses2", 170, -350, 0.975),
+        new Cosmetic("DU_Glasses3", 150, -450, 0.95),
+        new Cosmetic("DU_Glasses4", 210, -300, 1),
+    ];
+    private shirtArray: Cosmetic[] = [
+        //Minion Overalls
+        new Cosmetic("DU_Shirt1", 100, 180, 1),
+        //Jester Necklace
+        new Cosmetic("DU_Shirt2", 85, 170, 1.1),
+        //Pointer
+        new Cosmetic("DU_Shirt3", -60, 30, 1),
+        //Tie
+        new Cosmetic("DU_Shirt4", 130, 210, 1.05),
+    ];
 
     private faceButtons: Phaser.GameObjects.Image[] = [];
     private glassesButtons: Phaser.GameObjects.Image[] = [];
@@ -73,31 +93,6 @@ export class DressUp extends CustomizationTemplate {
         this.cosmeticContainer.add(this.iconContainer);
         this.iconContainer.add(this.add.graphics().fillStyle(0xffc9d2, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
 
-        //make arrays of cosmetic image keys
-        this.faceArray = [
-            new Cosmetic( "DU_Face1", 195, -30, 0.95),
-            new Cosmetic("DU_Face2", 200, -30, 1),
-            new Cosmetic("DU_Face3", 195, -30, 1),
-            new Cosmetic("DU_Face4", 180, -30, 1),
-        ];
-      
-        this.glassesArray = [
-            new Cosmetic("DU_Glasses1", 200, -300, 0.975),
-            new Cosmetic("DU_Glasses2", 170, -350, 0.975),
-            new Cosmetic("DU_Glasses3", 150, -450, 0.95),
-            new Cosmetic("DU_Glasses4", 210, -300, 1),
-        ];
-
-        this.shirtArray = [
-            //Minion Overalls
-            new Cosmetic("DU_Shirt1", 100, 180, 1),
-            //Jester Necklace
-            new Cosmetic("DU_Shirt2", 85, 170, 1.1),
-            //Pointer
-            new Cosmetic("DU_Shirt3", -60, 30, 1),
-            //Tie
-            new Cosmetic("DU_Shirt4", 130, 210, 1.05),
-        ];
     
 
         //create category buttons

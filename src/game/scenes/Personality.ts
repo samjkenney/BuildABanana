@@ -83,6 +83,8 @@ export class Personality extends CustomizationTemplate{
         // this.bananaContainer.setDepth(1); 
         if(banana.getPersonality() !== undefined){
             banana.getFaceImage().setVisible(false); //remove default face
+            banana.getGlassesImage().setVisible(false);
+            banana.getShirtImage().setVisible(false);
 
             var characteristic = banana.getPersonality(); //add selected cosmetic
             banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -90,10 +92,10 @@ export class Personality extends CustomizationTemplate{
             var index = CharacteristicHandler.getPersonalities().indexOf(characteristic); //select button
             this.buttonList[index].setSelected(true);
 
-            this.addNextButton(this, "Aspirations");
+            this.createNextButton();
         }
 
-        super.addBackButton(this, "Name"); //don't need to use super (can use "this")?
+        super.addBackButton(this, "DressUp"); //don't need to use super (can use "this")?
     }
 
     private createMenu(){
@@ -104,7 +106,7 @@ export class Personality extends CustomizationTemplate{
                 var banana: Banana = this.registry.get("banana");
                 //this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
                 banana.setPersonality(CharacteristicHandler.getPersonalities()[i]);
-                this.addNextButton(this, "Aspirations");
+                this.createNextButton();
             };
 
             //add button
@@ -116,6 +118,9 @@ export class Personality extends CustomizationTemplate{
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
                 banana.getFaceImage().setVisible(false); //remove default face
+                banana.getGlassesImage().setVisible(false);
+                banana.getShirtImage().setVisible(false);
+
                 //remove all cosmetics
                 CharacteristicHandler.getPersonalities().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -135,6 +140,8 @@ export class Personality extends CustomizationTemplate{
                     }
                     else{
                         banana.getFaceImage().setVisible(true); //add back default face
+            banana.getGlassesImage().setVisible(true);
+            banana.getShirtImage().setVisible(true);
                     }
                 }
             });
@@ -145,8 +152,28 @@ export class Personality extends CustomizationTemplate{
         };
     }
 
+    private createNextButton(){
+        var extraAction = () => {
+            //ADD WATER ANIMATION
+            //change to fade cosmetics out
+            var banana: Banana = this.registry.get("banana");
+            banana.removeCosmetic(banana.getPersonality().getReactionCosmetic(), this.bananaContainer);
+            
+            //add customizations back
+            this.time.delayedCall(300, () => {
+                banana.getFaceImage().setVisible(true);
+                banana.getGlassesImage().setVisible(true);
+                banana.getShirtImage().setVisible(true);
+            });
+        };
+
+        this.addNextButton(this, "Aspirations", "Next", extraAction, 600);
+    }
+
+
+
     //for pentagon menu
-    private createMenu1(){
+    private createPentagonMenu(){
         //Pentagon positioning
         var h = 150;
         var buttonWidth = 300
@@ -166,7 +193,7 @@ export class Personality extends CustomizationTemplate{
         for(let i = 0; i < CharacteristicHandler.getPersonalities().length; i++){
             var action = () => {
                 actions.set(`action${i}`, this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic()));
-                this.addNextButton(this, "Aspirations");
+                this.addNextButton(this, "Aspirations", "Next");
             };
             
             //add button

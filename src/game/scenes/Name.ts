@@ -18,10 +18,6 @@ export class Name extends CustomizationTemplate {
     preload() {
         this.load.image('nameBackground', 'assets/name/NS_BKG_NoText.png');
 
-        this.load.spritesheet('blinking_sheet','assets/name/Blinking.png', {
-            frameWidth: 666,  
-            frameHeight: 372,
-        });
         this.load.html('nameform', 'assets/text/nameform.html');
         
     }
@@ -34,7 +30,7 @@ export class Name extends CustomizationTemplate {
         //const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the Personality scene
         //nextButton.setVisible(false);
         //const myBanana = new Banana(this, 400, 714, 'banana'); // Create a new Banana object
-        this.addNextButton(this, "PhotoShoot");
+        this.addNextButton(this, "PhotoShoot", "Next");
         this.getNextButton().setVisible(false);
 
         const element = this.add.dom(0, 300).createFromCache('nameform'); //update y!!!
@@ -70,27 +66,14 @@ export class Name extends CustomizationTemplate {
                 banana.setName(inputBox.value);
                 //update banana in registry?
 
-                //debugging 
-                console.log('Saved name:', inputBox.value);  
-                console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
+                //debugging
+                //console.log('Saved name:', inputBox.value);  
+                //console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
             }
         });
 
         
     }
 
-    private addBlink(){
-        this.anims.create({
-            key:'blink',
-            frames:this.anims.generateFrameNumbers('blinking_sheet',{frames: [0, 1, 2]}),
-            frameRate:1,
-            repeat:-1
-        });
-
-        this.expression = this.add.sprite(530,714, 'blinking_sheet');
-        this.expression.setFrame(0);
-        this.expression.play('blink',true);
-        this.expression.setDepth(1);
-        this.expression.setScale(1.6);
-    }
+  
 }

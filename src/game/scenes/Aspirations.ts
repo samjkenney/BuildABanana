@@ -68,6 +68,8 @@ export class Aspirations extends CustomizationTemplate{
         var banana = this.registry.get("banana");
         if(banana.getAspiration() !== undefined){
             banana.getFaceImage().setVisible(false); //remove default face
+            banana.getGlassesImage().setVisible(false);
+            banana.getShirtImage().setVisible(false);
 
             var characteristic = banana.getAspiration(); //add selected cosmetic
             banana.addCosmetic(this, characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -75,7 +77,7 @@ export class Aspirations extends CustomizationTemplate{
             var index = CharacteristicHandler.getAspirations().indexOf(characteristic); //select button
             this.buttonList[index].setSelected(true);
 
-            this.addNextButton(this, "Wash");
+            this.addNextButton(this, "Wash", "Next");
         }
 
         super.addBackButton(this, "Personality");
@@ -91,7 +93,7 @@ export class Aspirations extends CustomizationTemplate{
                 //banana.removeCosmetic(new Cosmetic("uhh", 0, 0, 0), this.bananaContainer);
                 //banana.addCosmetic(this, CharacteristicHandler.getAspirations()[i].getReactionCosmetic(), this.bananaContainer);
                 banana.setAspiration(CharacteristicHandler.getAspirations()[i]);
-                this.addNextButton(this, "Wash");
+                this.createNextButton();
             };
 
             //add button
@@ -102,6 +104,9 @@ export class Aspirations extends CustomizationTemplate{
             button.on('pointerover', () => {
                 var banana: Banana = this.registry.get("banana");
                 banana.getFaceImage().setVisible(false); //remove default face
+                banana.getGlassesImage().setVisible(false);
+                banana.getShirtImage().setVisible(false);
+
                 //remove all cosmetics
                 CharacteristicHandler.getAspirations().forEach(characteristic => {
                     banana.removeCosmetic(characteristic.getReactionCosmetic(), this.bananaContainer);
@@ -121,6 +126,8 @@ export class Aspirations extends CustomizationTemplate{
                     }
                     else{
                         banana.getFaceImage().setVisible(true); //add back default face
+            banana.getGlassesImage().setVisible(true);
+            banana.getShirtImage().setVisible(true);
                     }
                 }
             });
@@ -129,6 +136,24 @@ export class Aspirations extends CustomizationTemplate{
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){ //move to previous loop
             this.buttonList[i].setSelectOne(this.buttonList);
         };
+    }
+
+    private createNextButton(){
+        var extraAction = () => {
+            //ADD WATER ANIMATION
+            //change to fade cosmetics out
+            var banana: Banana = this.registry.get("banana");
+            banana.removeCosmetic(banana.getAspiration().getReactionCosmetic(), this.bananaContainer);
+            
+            //add customizations back
+            this.time.delayedCall(300, () => {
+                banana.getFaceImage().setVisible(true);
+                banana.getGlassesImage().setVisible(true);
+                banana.getShirtImage().setVisible(true);
+            });
+        };
+
+        this.addNextButton(this, "Wash", "Next", extraAction, 600);
     }
 
     private flashCosmetic(cosmetic: Cosmetic){ //move to banana?

@@ -30,12 +30,13 @@ export class Banana{
 
     bananaImage: GameObjects.Image;
     //activeFace: GameObjects.Image | null = null;
-    faceImage: GameObjects.Image;
+    faceImage: GameObjects.Image; //replace with Cosmetics
     glassesImage: GameObjects.Image;
     shirtImage: GameObjects.Image;
 
     washed = false;
     peeled = false;
+    blinkingStarted = false;
 
     constructor(currentScene: Scene){ //add container
         this.scene = currentScene;
@@ -80,7 +81,9 @@ export class Banana{
         }
         else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
-            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey()).setScale(this.defaultFaceCosmetic.getScale());
+            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey())
+            .setScale(this.defaultFaceCosmetic.getScale());
+            this.startBlinking(this.faceImage, scene);
         }
         //this.faceImage = scene.add.image(0, 0, 'face1').setScale(0.4); //add coordinates, scale in list of face dictionaries
 
@@ -127,6 +130,22 @@ export class Banana{
         };
     }
 
+
+    startBlinking(faceImage: Phaser.GameObjects.Image, scene: Phaser.Scene): void {
+        console.log('Starting blinking...');
+        const originalTexture = faceImage.texture.key; // capture the texture it started with
+        const blink = () => {
+            faceImage.setTexture("eyesClosed"); // closed eyes
+            scene.time.delayedCall(210, () => {
+                faceImage.setTexture(originalTexture); // return to the original texture
+                scene.time.delayedCall(3500, blink); // loop it
+            });
+        };
+        blink();
+   
+    }
+ 
+
     updateBanana(scene: Scene, bananaContainer: GameObjects.Container){
         //remove banana images
         this.bananaImage.setVisible(false);
@@ -172,13 +191,17 @@ export class Banana{
         //set banana face
         this.activeFace = faceCosmetic.getImageKey();
         this.faceCosmetic = faceCosmetic;
+        console.log('this.activeFace:', this.activeFace);
+        if (this.activeFace === "defaultFace") {
+            console.log('Starting blinking...');
+            this.startBlinking(this.faceImage, scene);
+        }
+   
         this.updateBanana(scene, container);
-
-        //if (this.activeFace !== null){
-            //this.activeFace.destroy();
-        //}
+ 
+ 
     }
-
+ 
     setGlasses(scene: Scene, glassesCosmetic: Cosmetic, container: GameObjects.Container){
         //set banana glasses
         this.activeGlasses = glassesCosmetic.getImageKey();
@@ -222,6 +245,18 @@ export class Banana{
 
     getGlassesImage(){
         return this.glassesImage;
+    }
+
+    getFaceCosmetic(){
+        return this.faceCosmetic;
+    }
+
+    getShirtCosmetic(){
+        return this.shirtCosmetic;
+    }
+
+    getGlassesCosmetic(){
+        return this.glassesCosmetic;
     }
 
     destroy() {
