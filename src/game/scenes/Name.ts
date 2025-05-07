@@ -18,10 +18,6 @@ export class Name extends CustomizationTemplate {
     preload() {
         this.load.image('nameBackground', 'assets/name/NS_BKG_NoText.png');
 
-        this.load.spritesheet('blinking_sheet','assets/name/Blinking.png', {
-            frameWidth: 666,  
-            frameHeight: 372,
-        });
         this.load.html('nameform', 'assets/text/nameform.html');
         
     }
@@ -70,18 +66,5 @@ export class Name extends CustomizationTemplate {
         });
     }
 
-    private addBlink(){
-        this.anims.create({
-            key:'blink',
-            frames:this.anims.generateFrameNumbers('blinking_sheet',{frames: [0, 1, 2]}),
-            frameRate:1,
-            repeat:-1
-        });
-
-        this.expression = this.add.sprite(530,714, 'blinking_sheet');
-        this.expression.setFrame(0);
-        this.expression.play('blink',true);
-        this.expression.setDepth(1);
-        this.expression.setScale(1.6);
-    }
+  
 }

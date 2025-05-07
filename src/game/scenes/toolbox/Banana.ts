@@ -36,6 +36,7 @@ export class Banana{
 
     washed = false;
     peeled = false;
+    blinkingStarted = false;
 
     constructor(currentScene: Scene){ //add container
         this.scene = currentScene;
@@ -80,7 +81,9 @@ export class Banana{
         }
         else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
-            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey()).setScale(this.defaultFaceCosmetic.getScale());
+            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey())
+            .setScale(this.defaultFaceCosmetic.getScale());
+            this.startBlinking(this.faceImage, scene);
         }
         //this.faceImage = scene.add.image(0, 0, 'face1').setScale(0.4); //add coordinates, scale in list of face dictionaries
 
@@ -126,6 +129,24 @@ export class Banana{
             image.destroy();
         };
     }
+
+
+    startBlinking(faceImage: Phaser.GameObjects.Image, scene: Phaser.Scene): void {
+        if (this.blinkingStarted) return;
+        this.blinkingStarted = true;
+    
+        const originalTexture = faceImage.texture.key; // capture the texture it started with
+        const blink = () => {
+            faceImage.setTexture("eyesClosed"); // closed eyes
+            scene.time.delayedCall(210, () => {
+                faceImage.setTexture(originalTexture); // return to the original texture
+                scene.time.delayedCall(3500, blink); // loop it
+            });
+        };
+    
+        blink();
+    }
+    
 
     updateBanana(scene: Scene, bananaContainer: GameObjects.Container){
         //remove banana images
