@@ -45,7 +45,7 @@ export class IceCream extends Scene {
         })
         
         
-        this.add.existing(new NextButton(this,'Eulogy', 1400, 1000, 'Yum!'));
+        this.add.existing(new NextButton(this,'Eulogy', 1400, 1000, 'Yum!', 0xDBFFF));
        
         
     }

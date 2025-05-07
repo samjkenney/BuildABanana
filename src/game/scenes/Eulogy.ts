@@ -66,7 +66,7 @@ export class Eulogy extends Scene {
       this.time.addEvent({
         delay: 40000, // Delay before starting the animation
         callback: () => {
-            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!')); // Add a next button to go to the MainMenu scene
+            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!', 0xDBFFF)); // Add a next button to go to the MainMenu scene
         },
         loop: false
       });  

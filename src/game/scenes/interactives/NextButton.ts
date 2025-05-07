@@ -11,19 +11,26 @@ export class NextButton extends SceneButton{
     private static COLOR = 0xF9B1B4; //make constant?
     //add rounding
 
-    constructor(scene: Scene, nextScene: string, x: number, y: number, displayText?: string){
+    constructor(scene: Scene, nextScene: string, x: number, y: number, displayText?: string, color?: number){
         var text;
+        var thisColor: number;
         if(displayText != null){
             text = displayText;
         }
         else{
             text = "Next";
         }
+        if(color != null){
+            thisColor = color;
+        }
+        else{
+            thisColor = NextButton.COLOR;
+        }
 
         // super(scene, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // super(scene, 0, 0, NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // //position updated in each scene?
-        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
+        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, thisColor, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
     }
 
     updatePosition(scene: Scene){
