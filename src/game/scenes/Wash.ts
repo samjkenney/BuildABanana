@@ -1,6 +1,7 @@
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
 import { Banana } from './toolbox/Banana';
+import { Cosmetic } from './toolbox/Cosmetic';
 
 export class Wash extends CookTemplate {
     constructor() {
@@ -18,6 +19,7 @@ export class Wash extends CookTemplate {
         this.load.image('washButton', 'assets/wash/WashButton.png');
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
+        this.load.image('washFace', 'assets/wash/washed face.png');
     }
 
     private makeDropFall(drop: GameObjects.Image) {
@@ -114,7 +116,9 @@ export class Wash extends CookTemplate {
 
                         // update the banana appearance
                         var banana: Banana = this.registry.get("banana");
-                        banana.setFace(this, banana.defaultFaceCosmetic, this.bananaContainer);
+                        var washedFace: Cosmetic = new Cosmetic("washFace", 0, -30, 1.1);
+                        //TODO: change defaultFace to nervous face
+                        banana.setFace(this, washedFace, this.bananaContainer);
                         banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
                         banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);
 
