@@ -47,12 +47,19 @@ export class Name extends CustomizationTemplate {
         inputBox.style.width = this.getMenuContainer().width + 'px';
         inputBox.style.height = '100px'; 
 
-        
+        var message: GameObjects.Text = this.add.text(1200, 530, "Name too long!", { fontSize: '32px', color: '#ff0000' }).setOrigin(0.5).setDepth(1);;
+        message.setVisible(false);
 
         inputBox.addEventListener('input', () => {
-            if (inputBox.value !== '') { //add character limit (function)
+            if (inputBox.value !== '' && inputBox.value.length <= 20) { //add character limit (function)
+                message.setVisible(false); //remove error message
                 this.getNextButton().setVisible(true);  
-            } else {
+            }
+            else if (inputBox.value.length > 20){
+                this.getNextButton().setVisible(false);
+                message.setVisible(true);
+            }
+             else {
                 this.getNextButton().setVisible(false); 
             }
         });
@@ -68,6 +75,8 @@ export class Name extends CustomizationTemplate {
                 console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
             }
         });
+
+        
     }
 
     private addBlink(){
