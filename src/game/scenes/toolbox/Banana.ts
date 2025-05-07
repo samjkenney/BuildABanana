@@ -132,9 +132,7 @@ export class Banana{
 
 
     startBlinking(faceImage: Phaser.GameObjects.Image, scene: Phaser.Scene): void {
-        if (this.blinkingStarted) return;
-        this.blinkingStarted = true;
-    
+        console.log('Starting blinking...');
         const originalTexture = faceImage.texture.key; // capture the texture it started with
         const blink = () => {
             faceImage.setTexture("eyesClosed"); // closed eyes
@@ -143,10 +141,10 @@ export class Banana{
                 scene.time.delayedCall(3500, blink); // loop it
             });
         };
-    
         blink();
+   
     }
-    
+ 
 
     updateBanana(scene: Scene, bananaContainer: GameObjects.Container){
         //remove banana images
@@ -193,13 +191,17 @@ export class Banana{
         //set banana face
         this.activeFace = faceCosmetic.getImageKey();
         this.faceCosmetic = faceCosmetic;
+        console.log('this.activeFace:', this.activeFace);
+        if (this.activeFace === "defaultFace") {
+            console.log('Starting blinking...');
+            this.startBlinking(this.faceImage, scene);
+        }
+   
         this.updateBanana(scene, container);
-
-        //if (this.activeFace !== null){
-            //this.activeFace.destroy();
-        //}
+ 
+ 
     }
-
+ 
     setGlasses(scene: Scene, glassesCosmetic: Cosmetic, container: GameObjects.Container){
         //set banana glasses
         this.activeGlasses = glassesCosmetic.getImageKey();
