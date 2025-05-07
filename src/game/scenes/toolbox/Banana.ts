@@ -192,11 +192,6 @@ export class Banana{
         this.activeFace = faceCosmetic.getImageKey();
         this.faceCosmetic = faceCosmetic;
         console.log('this.activeFace:', this.activeFace);
-        if (this.activeFace === "defaultFace") {
-            console.log('Starting blinking...');
-            this.startBlinking(this.faceImage, scene);
-        }
-   
         this.updateBanana(scene, container);
  
  

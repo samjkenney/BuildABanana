@@ -13,6 +13,7 @@ export class MainMenu extends Scene {
         //this.load.image('startButton', 'assets/startButton.png');
         this.load.image('defaultBackground', 'assets/Basic_BKG.png');
         this.load.image('labBackground', 'assets/characteristic background.png');
+        this.load.image('tank', 'assets/tank_layer.png');
         this.load.image('banana', 'assets/Banana.png');
         this.load.image("bananaPeeled", "assets/peel/bananaPeel4.png");
         this.load.image('defaultFace', 'assets/default face.png');

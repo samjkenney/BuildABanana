@@ -59,6 +59,11 @@ export class Personality extends CustomizationTemplate{
         this.buttonList = []; //clear list (for back button)
         this.createMenu();
 
+        const tank = this.add.image(830, 560, 'tank')
+        .setDepth(0)
+        // .setScale(1.15)
+        // .setAlpha(0.6);
+
          // animated water
          const water = this.add.image(900, 560, 'water_1')
          .setDepth(0)// layering
