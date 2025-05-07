@@ -30,7 +30,7 @@ export class Banana{
 
     bananaImage: GameObjects.Image;
     //activeFace: GameObjects.Image | null = null;
-    faceImage: GameObjects.Image;
+    faceImage: GameObjects.Image; //replace with Cosmetics
     glassesImage: GameObjects.Image;
     shirtImage: GameObjects.Image;
 
@@ -222,6 +222,18 @@ export class Banana{
 
     getGlassesImage(){
         return this.glassesImage;
+    }
+
+    getFaceCosmetic(){
+        return this.faceCosmetic;
+    }
+
+    getShirtCosmetic(){
+        return this.shirtCosmetic;
+    }
+
+    getGlassesCosmetic(){
+        return this.glassesCosmetic;
     }
 
     destroy() {
