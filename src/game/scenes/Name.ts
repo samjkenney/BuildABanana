@@ -63,9 +63,9 @@ export class Name extends CustomizationTemplate {
                 banana.setName(inputBox.value);
                 //update banana in registry?
 
-                //debugging 
-                console.log('Saved name:', inputBox.value);  
-                console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
+                //debugging
+                //console.log('Saved name:', inputBox.value);  
+                //console.log('Retrieved name from banana in registry:', this.registry.get('banana').getName());
             }
         });
     }

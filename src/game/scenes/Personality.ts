@@ -106,7 +106,7 @@ export class Personality extends CustomizationTemplate{
                 var banana: Banana = this.registry.get("banana");
                 //this.flashCosmetic(CharacteristicHandler.getPersonalities()[i].getReactionCosmetic());
                 banana.setPersonality(CharacteristicHandler.getPersonalities()[i]);
-                this.addNextButton(this, "Aspirations", "Next");
+                this.createNextButton();
             };
 
             //add button
@@ -153,11 +153,21 @@ export class Personality extends CustomizationTemplate{
     }
 
     private createNextButton(){
-        //ADD WATER ANIMATION
-        //add fade cosmetics
-        this.time.delayedCall(300, () => {
-            this.addNextButton(this, "Aspirations", "Next");
-        });
+        var extraAction = () => {
+            //ADD WATER ANIMATION
+            //change to fade cosmetics out
+            var banana: Banana = this.registry.get("banana");
+            banana.removeCosmetic(banana.getPersonality().getReactionCosmetic(), this.bananaContainer);
+            
+            //add customizations back
+            this.time.delayedCall(300, () => {
+                banana.getFaceImage().setVisible(true);
+                banana.getGlassesImage().setVisible(true);
+                banana.getShirtImage().setVisible(true);
+            });
+        };
+
+        this.addNextButton(this, "Aspirations", "Next", extraAction, 600);
     }
 
 

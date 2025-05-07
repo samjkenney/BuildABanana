@@ -25,7 +25,7 @@ export class PhotoShoot extends SceneTemplate {
         this.time.addEvent({ //delayedCall?
             delay: 3000,
             callback: ()=>{
-                this.addNextButton(this, "DressUp");
+                this.addNextButton(this, "DressUp", "Next");
                 this.getNextButton().setPosition(this.bananaContainer.width - this.getNextButton().width, this.bananaContainer.height - this.getNextButton().height);
                 this.bananaContainer.add(this.getNextButton());
             },
