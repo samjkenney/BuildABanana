@@ -59,22 +59,22 @@ export class Personality extends CustomizationTemplate{
         this.buttonList = []; //clear list (for back button)
         this.createMenu();
 
-        const tank = this.add.image(830, 560, 'tank')
-        .setDepth(0)
+        const tank = this.add.image(860, 568, 'tank')
+        .setDepth(1)
         // .setScale(1.15)
-        // .setAlpha(0.6);
+        // .setAlpha(0.8);
 
          // animated water
-         const water = this.add.image(900, 560, 'water_1')
+         const water = this.add.image(930, 560, 'water_1')
          .setDepth(0)// layering
-         .setScale(1.15) // scale
+         .setScale(1.16) // scale
          .setAlpha(0.6); 
  
          let waterFrames = ['water_1', 'water_2', 'water_3'];
          let currentFrame = 0;
  
          this.time.addEvent({
-             delay: 220, // speed
+             delay: 230, // speed
              loop: true,
              callback: () => {
              water.setTexture(waterFrames[currentFrame]);
