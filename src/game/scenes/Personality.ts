@@ -68,7 +68,7 @@ export class Personality extends CustomizationTemplate{
         // .setAlpha(0.8);
 
          // animated water
-         const water = this.add.image(850.2155144762387, 566.7769396551724, 'water_1')
+         const water = this.add.image(917.8492418333755, 542.6275017097364, 'water_1')
          .setDepth(0)// layering
          .setScale(1.180) // scale
          .setAlpha(0.6); 
@@ -85,13 +85,14 @@ export class Personality extends CustomizationTemplate{
              }
          });
 
+         //debug positions
          water.setInteractive({ draggable: true });
         this.input.setDraggable(water);
 
         water.on('drag', (pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
             water.x = dragX;
             water.y = dragY;
-            console.log(`Water position: x=${tank.x}, y=${tank.y}`);
+            console.log(`Water position: x=${water.x}, y=${water.y}`);
         });
 
         
