@@ -72,6 +72,10 @@ export class DressUp extends CustomizationTemplate {
              this.load.image(`DU_Shirt${i}`, `assets/dressup/DU_Shirt${i}.png`);
         }
 
+        for (let j = 1; j <= 15; j++) {
+            this.load.image(`brainZoom${j}`, `assets/dressup/zoomAnimation/brainzoom${j}.png`);
+        }
+
     }
 
     create() {
@@ -115,8 +119,11 @@ export class DressUp extends CustomizationTemplate {
         buttonList[0].setSelected(true);
         buttonList[0].selectCategory();
        
+        
+
         //zoom function
         var zoom = () => {
+            
             var cam = this.cameras.main;
             
             cam.setPosition(0, 0);
@@ -128,9 +135,45 @@ export class DressUp extends CustomizationTemplate {
                 ease: 'Linear',
                 duration: 1500,
                 onComplete: () => {
-                    this.scene.start('Personality');
+                    //play animation
+                    playZoomAnimation();
+                    this.time.addEvent({
+                        delay: 4300, // Delay before starting the animation
+                        callback: () => { 
+                            this.scene.start('Personality');
+                        },
+                        loop: false
+                    })    
                 }
             });
+        }
+
+        var playZoomAnimation = () => {
+            this.anims.create({
+                key: 'brainZoom',
+                frames: [
+                    { key: 'brainZoom1' },
+                    { key: 'brainZoom2' },
+                    { key: 'brainZoom3' },
+                    { key: 'brainZoom4' },
+                    { key: 'brainZoom5' },
+                    { key: 'brainZoom6' },
+                    { key: 'brainZoom7' },
+                    { key: 'brainZoom8' },
+                    { key: 'brainZoom9' },
+                    { key: 'brainZoom10' },
+                    { key: 'brainZoom11' },
+                    { key: 'brainZoom12' },
+                    { key: 'brainZoom13' },
+                    { key: 'brainZoom14' },
+                    { key: 'brainZoom15' }
+                ],
+                frameRate: 3.5, //3.5 frames per second
+                repeat: 0 
+            })
+
+            const thisSprite = this.add.sprite(720, 400, 'brainZoom1').setScale(0.05).play('brainZoom'); //
+            // play animation
         }
         
        //add button to zoom in on banana and transition to next scene

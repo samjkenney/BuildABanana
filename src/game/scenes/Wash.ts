@@ -20,6 +20,10 @@ export class Wash extends CookTemplate {
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
         this.load.image('washFace', 'assets/wash/washed face.png');
+
+        for (let j = 1; j <= 15; j++) {
+            this.load.image(`brainZoom${j}`, `assets/dressup/zoomAnimation/brainzoom${j}.png`);
+        }
     }
 
     private makeDropFall(drop: GameObjects.Image) {
@@ -41,7 +45,7 @@ export class Wash extends CookTemplate {
     create() {
         this.cookLoader(this);
 
-        //get camera
+
         var cam = this.cameras.main;
         // get camera starting information 
         var camX = cam.x;
@@ -50,10 +54,11 @@ export class Wash extends CookTemplate {
         var camHeight = cam.height;
         var centerX = cam.centerX;
         var centerY = cam.centerY;
-       //zoom in on banana forehead
+        //zoom in on banana forehead
         cam.centerOn(1010, 520);
         cam.setZoom(20);
-        //zoom out to original size 
+     
+                //zoom out to original size 
         this.tweens.add({
             targets: cam,
             zoom: 1,
@@ -65,7 +70,10 @@ export class Wash extends CookTemplate {
                 cam.setSize(camWidth, camHeight);
                 cam.setZoom(1);
             }
-        });
+        }); // start the next scene after the animation
+            
+
+        
 
         const drops = [
             this.add.image(1100, 510, 'water'),

@@ -2,7 +2,6 @@
 // Can be called to get the characteristics for the game
 import { Characteristic } from "./Characteristic";
 import { Cosmetic } from "./Cosmetic";
-import { Aspirations } from "../Aspirations";
 
 export class CharacteristicHandler{
     //All of the avaiable aspirations
