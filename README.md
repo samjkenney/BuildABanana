@@ -26,11 +26,11 @@ We only utilized three of the folders: dist, src, and public.
 
 **src** holds all of the code to run the game. 
 
-    - **game** is the only folder we updated
+- **game** is the only folder we updated
     
-        - **scenes** contains all of the individual scene files, plus our templates and helper classes.
+     - **scenes** contains all of the individual scene files, plus our templates and helper classes.
         
-            - **interactives** holds our helper classes for buttons. 
+        - **interactives** holds our helper classes for buttons. 
             
             - **toolbox** holds our other managing classes: Banana, Characteristic, Cosmetic, etc.
             
@@ -41,7 +41,9 @@ We only utilized three of the folders: dist, src, and public.
         - **main.ts** is updated to include new scenes.
 
 **public** contains the external assets. 
+
     - **assets** holds our graphics, including animation frames. Graphics used more than once are stored in the main folder, while scene-specific assets are stored in sub-folders named by scene.
+
     - **fonts** holds our font, Kitto. 
 
 ### To Add a New Scene
