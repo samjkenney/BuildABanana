@@ -1,6 +1,7 @@
 import { Banana } from './toolbox/Banana';
 import { CookTemplate } from './CookTemplate';
 import { TextStyles } from './toolbox/TextStyles';
+import { Cosmetic } from './toolbox/Cosmetic';
 
 export class Peel extends CookTemplate {
     constructor() {
@@ -37,13 +38,12 @@ export class Peel extends CookTemplate {
     
 
         let banana: Banana = this.registry.get('banana');
-    
-        // if there's no banana in the registry, create a new one
-        if (!banana) {
-            banana = new Banana(this);
-            this.registry.set('banana', banana); // store it in the registry for later use
-        }
 
+       
+        
+   
+    
+     
         // banana frames for peeling
         const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
         let currentFrame = 0;
@@ -89,7 +89,17 @@ export class Peel extends CookTemplate {
                     banana.setScale(1);
         
                     // stop the drag animation once the banana is fully peeled
-                    if (currentFrame === 4) {
+                    if (currentFrame === 1) {
+                        // remove the face cosmetic
+                        console.log("Removing face cosmetic:", banana.getFaceCosmetic());
+                        var noFace: Cosmetic = new Cosmetic("none", 0, -30, 0.2);
+                        banana.setFace(this, noFace, this.bananaContainer); //  empty face
+        
+                        banana.setTexture(bananaFrames[currentFrame]);
+                        banana.setScale(1);
+        
+                    } 
+                    else if (currentFrame === 4) {
                         dragAnimation.stop();
                         dragAnimation.setVisible(false);
                         this.addNextButton(this, 'LightsOff', "Next"); // show next button

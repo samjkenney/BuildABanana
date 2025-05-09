@@ -94,6 +94,15 @@ export class Personality extends CustomizationTemplate{
             ease: 'Sine.easeInOut'
         });
 
+
+        // tank.setInteractive({ draggable: true });
+        // this.input.setDraggable(tank);
+        // tank.on('drag', (pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
+        //     tank.x = dragX;
+        //     tank.y = dragY;
+        //     console.log(`Tank position: x=${tank.x}, y=${tank.y}`);
+        // });
+
         
         //check if Personality already selected (used back button)
         var banana = this.registry.get("banana");

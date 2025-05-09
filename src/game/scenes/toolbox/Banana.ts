@@ -128,6 +128,10 @@ export class Banana{
         if(bananaContainer.exists(image)){
             image.destroy();
         };
+
+        if (image) {
+            image.destroy();
+        }
     }
 
 
