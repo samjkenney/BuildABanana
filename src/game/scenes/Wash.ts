@@ -63,7 +63,7 @@ export class Wash extends CookTemplate {
             targets: cam,
             zoom: 1,
             ease: 'Linear',
-            duration: 1500,    
+            duration: 1300,    
             onComplete: () => {
                 cam.setPosition(camX, camY);
                 cam.centerOn(centerX, centerY);
