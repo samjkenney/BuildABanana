@@ -12,6 +12,7 @@ import { Personality } from './scenes/Personality';
 import { Aspirations } from './scenes/Aspirations';
 import { DressUp } from './scenes/DressUp';
 import { Peel } from './scenes/Peel';
+import { LightsOff } from './scenes/LightsOff';
 import { Split } from './scenes/Split';
 import { Wash } from './scenes/Wash';
 import { IceCream } from './scenes/IceCream';
@@ -49,6 +50,7 @@ const config: Phaser.Types.Core.GameConfig = {
         DressUp,
         Wash,
         Peel,
+        LightsOff,
         Split,
         IceCream,
         Eulogy
