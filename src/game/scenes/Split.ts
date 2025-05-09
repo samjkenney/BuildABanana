@@ -19,7 +19,9 @@ export class Split extends CookTemplate {
         
         this.load.image('text', 'assets/split/click to slice text.png');
 
-        this.load.video('splitVideo', 'assets/split/slice animation CROPPED.mp4')
+        for (let i = 1; i <= 5; i++) {
+            this.load.image(`lightsOn${i}`, `assets/split/lightsOn/lightson${i}.png`);
+        }
     }
 
     create() {
@@ -62,8 +64,14 @@ export class Split extends CookTemplate {
                         slice1.destroy();
                         slice2.destroy();
                         slice3.destroy();
-                        this.add.video(849, 567.5, 'splitVideo').setScale(1.2).play();
-                        this.addNextButton(this, 'IceCream', 'Oops!');
+                        this.playLightsOn();
+                        this.time.addEvent({
+                            delay: 1000,
+                            callback: () => {
+                                this.addNextButton(this, 'IceCream', 'Oops!');
+                            },
+                            loop: false
+                        })
                     },
                     loop: false
                 })
@@ -73,5 +81,22 @@ export class Split extends CookTemplate {
            
         })
         
+    }
+
+    playLightsOn = () => {
+        this.anims.create({
+            key: 'lightsOn',
+            frames: [
+                { key: 'lightsOn1' },
+                { key: 'lightsOn2' },
+                { key: 'lightsOn3' },
+                { key: 'lightsOn4' },
+                { key: 'lightsOn5' }
+            ],
+            frameRate: 5,
+            repeat: 0 
+        })
+
+        const thisSprite = this.add.sprite(849, 567.5, 'lightsOn1').play('lightsOn');
     }
 }
