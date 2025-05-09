@@ -29,7 +29,7 @@ export class IceCream extends Scene {
                 { key: 'cloudFrame6' },
                 { key: 'cloudFrame7' }
             ],
-            frameRate: 3.5, //3.5 frames per second
+            frameRate: 4.5, //3.5 frames per second
             repeat: 0 
         })
 

@@ -1,3 +1,4 @@
+// Represents the individual cosmetic buttons in the dress up scene
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { ImageButton } from './ImageButton';

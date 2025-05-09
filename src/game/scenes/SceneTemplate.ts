@@ -1,3 +1,4 @@
+// template for all scenes, contains common methods and properties
 import { GameObjects, Scene } from 'phaser';
 import { Banana } from './toolbox/Banana';
 import { TextStyles } from './toolbox/TextStyles';
@@ -6,7 +7,7 @@ import { BackButton } from './interactives/BackButton';
 
 export abstract class SceneTemplate extends Scene {
     //debugging
-    protected debug = false;
+    protected debug = false; //highlights container and buttons
     borderBox: GameObjects.Graphics;
     expectedBox: GameObjects.Graphics;
     actualBox: GameObjects.Graphics;

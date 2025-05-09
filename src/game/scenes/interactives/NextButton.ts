@@ -1,3 +1,4 @@
+// represents all the buttons that take the player to the next scene
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { SceneButton } from "./SceneButton";

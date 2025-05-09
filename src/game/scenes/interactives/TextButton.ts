@@ -1,3 +1,4 @@
+//represents a button that displays text
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { Button } from './Button';

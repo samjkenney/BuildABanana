@@ -148,6 +148,7 @@ export class DressUp extends CustomizationTemplate {
             });
         }
 
+        //play the animation of zooming in on the banana
         var playZoomAnimation = () => {
             this.anims.create({
                 key: 'brainZoom',

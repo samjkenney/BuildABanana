@@ -54,33 +54,35 @@ export class Split extends CookTemplate {
                 slice2.setVisible(true);
             }
             else if (click === 3)  {
-                slice3.setVisible(true);
-                text.destroy();
-                //after one second, play the video
-                this.time.addEvent({
-                    delay: 1000,
-                    callback: ()=>{
-                       banana.destroy();
-                        slice1.destroy();
-                        slice2.destroy();
-                        slice3.destroy();
-                        this.playLightsOn();
-                        this.time.addEvent({
-                            delay: 1000,
-                            callback: () => {
-                                this.addNextButton(this, 'IceCream', 'Oops!');
-                            },
-                            loop: false
-                        })
-                    },
-                    loop: false
-                })
-            }
-            
-            
-           
+                this.clearScene(banana, slice1, slice2, slice3, text);
+            }      
         })
         
+    }
+    
+    //removes the banana, slices, and text, and plays the lights on animation
+    clearScene(banana: GameObjects.Image, slice1: GameObjects.Image, slice2: GameObjects.Image, slice3: GameObjects.Image, text: GameObjects.Image) {
+        slice3.setVisible(true);
+        text.destroy();
+        //after one second, play the animation
+        this.time.addEvent({
+            delay: 1000,
+            callback: ()=>{
+                banana.destroy();
+                slice1.destroy();
+                slice2.destroy();
+                slice3.destroy();
+                this.playLightsOn();
+                this.time.addEvent({
+                    delay: 1000,
+                    callback: () => {
+                        this.addNextButton(this, 'IceCream', 'Oops!');
+                    },
+                    loop: false
+                        })
+                    },
+                loop: false
+                })
     }
 
     playLightsOn = () => {

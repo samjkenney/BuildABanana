@@ -1,3 +1,4 @@
+/// Represents any button that uses an image as its content, like icon buttons
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { Button } from './Button';

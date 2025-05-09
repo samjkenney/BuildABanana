@@ -1,3 +1,4 @@
+// Parent class for all buttons
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 
@@ -104,6 +105,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         }
     }
 
+    //add the rectangular shape of the button
     protected addRectangle(color: number){
         this.backgroundGraphics.clear();
         if(color == 0){ //replace with this.transparent
@@ -115,7 +117,7 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
 
-    //scale content to button size
+    //scale content (string inside the button) to button size
     // protected scaleToButton(content: GameObjects.Text): void;
     // protected scaleToButton(content: GameObjects.Image): void;
     // protected scaleToButton(content: any){

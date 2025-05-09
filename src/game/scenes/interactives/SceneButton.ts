@@ -1,3 +1,4 @@
+//Represents a button to switch between scenes, like the back and next buttons
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { TextButton } from "./TextButton";

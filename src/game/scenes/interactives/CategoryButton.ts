@@ -1,3 +1,4 @@
+// category button for the dress up scene- represent the category of cosmetics (face, glasses, shirt)
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
 import { Banana } from '../toolbox/Banana';
