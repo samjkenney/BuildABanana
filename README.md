@@ -18,6 +18,8 @@ To build, run *npm run build* in the terminal. Then, upload the contents of the 
 
 ## Navigating the Repository
 
+The layout, style guide, and class map can be found on [this Figma page](https://www.figma.com/proto/EsI8IQl0QP7oHOVFBhOmLT/Build-A-Banana?node-id=125-59&t=jBRwfzo9fOuBfKHW-1).
+
 We only utilized three of the folders: dist, src, and public.
 
 **dist** is updated on *npm run build* and contains the built files of the game.
