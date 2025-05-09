@@ -16,7 +16,7 @@ export class Name extends CustomizationTemplate {
     }
 
     preload() {
-        this.load.image('nameBackground', 'assets/name/NS_BKG_NoText.png');
+        this.load.image('nameBackground', 'assets/name/NS_BKG_NoText_edited.png');
 
         this.load.html('nameform', 'assets/text/nameform.html');
         
