@@ -59,15 +59,18 @@ export class Personality extends CustomizationTemplate{
         this.buttonList = []; //clear list (for back button)
         this.createMenu();
 
-        const tank = this.add.image(860, 568, 'tank')
+        const tank = this.add.image(850.2155144762387, 566.7769396551724, 'tank')
         .setDepth(1)
-        // .setScale(1.15)
+        .setScale(1);
+
+
+        
         // .setAlpha(0.8);
 
          // animated water
-         const water = this.add.image(930, 560, 'water_1')
+         const water = this.add.image(850.2155144762387, 566.7769396551724, 'water_1')
          .setDepth(0)// layering
-         .setScale(1.16) // scale
+         .setScale(1.180) // scale
          .setAlpha(0.6); 
  
          let waterFrames = ['water_1', 'water_2', 'water_3'];
@@ -81,6 +84,15 @@ export class Personality extends CustomizationTemplate{
              currentFrame = (currentFrame + 1) % waterFrames.length;
              }
          });
+
+         water.setInteractive({ draggable: true });
+        this.input.setDraggable(water);
+
+        water.on('drag', (pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
+            water.x = dragX;
+            water.y = dragY;
+            console.log(`Water position: x=${tank.x}, y=${tank.y}`);
+        });
 
         
         //check if Personality already selected (used back button)
