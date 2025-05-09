@@ -24,7 +24,7 @@ We only utilized three of the folders: dist, src, and public.
 
 **dist** is updated on *npm run build* and contains the built files of the game.
 
-**src** holds all of the code to run the game. 
+-**src** holds all of the code to run the game. 
 
 - **game** is the only folder we updated
     
@@ -42,9 +42,9 @@ We only utilized three of the folders: dist, src, and public.
 
 **public** contains the external assets. 
 
-    - **assets** holds our graphics, including animation frames. Graphics used more than once are stored in the main folder, while scene-specific assets are stored in sub-folders named by scene.
+- **assets** holds our graphics, including animation frames. Graphics used more than once are stored in the main folder, while scene-specific assets are stored in sub-folders named by scene.
 
-    - **fonts** holds our font, Kitto. 
+- **fonts** holds our font, Kitto. 
 
 ### To Add a New Scene
 New scenes should be stored as individual typeScript files in in src/game/scenes. Their unique assets should be stored in a folder of the same name in public/assets.
