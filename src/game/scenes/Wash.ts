@@ -125,7 +125,6 @@ export class Wash extends CookTemplate {
                         // update the banana appearance
                         var banana: Banana = this.registry.get("banana");
                         var washedFace: Cosmetic = new Cosmetic("washFace", 0, -30, 1.1);
-                        //TODO: change defaultFace to nervous face
                         banana.setFace(this, washedFace, this.bananaContainer);
                         banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
                         banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);

@@ -37,10 +37,14 @@ We only utilized three of the folders: dist, src, and public.
 
 ### To Add a New Scene
 New scenes should be stored as individual typeScript files in in src/game/scenes. Their unique assets should be stored in a folder of the same name in public/assets.
-They should extend from either CustomizatonTemplate, CookTemplate, or SceneTemplate, depending on the content of the scene, and load in the banana from the registry.
+They should extend from either CustomizatonTemplate, CookTemplate, or SceneTemplate, depending on the content of the scene, and load in the banana from the registry. Frequently used assets (like buttons) can be loaded using the cookLoader() or customizationLoader() functions. 
 The name of the scene should be added to src/main.ts in the form of an import statement at the top, and added into the scene array. 
 
 ## Known Bugs
+- Title text colors changes on replay
+- On hover, blue buttons turn to pink
+- The background of the photo shoot scene appears before the photo shoot plays
+- Certain characters (Cyrillic) aren't available in theme font
 
 ## Future Work
 - Adding in more options for recipes: banana bread, banana smoothie.
@@ -51,6 +55,8 @@ The name of the scene should be added to src/main.ts in the form of an import st
 - Add sound effects
 - Use keyboard to handle interactions (Enter for Next)
 - Make the game accesssible for screen readers
+- Continue to decompose methods
+- Continue to create helper functions
 
 ## Frequently Asked Questions
 **Did you guys make all the art?**
@@ -58,3 +64,7 @@ Yes! Daisy made all of the art in Ibis Paint.
 
 **How'd you come up with the idea?**
 The phrase "Build A Banana" met the idea of "Cooking Mama but screaming." Our other inspirations include the [Papa's -eria games](https://papasgamesfree.io/#google_vignette), [The Ratchelor](https://algorat.club/ratchelor/), [Finch](https://finchcare.com/), Pokemon, and [Jellycat](https://us.jellycat.com/). 
+
+**Do you hate bananas?**
+No! We love bananas!
+

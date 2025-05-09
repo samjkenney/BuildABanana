@@ -48,6 +48,7 @@ export class Eulogy extends Scene {
 
        //add text ot the screen
         const titleText = this.add.text(400, 1000, eulogyText);
+        //titleText.setColor('#000000');
         titleText.setStyle(TextStyles.body);
         titleText.setWordWrapWidth(1000);
         titleText.setLineSpacing(50);
