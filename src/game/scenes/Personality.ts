@@ -77,7 +77,7 @@ export class Personality extends CustomizationTemplate{
          let currentFrame = 0;
  
          this.time.addEvent({
-             delay: 230, // speed
+             delay: 250, // speed
              loop: true,
              callback: () => {
              water.setTexture(waterFrames[currentFrame]);
@@ -85,14 +85,13 @@ export class Personality extends CustomizationTemplate{
              }
          });
 
-         //debug positions
-         water.setInteractive({ draggable: true });
-        this.input.setDraggable(water);
-
-        water.on('drag', (pointer: Phaser.Input.Pointer, dragX: number, dragY: number) => {
-            water.x = dragX;
-            water.y = dragY;
-            console.log(`Water position: x=${water.x}, y=${water.y}`);
+         this.tweens.add({
+            targets: water,
+            alpha: 0.7, 
+            duration: 1000,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
         });
 
         

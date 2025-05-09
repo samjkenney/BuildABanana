@@ -46,23 +46,38 @@ export class Aspirations extends CustomizationTemplate{
 
 
 
+        const tank = this.add.image(850.2155144762387, 566.7769396551724, 'tank')
+        .setDepth(1)
+        .setScale(1);
+
+
          // animated water
-         const water = this.add.image(900, 560, 'water_1')
+         const water = this.add.image(917.8492418333755, 542.6275017097364, 'water_1')
          .setDepth(0)// layering
-         .setScale(1.15) // scale
+         .setScale(1.180) // scale
          .setAlpha(0.6); 
  
          let waterFrames = ['water_1', 'water_2', 'water_3'];
          let currentFrame = 0;
  
          this.time.addEvent({
-             delay: 220, // speed
+             delay: 250, // speed
              loop: true,
              callback: () => {
              water.setTexture(waterFrames[currentFrame]);
              currentFrame = (currentFrame + 1) % waterFrames.length;
              }
          });
+
+         this.tweens.add({
+            targets: water,
+            alpha: 0.7, 
+            duration: 1000,
+            yoyo: true,
+            repeat: -1,
+            ease: 'Sine.easeInOut'
+        });
+
 
         //check if Aspiration already selected (used back button)
         var banana = this.registry.get("banana");
