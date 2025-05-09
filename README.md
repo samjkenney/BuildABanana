@@ -24,7 +24,7 @@ We only utilized three of the folders: dist, src, and public.
 
 **dist** is updated on *npm run build* and contains the built files of the game.
 
--**src** holds all of the code to run the game. 
+**src** holds all of the code to run the game. 
 
 - **game** is the only folder we updated
     

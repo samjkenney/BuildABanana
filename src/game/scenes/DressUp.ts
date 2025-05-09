@@ -169,7 +169,7 @@ export class DressUp extends CustomizationTemplate {
                     { key: 'brainZoom14' },
                     { key: 'brainZoom15' }
                 ],
-                frameRate: 3.5, //3.5 frames per second
+                frameRate: 5, 
                 repeat: 0 
             })
 

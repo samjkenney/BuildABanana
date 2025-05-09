@@ -95,7 +95,7 @@ export class Split extends CookTemplate {
                 { key: 'lightsOn4' },
                 { key: 'lightsOn5' }
             ],
-            frameRate: 5,
+            frameRate: 4.5,
             repeat: 0 
         })
 

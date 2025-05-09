@@ -12,17 +12,17 @@ export class Eulogy extends Scene {
 
     preload(){
         //load background
-        this.load.image("backgroundT", "assets/Basic_BKG.jpeg"); 
+        this.load.image("backgroundT", "assets/eulogy/EulogyBKG.png"); 
     }
     
     create(){
-        //gets information frmo the banana object
+        //gets information from the banana object
         const name : String = this.registry.get("banana").getName();
         const personality : Characteristic = this.registry.get("banana").getPersonality();
         const aspiration : Characteristic = this.registry.get("banana").getAspiration();
         
 
-        const bg = this.add.image(849, 567.5,'backgroundT').setScale(1.5); //replace w custom background
+        const bg = this.add.image(849, 567.5,'backgroundT').setScale(1); //replace w custom background
        
         //custom text to be displayed 
         const eulogyText = "Here lies " + name + " the Banana\n" +
@@ -48,9 +48,10 @@ export class Eulogy extends Scene {
 
        //add text ot the screen
         const titleText = this.add.text(400, 1000, eulogyText);
-        //titleText.setColor('#000000');
+        titleText.setTint(0x000000); // Set the text color to black
+        console.log(titleText.tint);
         titleText.setStyle(TextStyles.body);
-        titleText.setWordWrapWidth(1000);
+        titleText.setWordWrapWidth(900);
         titleText.setLineSpacing(50);
         
         //animation for autoscroll
@@ -67,7 +68,7 @@ export class Eulogy extends Scene {
       this.time.addEvent({
         delay: 40000, // Delay before starting the animation
         callback: () => {
-            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again!', undefined, 0,  0xDBFFF)); // Add a next button to go to the MainMenu scene
+            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again', undefined, 0,  0xDBFFF)); // Add a next button to go to the MainMenu scene
         },
         loop: false
       });  
