@@ -4,6 +4,8 @@ import { Banana } from './toolbox/Banana';
 import { Cosmetic } from './toolbox/Cosmetic';
 
 export class Wash extends CookTemplate {
+
+    private candles: Phaser.GameObjects.Image;
     constructor() {
         super('Wash', "Bath time!", "washBackground");
     }
@@ -19,6 +21,8 @@ export class Wash extends CookTemplate {
         this.load.image('washButton', 'assets/wash/WashButton.png');
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
+        this.load.image('candles', 'assets/wash/candles.png');
+        this.load.image('candles_out', 'assets/wash/candles_out.png');
         this.load.image('washFace', 'assets/wash/washed face.png');
 
        
@@ -44,7 +48,10 @@ export class Wash extends CookTemplate {
         this.cookLoader(this);
 
         this.brainZoom();
-        
+
+        this.candles = this.add.image(798.8186877290125, 511.42518720068756, 'candles')
+        .setDepth(1);
+            
         const drops = [
             this.add.image(1100, 510, 'water'),
             this.add.image(900, 850, 'water')
@@ -85,6 +92,8 @@ export class Wash extends CookTemplate {
                             // set the banana container depth to be above the puddle
                             this.bananaContainer.setDepth(1); 
 
+                            this.candles.setTexture('candles_out');
+
                             hose.setTexture('hoseOff'); // reset hose texture
                             drops.forEach(drop => drop.setVisible(true)); // make water drops visible
                             drops.forEach(drop => this.makeDropFall(drop)); // start making water drops fall
@@ -107,6 +116,11 @@ export class Wash extends CookTemplate {
                     }
                 });
             });
+
+
+
+    
+
         }
 
     // Function to zoom in on the banana's forehead and then zoom out

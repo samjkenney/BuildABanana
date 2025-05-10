@@ -8,7 +8,7 @@ export class PhotoShoot extends SceneTemplate {
     }
 
     preload() {
-        this.load.image('backgroundbase', 'assets/Basic_BKG.jpeg'); //replace w custom background
+        this.load.image('backgroundbase', 'assets/PS_BKG.png'); //replace w custom background
 
         this.load.video('photoshootVideo', 'assets/banana photos.mp4'); // Load the video
 
