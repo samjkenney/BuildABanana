@@ -79,7 +79,7 @@ export class Peel extends CookTemplate {
         // handle dragging
         this.input.on('drag', (pointer: Phaser.Input.Pointer, gameObject: Phaser.GameObjects.GameObject) => {
             console.log('Dragging:', (gameObject as Phaser.GameObjects.Image).texture?.key); // debug test
-        
+
             // get current time to track how long since last peel
             const now = this.time.now;
             if (pointer.isDown && currentFrame < bananaFrames.length - 1) { // check if the pointer is down and we're not at the last peel frame yet
@@ -93,8 +93,10 @@ export class Peel extends CookTemplate {
                         // remove the face cosmetic
                         console.log("Removing face cosmetic:", banana.getFaceCosmetic());
                         var noFace: Cosmetic = new Cosmetic("none", 0, -30, 0.2);
-                        banana.setFace(this, noFace, this.bananaContainer); //  empty face
-        
+                        //banana.setFace(this, noFace, this.bananaContainer); //  empty face
+                        //banana.removeCosmetic(banana.getFaceCosmetic(), this.bananaContainer);
+                        banana.getFaceImage().setVisible(false);
+
                         banana.setTexture(bananaFrames[currentFrame]);
                         banana.setScale(1);
         
