@@ -113,7 +113,7 @@ export class DressUp extends CustomizationTemplate {
         }
 
         for(var i = 0; i < categories.length; i++){
-            buttonList[i].setSelectOne(buttonList);
+            buttonList[i].setSelectOne(buttonList, false);
         }
 
         buttonList[0].setSelected(true);
@@ -179,7 +179,7 @@ export class DressUp extends CustomizationTemplate {
         
        //add button to zoom in on banana and transition to next scene
         this.add.existing(new TextButton(this, 1050, 1000, 400, 100,
-             0xF9B1B4, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
+             0xF9B1B4, 0x000000, 0x000000, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
              true, true, zoom))
     }
 

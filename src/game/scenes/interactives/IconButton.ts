@@ -7,6 +7,8 @@ import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class IconButton extends ImageButton{
     private static COLOR = 0xfeeaed; //make constant?
+    private static HOVERCOLOR = 0xF9B1B4; //make constant?
+    private static SELECTEDCOLOR = 0x0000ff; //make constant?
     private WIDTH: number; //make constant?
     private HEIGHT: number; //make constant?
 
@@ -14,19 +16,33 @@ export class IconButton extends ImageButton{
         var action = () => {
             console.log("Icon button clicked");
             var banana: Banana = scene.registry.get("banana");
-            if(category == "face"){ //change to index of categoryArray or whatever from DressUp, check for which category to set (if statements)?
-                banana.setFace(scene, imageKey, bananaContainer);
+            
+            if(this.selected == true){ //deselect
+                if(category == "face"){ //change to index of categoryArray or whatever from DressUp, check for which category to set (if statements)?
+                    banana.setFace(scene, Banana.defaultFaceCosmetic, bananaContainer);
+                }
+                else if(category == "glasses"){
+                    banana.setGlasses(scene, Banana.noGlassesCosmetic, bananaContainer);
+                }
+                else if(category == "shirt"){
+                    banana.setShirt(scene, Banana.noShirtCosmetic, bananaContainer);
+                }
             }
-            else if(category == "glasses"){
-                banana.setGlasses(scene, imageKey, bananaContainer);
+            else{
+                console.log("icon not selected " + this.selected);
+                if(category == "face"){
+                    banana.setFace(scene, imageKey, bananaContainer);
+                }
+                else if(category == "glasses"){
+                    banana.setGlasses(scene, imageKey, bananaContainer);
+                }
+                else if(category == "shirt"){
+                    banana.setShirt(scene, imageKey, bananaContainer);
+                }
             }
-            else if(category == "shirt"){
-                banana.setShirt(scene, imageKey, bananaContainer);
-            }
-            //select behavior
         };
 
-        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, imageKey.getImageKey(), true, action);
+        super(scene, x, y, container.width * 0.35, container.height * 0.35, IconButton.COLOR, IconButton.HOVERCOLOR, IconButton.SELECTEDCOLOR, imageKey.getImageKey(), true, action);
 
         this.calculateSizes(container);
         this.setSize(this.WIDTH, this.HEIGHT);

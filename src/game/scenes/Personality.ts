@@ -17,6 +17,8 @@ export class Personality extends CustomizationTemplate{
     private BUTTONHEIGHT: number;
     private BUTTONWIDTH: number;
     private COLOR = 0xff0000;
+    private HOVERCOLOR = 0x000000;
+    private SELECTEDCOLOR = 0x000000;
 
     private buttonList: TextButton[] = [];
 
@@ -136,7 +138,7 @@ export class Personality extends CustomizationTemplate{
             };
 
             //add button
-            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
+            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.HOVERCOLOR, this.SELECTEDCOLOR, CharacteristicHandler.getPersonalities()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             //button.setTransparent();
             this.buttonList.push(button);
             this.menuContainer.add(button);
@@ -174,7 +176,7 @@ export class Personality extends CustomizationTemplate{
         };
 
         for(var i = 0; i < CharacteristicHandler.getPersonalities().length; i++){ //move to previous loop?
-            this.buttonList[i].setSelectOne(this.buttonList);
+            this.buttonList[i].setSelectOne(this.buttonList, false);
         };
     }
 
@@ -223,7 +225,7 @@ export class Personality extends CustomizationTemplate{
             };
             
             //add button
-            var button = new ImageButton(this, positions[i].x, positions[i].y, 300, 300, 0xffffff, `Personality menu ${i + 1}`, false, action);
+            var button = new ImageButton(this, positions[i].x, positions[i].y, 300, 300, 0xffffff, 0x000000, 0x000000, `Personality menu ${i + 1}`, false, action);
             //button.setInteractive(false);
             //button.getContent().setInteractive();
             button.setTransparent();

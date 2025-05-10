@@ -10,6 +10,8 @@ export class NextButton extends SceneButton{
     private static WIDTH = 240; //make constant?
     private static HEIGHT = 100; //make constant?
     private static COLOR = 0xF9B1B4; //make constant?
+    private static HOVERCOLOR = 0x00ff00; //make constant?
+    private static SELECTEDCOLOR = 0x0000ff; //make constant?
     //add rounding
 
     constructor(scene: Scene, nextScene: string, x: number, y: number, displayText: string, extraAction?: Function, delay?: number, color?: number){
@@ -31,7 +33,7 @@ export class NextButton extends SceneButton{
         // super(scene, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // super(scene, 0, 0, NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // //position updated in each scene?
-        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, thisColor, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene, extraAction, delay);
+        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, thisColor, NextButton.HOVERCOLOR, NextButton.SELECTEDCOLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene, extraAction, delay);
     }
 
     updatePosition(scene: Scene){

@@ -2,7 +2,8 @@ import { Scene } from "phaser";
 import { Banana } from "./toolbox/Banana";
 import { TextStyles } from "./toolbox/TextStyles";
 import { Characteristic } from "./toolbox/Characteristic";
-import { NextButton } from "./interactives/NextButton";
+import { SceneButton } from "./interactives/SceneButton";
+import { MainMenu } from "./MainMenu";
 
 export class Eulogy extends Scene {
 
@@ -68,7 +69,9 @@ export class Eulogy extends Scene {
       this.time.addEvent({
         delay: 40000, // Delay before starting the animation
         callback: () => {
-            this.add.existing(new NextButton(this, 'MainMenu', 700, 500, 'Again', undefined, 0,  0xDBFFF)); // Add a next button to go to the MainMenu scene
+            var buttonWidth = 550;
+            var buttonHeight = 100;
+            this.add.existing(new SceneButton(this, this.scale.baseSize.width / 2 - buttonWidth / 2, this.scale.baseSize.height / 2 - buttonHeight / 2, buttonWidth, buttonHeight, MainMenu.BUTTONCOLOR, MainMenu.BUTTONHOVERCOLOR, MainMenu.BUTTONSELECTEDCOLOR, 'Play again?', TextStyles.getButtonStyle(this), false, true, "MainMenu")); // Add a next button to go to the MainMenu scene
         },
         loop: false
       });  

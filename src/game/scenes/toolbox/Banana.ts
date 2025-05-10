@@ -24,9 +24,9 @@ export class Banana{
     glassesCosmetic: Cosmetic;
     shirtCosmetic: Cosmetic;
 
-    defaultFaceCosmetic: Cosmetic;
-    noGlassesCosmetic: Cosmetic;
-    noShirtCosmetic: Cosmetic;
+    static defaultFaceCosmetic: Cosmetic = new Cosmetic("defaultFace", 35, 20, 1);
+    static noGlassesCosmetic: Cosmetic = new Cosmetic("none", 0, 0, 1);
+    static noShirtCosmetic: Cosmetic = new Cosmetic("none", 0, 0, 1);
 
     bananaImage: GameObjects.Image;
     //activeFace: GameObjects.Image | null = null;
@@ -45,12 +45,9 @@ export class Banana{
         //this.bananaImage = currentScene.add.image(x, y, 'banana'); 
         //this.bananaImage.setScale(0.65);  
         //this.bananaImage.setInteractive();
-        this.defaultFaceCosmetic = new Cosmetic("defaultFace", 35, 20, 1);
-        this.noGlassesCosmetic = new Cosmetic("none", 0, 0, 1);
-        this.noShirtCosmetic = new Cosmetic("none", 0, 0, 1);
-        this.faceCosmetic = this.defaultFaceCosmetic;
-        this.glassesCosmetic = this.noGlassesCosmetic;
-        this.shirtCosmetic = this.noShirtCosmetic;
+        this.faceCosmetic = Banana.defaultFaceCosmetic;
+        this.glassesCosmetic = Banana.noGlassesCosmetic;
+        this.shirtCosmetic = Banana.noShirtCosmetic;
     }
 
     //peel help methods
@@ -81,8 +78,8 @@ export class Banana{
         }
         else{ //change to loop, function, class?
             this.activeFace = "default"; //set to default if null or something weird, or if washed?????
-            this.faceImage = scene.add.image(0, 0, this.defaultFaceCosmetic.getImageKey())
-            .setScale(this.defaultFaceCosmetic.getScale());
+            this.faceImage = scene.add.image(0, 0, Banana.defaultFaceCosmetic.getImageKey())
+            .setScale(Banana.defaultFaceCosmetic.getScale());
             this.startBlinking(this.faceImage, scene);
         }
         //this.faceImage = scene.add.image(0, 0, 'face1').setScale(0.4); //add coordinates, scale in list of face dictionaries
@@ -197,8 +194,6 @@ export class Banana{
         this.faceCosmetic = faceCosmetic;
         console.log('this.activeFace:', this.activeFace);
         this.updateBanana(scene, container);
- 
- 
     }
  
     setGlasses(scene: Scene, glassesCosmetic: Cosmetic, container: GameObjects.Container){

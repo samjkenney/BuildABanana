@@ -8,6 +8,8 @@ import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
     private static COLOR = 0xfa94a9; //make constant?
+    private static HOVERCOLOR = 0xF9B1B4; //make constant?
+    private static SELECTEDCOLOR = 0x000000; //make constant?
     private static CLICKCOLOR = 0xffffff; //change to use Button selectedColor
     //color: number;
     private WIDTH: number; //make constant?
@@ -31,7 +33,7 @@ export class CategoryButton extends ImageButton{
             this.createIconButtons(scene, iconContainer, bananaContainer); //change to use existing icon menu
         };
 
-        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
+        super(scene, x, y, container.width + container.width * 0.2, container.height * 0.25, CategoryButton.COLOR, CategoryButton.HOVERCOLOR, CategoryButton.SELECTEDCOLOR, imageKey, false, action); //change width to add this.cornerRadius (instead of 10)????
         this.scene = scene;
         this.imageKey = imageKey;
         this.iconContainer = iconContainer;
@@ -88,7 +90,7 @@ export class CategoryButton extends ImageButton{
             }
 
             for(var i = 0; i < this.cosmeticArray.length; i++){
-                buttonList[i].setSelectOne(buttonList);
+                buttonList[i].setSelectOne(buttonList, true);
             }
         //}
     }

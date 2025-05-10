@@ -6,11 +6,14 @@ import { TextStyles } from '../toolbox/TextStyles';
 
 export class BackButton extends SceneButton{
     //private static color: string; //make constant?
+    private static COLOR = 0xfa94a9; //make constant?
+    private static HOVERCOLOR = 0xF9B1B4; //make constant?
+    private static SELECTEDCOLOR = 0xF9B1B4; //make constant?
     private static WIDTH = 80; //make constant?
     private static HEIGHT = 80; //make constant?
 
     constructor(scene: Scene, previousScene: string){
-        super(scene, scene.scale.baseSize.width * 0.04, scene.scale.baseSize.height * 0.08, BackButton.WIDTH, BackButton.HEIGHT, 0xF9B1B4, "<", new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, previousScene);
+        super(scene, scene.scale.baseSize.width * 0.04, scene.scale.baseSize.height * 0.08, BackButton.WIDTH, BackButton.HEIGHT, 0xF9B1B4, BackButton.HOVERCOLOR, BackButton.SELECTEDCOLOR, "<", new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, previousScene);
 
     }
 

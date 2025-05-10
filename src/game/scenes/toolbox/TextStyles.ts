@@ -18,7 +18,7 @@ export class TextStyles{
         color: '#ffffff',
         align: "center"
     };
-        
+
     static button = {
         fontFamily: "Kitto",
         color: "#ffffff",

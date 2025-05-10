@@ -9,7 +9,7 @@ export class SceneButton extends TextButton{
     //private static width: number; //make constant?
     //private static height: number; //make constant?
 
-    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string, extraAction?: Function, delay?: number){
+    constructor(scene: Scene, x: number, y: number, width: number, height: number, color: number, hoverColor: number, selectedColor: number, displayText: string, textStyle: GameObjects.TextStyle, scaleToButtonSize: boolean, scaleOnHover: boolean, nextScene: string, extraAction?: Function, delay?: number){
         var action = () => {
             if(extraAction){
                 extraAction();
@@ -24,7 +24,7 @@ export class SceneButton extends TextButton{
             }
         };
 
-        super(scene, x, y, width, height, color, displayText, textStyle, scaleToButtonSize, scaleOnHover, action);
+        super(scene, x, y, width, height, color, hoverColor, selectedColor, displayText, textStyle, scaleToButtonSize, scaleOnHover, action);
 
     }
 }

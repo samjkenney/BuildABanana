@@ -4,7 +4,7 @@ import { Characteristic } from "./Characteristic";
 import { Cosmetic } from "./Cosmetic";
 
 export class CharacteristicHandler{
-    //All of the avaiable aspirations
+    //All of the available aspirations
     static ASPIRATIONS: Characteristic[] = [
         new Characteristic("Cooties Doctor",
              new Cosmetic("cooties doctor", 120, 0, 1.875), 

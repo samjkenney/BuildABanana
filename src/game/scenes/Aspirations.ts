@@ -14,6 +14,8 @@ export class Aspirations extends CustomizationTemplate{
     private MENUHALFBORDER: number;
     private BUTTONHEIGHT: number;
     private COLOR = 0xff0000;
+    private HOVERCOLOR = 0x000000;
+    private SELECTEDCOLOR = 0x000000;
 
     private buttonList: TextButton[] = [];
 
@@ -112,7 +114,7 @@ export class Aspirations extends CustomizationTemplate{
             };
 
             //add button
-            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
+            let button = new TextButton(this, 0, buttonY, this.menuContainer.width, this.BUTTONHEIGHT, this.COLOR, this.HOVERCOLOR, this.SELECTEDCOLOR, CharacteristicHandler.getAspirations()[i].getName(), TextStyles.getButtonStyle(this), true, true, action);
             this.buttonList.push(button);
             this.menuContainer.add(button);
 
@@ -149,7 +151,7 @@ export class Aspirations extends CustomizationTemplate{
         };
 
         for(var i = 0; i < CharacteristicHandler.getAspirations().length; i++){ //move to previous loop
-            this.buttonList[i].setSelectOne(this.buttonList);
+            this.buttonList[i].setSelectOne(this.buttonList, false);
         };
     }
 

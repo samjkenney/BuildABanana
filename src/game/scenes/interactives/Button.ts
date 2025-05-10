@@ -1,6 +1,7 @@
 // Parent class for all buttons
 import { Scene } from "phaser";
 import { GameObjects } from "phaser";
+import { Input } from "phaser";
 
 export abstract class Button extends GameObjects.Container{ //make not abstract, allow other GameObjects button types?????
     scene: Scene;
@@ -9,8 +10,9 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     width: number;
     height: number;
     protected backgroundGraphics;
-    private color: number; //necessary?
-    private selectedColor: number = 0xc5d7d7;
+    private color: number;
+    private hoverColor: number;
+    private selectedColor: number; //0xc5d7d7
     private static TINT: number = 0xffabb5; //make constant, move to different types of buttons?
     
     protected content: GameObjects.Image | GameObjects.Text; //if need button with no content, move this to ImageButton and TextButton, remove scaleOnHover in constructor, add Content parameter to scaleToButton, move scaleToButton call to ImageButton, TextButton
@@ -24,13 +26,16 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
     protected selected = false;
     private staySelected = false;
     private buttonList: Button[];
+    private deselect = false;
 
-    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, action: Function){
+    constructor(currentScene: Scene, x: number, y: number, width: number, height: number, color: number, hoverColor: number, selectedColor: number, content: GameObjects.Image | GameObjects.Text, scaleToButtonSize: boolean, scaleOnHover: boolean, action: Function){
         super(currentScene, x, y);
         this.scene = currentScene;
         this.width = width;
         this.height = height;
-        this.color = color; //necessary?
+        this.color = color;
+        this.hoverColor = hoverColor;
+        this.selectedColor = selectedColor;
         this.content = content;
         this.cornerRadius = this.height * 0.2;
 
@@ -52,13 +57,26 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
 
 
         //mouse enters (hover start)
+        //change to hoverColor, change to selectedColor if pointer already down, scale if scaleOnHover
         this.on('pointerover', () => {
             this.originalX = this.x;
             this.originalY = this.y;
-            if(this.color !== 0){ //only if not selected, change to use this.transparent
-                this.addRectangle(Button.TINT); //use setTint?
+            if(this.scene.input.activePointer.isDown){ //if pointer already down, change to selectedColor
+                if(this.staySelected){
+                    //this.colorOne(this.buttonList, this.selectedColor); //change button to selectedColor out of list
+                    this.addRectangle(this.selectedColor); //allow 2 buttons to be selectedColor (save previous selection)
+                }
+                else{
+                    this.addRectangle(this.selectedColor); //change to selectedColor
+                }
             }
-            if(scaleOnHover){
+            else if(this.selected){ //if already selected, change to selectedColor
+                this.addRectangle(this.selectedColor);
+            }
+            else{
+                this.addRectangle(this.hoverColor); //if pointer not down, change to hoverColor
+            }
+            if(scaleOnHover){ //scale
                 var widthChange = width * Button.HOVERSCALE - width
                 var heightChange = height * Button.HOVERSCALE - height
                 this.setPosition(this.originalX - widthChange / 2, this.originalY - heightChange / 2)
@@ -67,41 +85,58 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         });
 
         //mouse leaves (hover end)
+        //reset to color, change to selectedColor if already selected, reset scale if scaleOnHover
         this.on('pointerout', () => {
-            if(this.staySelected && this.selected){
-                this.selectOne(this.buttonList);
+            if(this.staySelected && this.selected){ //if button already selected, change to selectedColor
+                //this.colorOne(this.buttonList, this.selectedColor);
             }
-            else{
+            else if(this.staySelected && !this.selected){ //if not already selected, reset list to color, change selected button to selectedColor
+                this.buttonList.forEach(button =>{
+                    button.updateButton();
+                });
+            }
+            else{ //if button not selected, reset to color
                 this.addRectangle(this.color)
             }
-            if(scaleOnHover){
+            if(scaleOnHover){ //reset scale
                 this.setScale(1);
                 this.setPosition(this.originalX, this.originalY);
             }
         });
 
-        //click
+        //click down
+        //select, change to selectedColor
         if (this.scene) { // Ensure this.scene is not null or undefined
-            this.on("pointerdown", action);
             this.on("pointerdown", () => {
                 if(this.staySelected){
-                    this.selectOne(this.buttonList);
+                    //this.colorOne(this.buttonList, this.selectedColor);
+                    this.addRectangle(this.selectedColor); //allow 2 buttons to be selectedColor (save previous selection)
                 }
-            });
-            this.on("pointerup", () => {
-                if(this.staySelected){
-                    this.selected = true;
+                else{
+                    this.addRectangle(this.selectedColor);
                 }
             });
         }
-    }
 
-    updateButton(){
-        if(this.selected){
-            this.addRectangle(this.selectedColor);
-        }
-        else{
-            this.addRectangle(this.color);
+        //click up
+        //action
+        if(this.scene){
+            this.on("pointerup", () => {
+                action();
+
+                if(this.staySelected){
+                    if(this.deselect && this.selected){
+                        this.setSelected(false);
+                        this.addRectangle(this.hoverColor);
+                    }
+                    else{
+                        this.selectOne(this.buttonList);
+                    }
+                }
+                else{
+                    this.setSelected(true);
+                }
+            });
         }
     }
 
@@ -117,7 +152,33 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.backgroundGraphics.fillRoundedRect(0, 0, this.width, this.height, this.cornerRadius);
     }
 
-    //scale content (string inside the button) to button size
+    updateButton(){
+        if(this.selected){
+            this.addRectangle(this.selectedColor);
+        }
+        else{
+            this.addRectangle(this.color);
+        }
+    }
+
+    private selectOne(buttonList: Button[]){ //selects button out of list of buttons
+        buttonList.forEach(button => {
+            button.setSelected(false);
+        });
+        this.selected = true;
+        this.updateButton();
+    }
+
+    private colorOne(buttonList: Button[], color: number){ //sets button to selectedColor out of list
+        buttonList.forEach(button => {
+            button.addRectangle(this.color);
+        });
+        this.addRectangle(color);
+    }
+
+
+
+    //scale content to button size
     // protected scaleToButton(content: GameObjects.Text): void;
     // protected scaleToButton(content: GameObjects.Image): void;
     // protected scaleToButton(content: any){
@@ -149,20 +210,14 @@ export abstract class Button extends GameObjects.Container{ //make not abstract,
         this.content.setPosition(this.width / 2, this.height / 2,); //recenter image or text
     }
 
-    private selectOne(buttonList: Button[]){ //remove selectedButton
-        buttonList.forEach(button => {
-            button.setSelected(false);
-        });
-
-        this.selected = true;
-        this.updateButton();
-    }
+    //scale to content method?
 
 
 
-    setSelectOne(buttonList: Button[]){ //set list of buttons to only have 1 button selected at a time
+    setSelectOne(buttonList: Button[], deselect: boolean){ //set list of buttons to only have 1 button selected at a time
         this.staySelected = true;
         this.buttonList = buttonList;
+        this.deselect = deselect;
     }
 
     protected setColor(color: number){ //remove?

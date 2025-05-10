@@ -168,8 +168,8 @@ export class Wash extends CookTemplate {
         var banana: Banana = this.registry.get("banana");
         var washedFace: Cosmetic = new Cosmetic("washFace", 0, -30, 1.1);
         banana.setFace(this, washedFace, this.bananaContainer);
-        banana.setGlasses(this, banana.noGlassesCosmetic, this.bananaContainer);
-        banana.setShirt(this, banana.noShirtCosmetic, this.bananaContainer);
+        banana.setGlasses(this, Banana.noGlassesCosmetic, this.bananaContainer);
+        banana.setShirt(this, Banana.noShirtCosmetic, this.bananaContainer);
     }
 }
 
