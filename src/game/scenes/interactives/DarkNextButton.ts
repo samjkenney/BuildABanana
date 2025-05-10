@@ -5,12 +5,12 @@ import { SceneButton } from "./SceneButton";
 import { TextStyles } from '../toolbox/TextStyles';
 
 
-export class NextButton extends SceneButton{
+export class DarkNextButton extends SceneButton{
     //private static color: string; //make constant?
     private static WIDTH = 240; //make constant?
     private static HEIGHT = 100; //make constant?
-    static COLOR = 0xffccd3; //make constant?
-    static HOVERCOLOR = 0xffabb5; //make constant?
+    static COLOR = 0xffabb5; //make constant?
+    static HOVERCOLOR = 0xffeaec; //make constant?
     static SELECTEDCOLOR = 0x80caca; //make constant?
     //add rounding
 
@@ -27,13 +27,13 @@ export class NextButton extends SceneButton{
             thisColor = color;
         }
         else{
-            thisColor = NextButton.COLOR;
+            thisColor = DarkNextButton.COLOR;
         }
 
         // super(scene, scene.scale.baseSize.width * 0.9 - NextButton.getWidth(), scene.scale.baseSize.height * 0.9 - NextButton.getHeight(), NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // super(scene, 0, 0, NextButton.WIDTH, NextButton.HEIGHT, NextButton.COLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene);
         // //position updated in each scene?
-        super(scene, x, y, NextButton.WIDTH, NextButton.HEIGHT, thisColor, NextButton.HOVERCOLOR, NextButton.SELECTEDCOLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene, extraAction, delay);
+        super(scene, x, y, DarkNextButton.WIDTH, DarkNextButton.HEIGHT, thisColor, DarkNextButton.HOVERCOLOR, DarkNextButton.SELECTEDCOLOR, text, new GameObjects.Text(scene, 0, 0 , "button", TextStyles.button).style, false, true, nextScene, extraAction, delay);
     }
 
     updatePosition(scene: Scene){
@@ -41,10 +41,10 @@ export class NextButton extends SceneButton{
     }
 
     static getWidth(){
-        return NextButton.WIDTH;
+        return DarkNextButton.WIDTH;
     }
 
     static getHeight(){
-        return NextButton.HEIGHT;
+        return DarkNextButton.HEIGHT;
     }
 }

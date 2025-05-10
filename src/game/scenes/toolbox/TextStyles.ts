@@ -5,9 +5,9 @@ export class TextStyles{
     static title = {
         fontFamily: "Kitto",
         fontSize: 100,
-        color: "#B4E6E7",
+        color: "#80caca",
         stroke: "#4FB0B0",
-        strokeThickness: 6,
+        //strokeThickness: 6,
         align: "center",
         //increase line spacing
     };
@@ -15,13 +15,19 @@ export class TextStyles{
     static body = {
         fontFamily: "Kitto",
         fontSize: 60,
-        color: '#ffffff',
+        color: '#7eb6b6',
         align: "center"
     };
 
     static button = {
         fontFamily: "Kitto",
         color: "#ffffff",
+        fontSize: 80
+    };
+
+    static titleButton = {
+        fontFamily: "Kitto",
+        color: "#ffabb5",
         fontSize: 80
     };
 
@@ -75,5 +81,9 @@ export class TextStyles{
 
     static getButtonStyle(scene: Scene){
         return new GameObjects.Text(scene, 0, 0, "", TextStyles.button).style;
+    }
+
+    static getTitleButtonStyle(scene: Scene){
+        return new GameObjects.Text(scene, 0, 0, "", TextStyles.titleButton).style;
     }
 }

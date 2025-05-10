@@ -5,9 +5,9 @@ import { NextButton } from './interactives/NextButton';
 import { TextStyles } from './toolbox/TextStyles';
 
 export class MainMenu extends Scene {
-    static BUTTONCOLOR = 0x000000;
-    static BUTTONHOVERCOLOR = 0x000000;
-    static BUTTONSELECTEDCOLOR = 0x000000;
+    static BUTTONCOLOR = 0xffe77f;
+    static BUTTONHOVERCOLOR = 0xeebe65;
+    static BUTTONSELECTEDCOLOR = 0xb18623;
     constructor() {
         super('MainMenu');
     }
@@ -31,7 +31,7 @@ export class MainMenu extends Scene {
         var banana = new Banana(this); //create new banana
         this.registry.set("banana", banana);
         
-        var startButton = new SceneButton(this, background.width / 2 - 150, background.height / 2 + 130, 300, 100, MainMenu.BUTTONCOLOR, MainMenu.BUTTONHOVERCOLOR, MainMenu.BUTTONSELECTEDCOLOR, "Start", TextStyles.getTitleStyle(this), false, true, 'Name');
+        var startButton = new SceneButton(this, background.width / 2 - 150, background.height / 2 + 130, 300, 100, MainMenu.BUTTONCOLOR, MainMenu.BUTTONHOVERCOLOR, MainMenu.BUTTONSELECTEDCOLOR, "Start", TextStyles.getTitleButtonStyle(this), false, true, 'Name');
         this.add.existing(startButton).setInteractive();
 
         //this.add.graphics().fillStyle(0x000000, 1).fillCircle(100, 100, 5);

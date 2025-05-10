@@ -1,5 +1,5 @@
 import { GameObjects, Scene } from 'phaser';
-import { NextButton } from './interactives/NextButton';
+import { DarkNextButton } from './interactives/DarkNextButton';
 
 export class IceCream extends Scene {
     constructor() {
@@ -29,7 +29,7 @@ export class IceCream extends Scene {
                 { key: 'cloudFrame6' },
                 { key: 'cloudFrame7' }
             ],
-            frameRate: 4.5, //3.5 frames per second
+            frameRate: 3.5, //3.5 frames per second
             repeat: 0 
         })
 
@@ -44,8 +44,9 @@ export class IceCream extends Scene {
             loop: false
         })
         
-        
-        this.add.existing(new NextButton(this,'Eulogy', 1400, 1000, 'Yum!', undefined, 0, 0xDBFFF));
+        this.time.delayedCall(3500, () => {
+        this.add.existing(new DarkNextButton(this,'Eulogy', 1310, 940, 'Yum!'));
+        });
        
         
     }

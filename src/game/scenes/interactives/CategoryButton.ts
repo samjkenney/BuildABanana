@@ -7,10 +7,9 @@ import { IconButton } from './IconButton';
 import { Cosmetic } from '../toolbox/Cosmetic';
 
 export class CategoryButton extends ImageButton{
-    private static COLOR = 0xfa94a9; //make constant?
-    private static HOVERCOLOR = 0xF9B1B4; //make constant?
-    private static SELECTEDCOLOR = 0x000000; //make constant?
-    private static CLICKCOLOR = 0xffffff; //change to use Button selectedColor
+    private static COLOR = 0xffccd2; //make constant?
+    private static HOVERCOLOR = 0xffeaec; //make constant?
+    private static SELECTEDCOLOR = 0xffabb5; //make constant?
     //color: number;
     private WIDTH: number; //make constant?
     private HEIGHT: number; //make constant?

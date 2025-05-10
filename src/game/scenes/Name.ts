@@ -25,6 +25,10 @@ export class Name extends CustomizationTemplate {
     create() {
         this.customizationLoader(this);
 
+        var layer = this.add.image(0, 0, "labBackground").setOrigin(0).setAlpha(0.1);
+        this.children.sendToBack(layer);
+        this.children.sendToBack(this.background);
+
         //this.addBlink();
 
         //const nextButton = new NextButton(this, 1160, 854, 'Personality'); // Add a next button to go to the Personality scene

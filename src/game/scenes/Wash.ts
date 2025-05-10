@@ -108,7 +108,7 @@ export class Wash extends CookTemplate {
                                     ease: 'Power2',
                                     onComplete: () => {
                                         hose.destroy(); // hose is destroyed
-                                        this.addNextButton(this, "Peel", "Next"); // add the next button
+                                        this.addDarkNextButton(this, "Peel", "Next"); // add the next button
                                     }
                                 });
                             });

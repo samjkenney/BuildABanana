@@ -34,7 +34,7 @@ export class Eulogy extends Scene {
          name + " " + aspiration.getEulogyEntry() +  "\n" +
          "They will be missed by all who knew them.\n\n" +
             "May they rest in peace.\n" +
-            "\n \n \n \n \n" +
+            "\n \n \n \n \n \n" +
             "This game was made by:\n" +
             "Daisy Chan \n" +
             "Sam Kenney \n" +
@@ -45,12 +45,11 @@ export class Eulogy extends Scene {
             "Paul Cantrell \n" +
             "Jim Marigmen \n" +
             "Kaliana Andriamananjara \n" +
+            "Our peer development teams \n" +
             "Guy the cat";
 
        //add text ot the screen
         const titleText = this.add.text(400, 1000, eulogyText);
-        titleText.setTint(0x000000); // Set the text color to black
-        console.log(titleText.tint);
         titleText.setStyle(TextStyles.body);
         titleText.setWordWrapWidth(900);
         titleText.setLineSpacing(50);
@@ -71,7 +70,7 @@ export class Eulogy extends Scene {
         callback: () => {
             var buttonWidth = 550;
             var buttonHeight = 100;
-            this.add.existing(new SceneButton(this, this.scale.baseSize.width / 2 - buttonWidth / 2, this.scale.baseSize.height / 2 - buttonHeight / 2, buttonWidth, buttonHeight, MainMenu.BUTTONCOLOR, MainMenu.BUTTONHOVERCOLOR, MainMenu.BUTTONSELECTEDCOLOR, 'Play again?', TextStyles.getButtonStyle(this), false, true, "MainMenu")); // Add a next button to go to the MainMenu scene
+            this.add.existing(new SceneButton(this, this.scale.baseSize.width / 2 - buttonWidth / 2, this.scale.baseSize.height / 2 - buttonHeight / 2, buttonWidth, buttonHeight, MainMenu.BUTTONCOLOR, MainMenu.BUTTONHOVERCOLOR, MainMenu.BUTTONSELECTEDCOLOR, 'Play again?', TextStyles.getTitleButtonStyle(this), false, true, "MainMenu")); // Add a next button to go to the MainMenu scene
         },
         loop: false
       });  

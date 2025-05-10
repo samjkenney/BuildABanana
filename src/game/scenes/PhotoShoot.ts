@@ -17,6 +17,7 @@ export class PhotoShoot extends SceneTemplate {
 
     create() {
         this.sceneLoader(this);
+        this.hideBanana(this);
         //remove banana?
         // this.add.image(849, 567.5,'background2');
         var video = this.add.video(this.bananaContainer.width / 2, this.bananaContainer.height / 2, 'photoshootVideo').setAlpha(1).setScale(1.35).setOrigin(0.5).play(); // Play the video

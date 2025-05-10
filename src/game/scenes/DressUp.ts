@@ -5,6 +5,7 @@ import { Banana } from './toolbox/Banana';
 import { CategoryButton } from "./interactives/CategoryButton";
 import { Cosmetic } from './toolbox/Cosmetic';
 import { TextButton } from './interactives/TextButton';
+import { NextButton } from './interactives/NextButton';
 import { TextStyles } from './toolbox/TextStyles';
 
 export class DressUp extends CustomizationTemplate {
@@ -80,6 +81,10 @@ export class DressUp extends CustomizationTemplate {
 
     create() {
         this.customizationLoader(this);
+
+        var layer = this.add.image(0, 0, "labBackground").setOrigin(0).setAlpha(0.1);
+        this.children.sendToBack(layer);
+        this.children.sendToBack(this.background);
         
         //create containers, move to function
         this.cosmeticContainer = new GameObjects.Container(this, 0, this.getTitle().height + this.MENUBORDER);
@@ -95,7 +100,7 @@ export class DressUp extends CustomizationTemplate {
         this.iconContainer = new GameObjects.Container(this, this.categoryContainer.width, 0);
         this.iconContainer.setSize(this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height);
         this.cosmeticContainer.add(this.iconContainer);
-        this.iconContainer.add(this.add.graphics().fillStyle(0xffc9d2, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
+        this.iconContainer.add(this.add.graphics().fillStyle(0xffabb5, 1).fillRoundedRect(0, 0, this.cosmeticContainer.width * 0.75, this.cosmeticContainer.height, 40)); //change to get button corner radius?
 
     
 
@@ -178,8 +183,10 @@ export class DressUp extends CustomizationTemplate {
         }
         
        //add button to zoom in on banana and transition to next scene
-        this.add.existing(new TextButton(this, 1050, 1000, 400, 100,
-             0xF9B1B4, 0x000000, 0x000000, "Deep Dive", new GameObjects.Text(this, 0, 0 , "button", TextStyles.button).style, 
+       var width = 400;
+       var height = 100;
+        this.add.existing(new TextButton(this,  this.SIDEBORDER + this.BANANAWIDTH + this.HALFBORDER + this.MENUWIDTH / 2 - width / 2, this.TOPBORDER + this.MENUHEIGHT + (this.BANANAHEIGHT - this.MENUHEIGHT - height), width, height,
+             NextButton.COLOR, NextButton.HOVERCOLOR, NextButton.SELECTEDCOLOR, "Deep Dive", TextStyles.getButtonStyle(this), 
              true, true, zoom))
     }
 

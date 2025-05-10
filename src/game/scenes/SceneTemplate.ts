@@ -19,6 +19,7 @@ export abstract class SceneTemplate extends Scene {
     protected titleText: string;
     // protected titleX: number;
     // protected titleY: number;
+    protected background: GameObjects.Image;
 
     protected SIDEBORDER: number; //make constant, move to sceneTemplate?
     protected TOPBORDER: number; //move to sceneTemplate?
@@ -77,7 +78,7 @@ export abstract class SceneTemplate extends Scene {
     }
 
     private addBackground(scene: Scene){
-        scene.add.image(0, 0, this.backgroundImage).setOrigin(0);
+        this.background = scene.add.image(0, 0, this.backgroundImage).setOrigin(0);
     }
 
     private addTitle(scene: Scene, text: string){
@@ -93,6 +94,10 @@ export abstract class SceneTemplate extends Scene {
         if(container){
             container.add(this.title);
         }
+    }
+
+    protected setTitleColor(color: string){
+        this.title.setColor(color);
     }
     
     private addBananaContainer(scene: Scene){ //move to sceneTemplate or Banana?
@@ -129,6 +134,14 @@ export abstract class SceneTemplate extends Scene {
         }
     }
 
+    protected hideBanana(scene: Scene){
+        var banana: Banana = scene.registry.get("banana");
+        banana.getBananaImage().setVisible(false);
+        banana.getFaceImage().setVisible(false);
+        banana.getGlassesImage().setVisible(false);
+        banana.getShirtImage().setVisible(false);
+    }
+
 
 
     protected addNextButton(scene: Scene, nextScene: string, displayText: string, extraAction?: Function, x?: number, y?: number){ //add x, y parameters, replaced in template addNextButton definitions, remove?
@@ -156,7 +169,7 @@ export abstract class SceneTemplate extends Scene {
     // }
 
 
-    //getter methods
+    //getter methods, remove!
     protected getTitle(){
         return this.title;
     }

@@ -28,21 +28,14 @@ export class Peel extends CookTemplate {
     }
 
     create() {
-
-        TextStyles.setTitleStyle('#ffcbd2', '#eda3a9');
-        
-
-        super.create(); // set up the base class things
-    
         this.cookLoader(this); // custom function to handle any extra setup
-    
+        this.setTitleColor("#61b5b9");
 
-        let banana: Banana = this.registry.get('banana');
-
-       
+        var layer = this.add.image(0, 0, "labBackground").setOrigin(0).setAlpha(0.1);
+        this.children.sendToBack(layer);
+        this.children.sendToBack(this.background);
         
-   
-    
+        let banana: Banana = this.registry.get('banana');
      
         // banana frames for peeling
         const bananaFrames = ['banana', 'banana1', 'banana2', 'banana3', 'banana4'];
@@ -93,8 +86,6 @@ export class Peel extends CookTemplate {
                         // remove the face cosmetic
                         console.log("Removing face cosmetic:", banana.getFaceCosmetic());
                         var noFace: Cosmetic = new Cosmetic("none", 0, -30, 0.2);
-                        //banana.setFace(this, noFace, this.bananaContainer); //  empty face
-                        //banana.removeCosmetic(banana.getFaceCosmetic(), this.bananaContainer);
                         banana.getFaceImage().setVisible(false);
 
                         banana.setTexture(bananaFrames[currentFrame]);

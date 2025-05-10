@@ -3,6 +3,7 @@ import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';
 import { TextStyles } from './toolbox/TextStyles';
 import { NextButton } from './interactives/NextButton';
+import { DarkNextButton } from './interactives/DarkNextButton';
 
 export abstract class CookTemplate extends SceneTemplate {
     constructor(sceneFileName: string, titleText: string, backgroundImage?: string) {
@@ -35,6 +36,11 @@ export abstract class CookTemplate extends SceneTemplate {
     
     protected addNextButton(scene: Scene, nextScene: string, displayText: string, extraAction?: Function, delay?: number){
         this.nextButton = new NextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH - NextButton.getWidth(), this.TOPBORDER + this.BANANAHEIGHT - NextButton.getHeight(), displayText, extraAction, delay);
+        scene.add.existing(this.nextButton);
+    }
+
+    protected addDarkNextButton(scene: Scene, nextScene: string, displayText: string, extraAction?: Function, delay?: number){
+        this.nextButton = new DarkNextButton(this, nextScene, this.SIDEBORDER + this.BANANAWIDTH - NextButton.getWidth(), this.TOPBORDER + this.BANANAHEIGHT - NextButton.getHeight(), displayText, extraAction, delay);
         scene.add.existing(this.nextButton);
     }
 

@@ -16,9 +16,9 @@ export class Personality extends CustomizationTemplate{
     private MENUHALFBORDER: number;
     private BUTTONHEIGHT: number;
     private BUTTONWIDTH: number;
-    private COLOR = 0xff0000;
-    private HOVERCOLOR = 0x000000;
-    private SELECTEDCOLOR = 0x000000;
+    private COLOR = 0xffccd2;
+    private HOVERCOLOR = 0xb5e8e8;
+    private SELECTEDCOLOR = 0x80caca;
 
     private buttonList: TextButton[] = [];
 
@@ -51,6 +51,7 @@ export class Personality extends CustomizationTemplate{
 
     create(){
         super.customizationLoader(this); //don't need to use super (can use "this")?
+        this.setTitleColor("#dbffff");
 
         //calculate UI dimensions
         this.MENUHALFBORDER = super.getMenuContainer().width * 0.05;
@@ -62,18 +63,19 @@ export class Personality extends CustomizationTemplate{
         this.createMenu();
 
         const tank = this.add.image(850.2155144762387, 566.7769396551724, 'tank')
-        .setDepth(1)
         .setScale(1);
-
-
-        
         // .setAlpha(0.8);
+        var layer = this.add.image(0, 0, "labBackground").setOrigin(0).setAlpha(0.2);
+
+        this.children.sendToBack(layer);
+        this.children.sendToBack(tank);
+        this.children.sendToBack(this.background);
 
          // animated water
          const water = this.add.image(917.8492418333755, 542.6275017097364, 'water_1')
          .setDepth(0)// layering
          .setScale(1.180) // scale
-         .setAlpha(0.6); 
+         .setAlpha(0.3); 
  
          let waterFrames = ['water_1', 'water_2', 'water_3'];
          let currentFrame = 0;
@@ -89,7 +91,7 @@ export class Personality extends CustomizationTemplate{
 
          this.tweens.add({
             targets: water,
-            alpha: 0.7, 
+            alpha: 0.3, 
             duration: 1000,
             yoyo: true,
             repeat: -1,
@@ -182,20 +184,29 @@ export class Personality extends CustomizationTemplate{
 
     private createNextButton(){
         var extraAction = () => {
-            //ADD WATER ANIMATION
-            //change to fade cosmetics out
             var banana: Banana = this.registry.get("banana");
+            var cosmetics = banana.getPersonality().getReactionCosmetic();
             banana.removeCosmetic(banana.getPersonality().getReactionCosmetic(), this.bananaContainer);
-            
+            this.tweens.add({
+                targets: cosmetics,
+                alpha: 0, 
+                duration: 800,
+                yoyo: false,
+                repeat: -1,
+                ease: 'Sine.easeInOut'
+            });
+
             //add customizations back
-            this.time.delayedCall(300, () => {
+            this.time.delayedCall(800, () => {
                 banana.getFaceImage().setVisible(true);
                 banana.getGlassesImage().setVisible(true);
                 banana.getShirtImage().setVisible(true);
+
+                //change to tweens!!!!!!!!!
             });
         };
 
-        this.addNextButton(this, "Aspirations", "Next", extraAction, 600);
+        this.addNextButton(this, "Aspirations", "Next", extraAction, 1000);
     }
 
 

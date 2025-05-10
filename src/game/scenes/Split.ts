@@ -5,7 +5,7 @@ import { NextButton } from './interactives/NextButton';
 
 export class Split extends CookTemplate {
     constructor() {
-        super('Split','Slice it up!');
+        super('Split','  Slice it up!', "splitBackground");
     }
 
     preload() {
@@ -26,8 +26,7 @@ export class Split extends CookTemplate {
 
     create() {
         this.cookLoader(this);
-
-        this.add.image(849, 567.5,'splitBackground'); 
+        this.hideBanana(this);
 
         const banana = this.add.image(823, 535, 'splitBanana');  
         banana.setInteractive();
@@ -72,11 +71,12 @@ export class Split extends CookTemplate {
                 slice1.destroy();
                 slice2.destroy();
                 slice3.destroy();
+                this.setTitleColor("#b5e8e8");
                 this.playLightsOn();
                 this.time.addEvent({
-                    delay: 1000,
+                    delay: 1500,
                     callback: () => {
-                        this.addNextButton(this, 'IceCream', 'Oops!');
+                        this.addDarkNextButton(this, 'IceCream', 'Oops!');
                     },
                     loop: false
                         })
@@ -97,8 +97,9 @@ export class Split extends CookTemplate {
             ],
             frameRate: 4.5,
             repeat: 0 
-        })
+        });
 
-        const thisSprite = this.add.sprite(849, 567.5, 'lightsOn1').play('lightsOn');
+        const video = this.add.sprite(849, 567.5, 'lightsOn1').play('lightsOn');
+        this.children.bringToTop(this.bananaContainer);
     }
 }
