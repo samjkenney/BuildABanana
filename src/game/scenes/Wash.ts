@@ -19,6 +19,7 @@ export class Wash extends CookTemplate {
         this.load.image('washButton', 'assets/wash/WashButton.png');
         this.load.image('puddle', 'assets/wash/puddle.png');
         this.load.image('water', 'assets/wash/water.png');
+        this.load.image('candles', 'assets/wash/candles.png');
         this.load.image('washFace', 'assets/wash/washed face.png');
 
        
@@ -107,6 +108,16 @@ export class Wash extends CookTemplate {
                     }
                 });
             });
+
+
+
+         // Add draggable candles
+    const candles: Phaser.GameObjects.Image = this.add.image( 798.8186877290125, 511.42518720068756, 'candles')
+    .setAlpha(0.9)
+    .setDepth(1); // ensure it's on top of other elements if needed
+
+    
+
         }
 
     // Function to zoom in on the banana's forehead and then zoom out
