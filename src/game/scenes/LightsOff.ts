@@ -8,14 +8,14 @@ export class LightsOff extends SceneTemplate {
     }
 
     preload() {
-        for (let i = 1; i <= 11; i++) {
+        for (let i = 1; i <= 10; i++) {
             this.load.image(`image_${i}`, `assets/lightsoff/${i}.png`);
         }
     }
 
     create() {
         let i = 1; 
-        const totalImages = 11;
+        const totalImages = 10;
         const frameRate = 250; 
 
         let cutsceneImage = this.add.image(0, 0, `image_${i}`).setOrigin(0).setDepth(10);
