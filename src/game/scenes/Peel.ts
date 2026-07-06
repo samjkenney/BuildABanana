@@ -1,3 +1,4 @@
+//Scene to peel banana
 import { Banana } from './toolbox/Banana';
 import { CookTemplate } from './CookTemplate';
 import { TextStyles } from './toolbox/TextStyles';

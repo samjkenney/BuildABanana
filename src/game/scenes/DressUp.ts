@@ -1,3 +1,4 @@
+//Scene to pick banana clothing and accessories
 import { GameObjects, Scene } from 'phaser';
 import { Button } from './interactives/Button';
 import { CustomizationTemplate } from "./CustomizationTemplate";

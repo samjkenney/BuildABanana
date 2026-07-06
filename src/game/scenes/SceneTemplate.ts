@@ -1,4 +1,4 @@
-// template for all scenes, contains common methods and properties
+//A template for all scenes, contains common methods and properties
 import { GameObjects, Scene } from 'phaser';
 import { Banana } from './toolbox/Banana';
 import { TextStyles } from './toolbox/TextStyles';

@@ -1,3 +1,4 @@
+//Scene to name banana
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from "./CustomizationTemplate";
 import { Banana } from './toolbox/Banana';

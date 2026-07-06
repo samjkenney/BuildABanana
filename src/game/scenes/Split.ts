@@ -1,3 +1,4 @@
+//Scene to slice banana
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
 import { NextButton } from './interactives/NextButton';

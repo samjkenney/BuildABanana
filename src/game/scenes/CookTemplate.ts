@@ -1,4 +1,4 @@
-//template for all the cooking scenes
+//A scene template for all the cooking scenes
 import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';
 import { TextStyles } from './toolbox/TextStyles';

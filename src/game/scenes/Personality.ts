@@ -1,3 +1,4 @@
+//Scene to pick banana personality
 import { GameObjects, Scene } from 'phaser';
 import { CustomizationTemplate } from './CustomizationTemplate';
 import { TextStyles } from './toolbox/TextStyles';

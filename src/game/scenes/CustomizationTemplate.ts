@@ -1,6 +1,5 @@
-// A scene template for scenes that include a menu component
+// A scene template for customization scenes that include a menu component
 //Takes in a scene file name, title text, and an optional background image path
-//by Zander Leong
 
 import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';

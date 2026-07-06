@@ -1,3 +1,4 @@
+//End scene that plays custom eulogy and credits
 import { Scene } from "phaser";
 import { Banana } from "./toolbox/Banana";
 import { TextStyles } from "./toolbox/TextStyles";
@@ -48,7 +49,7 @@ export class Eulogy extends Scene {
             "Our peer development teams \n" +
             "Guy the cat";
 
-       //add text ot the screen
+       //add text to the screen
         const titleText = this.add.text(400, 1000, eulogyText);
         titleText.setStyle(TextStyles.body);
         titleText.setWordWrapWidth(900);

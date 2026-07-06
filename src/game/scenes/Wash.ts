@@ -1,3 +1,4 @@
+//Scene to wash banana
 import { GameObjects, Scene } from 'phaser';
 import { CookTemplate } from './CookTemplate';
 import { Banana } from './toolbox/Banana';

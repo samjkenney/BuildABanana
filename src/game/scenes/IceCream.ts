@@ -1,3 +1,4 @@
+//Scene to present final ice cream
 import { GameObjects, Scene } from 'phaser';
 import { DarkNextButton } from './interactives/DarkNextButton';
 

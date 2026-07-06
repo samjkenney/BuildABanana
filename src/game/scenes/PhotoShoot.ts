@@ -1,3 +1,4 @@
+//Scene to play beginning photo montage
 import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';
 import { NextButton } from './interactives/NextButton';

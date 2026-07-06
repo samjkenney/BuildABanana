@@ -1,3 +1,4 @@
+//Start scene with the main menu
 import { GameObjects, Scene } from 'phaser';
 import { Banana } from "./toolbox/Banana";
 import { SceneButton } from './interactives/SceneButton';

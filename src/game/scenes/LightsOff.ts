@@ -1,4 +1,4 @@
-// represents the scene between peel and split
+//Scene where the lights turn off, between Peel and Split
 import { GameObjects, Scene } from 'phaser';
 import { SceneTemplate } from './SceneTemplate';  
 
