@@ -1,7 +1,7 @@
 # Build A Banana
 Authors: Daisy Chan, Sam Kenney, Nadya Konadu, and Zander Leong
 
-Build-A-Banana can be found  [here](buildabanana.netlify.app).
+Build-A-Banana can be found  [here](https://buildabanana.netlify.app/).
 
 Build-A-Banana is a web game meant to instill a bond between the player and their banana, and destroy that bond by cooking the banana. 
 
